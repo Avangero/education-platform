@@ -36,7 +36,8 @@ export default {
     box-sizing: border-box;
 
     .tab-icon {
-        font-size: 24px;
+        height: 24px;
+        width: 24px;
         padding: 0 10px;
         color: red;
         filter: invert(53%) sepia(11%) saturate(22%) hue-rotate(337deg) brightness(97%) contrast(84%);

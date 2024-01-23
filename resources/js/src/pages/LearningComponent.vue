@@ -1,93 +1,21 @@
 <template>
-    <div>
-        <ProgressBar :progress-percent="calculateProgressPercent"></ProgressBar>
-        <div class="tasks">
-            <div class="task-cards">
-                <TaskCard v-for="card in taskCards" :key="card.id" :data="card"/>
-            </div>
-        </div>
-    </div>
+    <ProgressBar :progress-percent="progressPercent"></ProgressBar>
+    <Tasks></Tasks>
 </template>
-
 <script>
 import ProgressBar from "../components/ProgressBar.vue";
-import TaskCard from "../components/TaskCard.vue";
+import Tasks from "../components/Tasks/Tasks.vue";
 
 export default {
     name: "LearningComponent",
-    components: {TaskCard, ProgressBar},
+    components: {Tasks, ProgressBar},
     data() {
         return {
-            countCompleteTask: 1,
-            taskCards: [
-                {
-                    id: 1,
-                    title: "Книга “Погружение в рефакторинг”",
-                    content: "Прочитать, написать эссе в формате markdown, рецензию на книгу. В эссе так же указать какие приемы ты уже использовала с примерами своего кода, взять свои реквесты и применить на них новый изученный материал, вставить кусочек кода и написать какой прием надо было использовать и почему, а так же приложить исправленную версию.",
-                    status: "Выполнено",
-                    commentsCount: 10,
-                    filesCount: 2,
-                },
-                {
-                    id: 2,
-                    title: "Книга “Погружение в рефакторинг”",
-                    content: "Прочитать, написать эссе в формате markdown, рецензию на книгу. В эссе так же указать какие приемы ты уже использовала с примерами своего кода, взять свои реквесты и применить на них новый изученный материал, вставить кусочек кода и написать какой прием надо было использовать и почему, а так же приложить исправленную версию.",
-                    status: "На проверке",
-                    commentsCount: 5,
-                    filesCount: 1,
-                },
-                {
-                    id: 3,
-                    title: "Книга “Погружение в рефакторинг”",
-                    content: "Прочитать, написать эссе в формате markdown, рецензию на книгу. В эссе так же указать какие приемы ты уже использовала с примерами своего кода, взять свои реквесты и применить на них новый изученный материал, вставить кусочек кода и написать какой прием надо было использовать и почему, а так же приложить исправленную версию.",
-                    status: "В работе",
-                    commentsCount: 2,
-                    filesCount: 0,
-                },
-                {
-                    id: 4,
-                    title: "Книга “Погружение в рефакторинг”",
-                    content: "Прочитать, написать эссе в формате markdown, рецензию на книгу. В эссе так же указать какие приемы ты уже использовала с примерами своего кода, взять свои реквесты и применить на них новый изученный материал, вставить кусочек кода и написать какой прием надо было использовать и почему, а так же приложить исправленную версию.",
-                    status: "Не начато",
-                    commentsCount: 0,
-                    filesCount: 1,
-                },
-                {
-                    id: 5,
-                    title: "Книга “Погружение в рефакторинг”",
-                    content: "Прочитать, написать эссе в формате markdown, рецензию на книгу. В эссе так же указать какие приемы ты уже использовала с примерами своего кода, взять свои реквесты и применить на них новый изученный материал, вставить кусочек кода и написать какой прием надо было использовать и почему, а так же приложить исправленную версию.",
-                    status: "Не начато",
-                    commentsCount: 0,
-                    filesCount: 0,
-                },
-                {
-                    id: 6,
-                    title: "Книга “Погружение в рефакторинг”",
-                    content: "Прочитать, написать эссе в формате markdown, рецензию на книгу. В эссе так же указать какие приемы ты уже использовала с примерами своего кода, взять свои реквесты и применить на них новый изученный материал, вставить кусочек кода и написать какой прием надо было использовать и почему, а так же приложить исправленную версию.",
-                    status: "Не начато",
-                    commentsCount: 0,
-                    filesCount: 0,
-                },
-            ],
+            progressPercent: 17,
         };
-    },
-    computed: {
-        calculateProgressPercent() {
-            return Math.round((100 / this.taskCards.length) * this.countCompleteTask);
-        },
     },
 };
 </script>
 
 <style scoped lang="scss">
-.tasks {
-    flex: 1;
-}
-
-.task-cards {
-    margin-top: 50px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 50px;
-}
 </style>

@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import CommentSvg from "../images/task-icons/comment.svg";
-import FolderSvg from "../images/task-icons/folder.svg";
+import CommentSvg from "../../images/task-icons/comment.svg";
+import FolderSvg from "../../images/task-icons/folder.svg";
 
 export default {
     props: {
@@ -69,21 +69,19 @@ export default {
     },
     methods: {
         handleClick() {
-            // Обработка клика на карточке
         },
     },
 };
 </script>
 
 <style scoped lang="scss">
-@import '../styles/variables';
+@import '../../styles/variables';
 
 .task-card {
     background-color: white;
     border-radius: 10px;
     padding: 20px;
-    width: 44.73%;
-    margin-bottom: 50px;
+    width: calc(50% - 65px);;
     height: 265px;
     transition: box-shadow 0.3s ease;
     cursor: pointer;
