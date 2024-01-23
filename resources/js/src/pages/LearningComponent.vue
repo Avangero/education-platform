@@ -1,75 +1,93 @@
-<script>
-export default {
-    name: "LearningComponent"
-}
-</script>
-
 <template>
-    <div class="learning-progress">
-        <div class="progress-header">
-            <div class="progress-text">Прогресс изучения курса</div>
-            <div class="additional-text">10%</div>
-        </div>
-        <div class="progress-bar">
-            <div class="fill-bar" :style="{ width: `10%` }"></div>
+    <div>
+        <ProgressBar :progress-percent="calculateProgressPercent"></ProgressBar>
+        <div class="tasks">
+            <div class="task-cards">
+                <TaskCard v-for="card in taskCards" :key="card.id" :data="card"/>
+            </div>
         </div>
     </div>
 </template>
 
+<script>
+import ProgressBar from "../components/ProgressBar.vue";
+import TaskCard from "../components/TaskCard.vue";
+
+export default {
+    name: "LearningComponent",
+    components: {TaskCard, ProgressBar},
+    data() {
+        return {
+            countCompleteTask: 1,
+            taskCards: [
+                {
+                    id: 1,
+                    title: "Книга “Погружение в рефакторинг”",
+                    content: "Прочитать, написать эссе в формате markdown, рецензию на книгу. В эссе так же указать какие приемы ты уже использовала с примерами своего кода, взять свои реквесты и применить на них новый изученный материал, вставить кусочек кода и написать какой прием надо было использовать и почему, а так же приложить исправленную версию.",
+                    status: "Выполнено",
+                    commentsCount: 10,
+                    filesCount: 2,
+                },
+                {
+                    id: 2,
+                    title: "Книга “Погружение в рефакторинг”",
+                    content: "Прочитать, написать эссе в формате markdown, рецензию на книгу. В эссе так же указать какие приемы ты уже использовала с примерами своего кода, взять свои реквесты и применить на них новый изученный материал, вставить кусочек кода и написать какой прием надо было использовать и почему, а так же приложить исправленную версию.",
+                    status: "На проверке",
+                    commentsCount: 5,
+                    filesCount: 1,
+                },
+                {
+                    id: 3,
+                    title: "Книга “Погружение в рефакторинг”",
+                    content: "Прочитать, написать эссе в формате markdown, рецензию на книгу. В эссе так же указать какие приемы ты уже использовала с примерами своего кода, взять свои реквесты и применить на них новый изученный материал, вставить кусочек кода и написать какой прием надо было использовать и почему, а так же приложить исправленную версию.",
+                    status: "В работе",
+                    commentsCount: 2,
+                    filesCount: 0,
+                },
+                {
+                    id: 4,
+                    title: "Книга “Погружение в рефакторинг”",
+                    content: "Прочитать, написать эссе в формате markdown, рецензию на книгу. В эссе так же указать какие приемы ты уже использовала с примерами своего кода, взять свои реквесты и применить на них новый изученный материал, вставить кусочек кода и написать какой прием надо было использовать и почему, а так же приложить исправленную версию.",
+                    status: "Не начато",
+                    commentsCount: 0,
+                    filesCount: 1,
+                },
+                {
+                    id: 5,
+                    title: "Книга “Погружение в рефакторинг”",
+                    content: "Прочитать, написать эссе в формате markdown, рецензию на книгу. В эссе так же указать какие приемы ты уже использовала с примерами своего кода, взять свои реквесты и применить на них новый изученный материал, вставить кусочек кода и написать какой прием надо было использовать и почему, а так же приложить исправленную версию.",
+                    status: "Не начато",
+                    commentsCount: 0,
+                    filesCount: 0,
+                },
+                {
+                    id: 6,
+                    title: "Книга “Погружение в рефакторинг”",
+                    content: "Прочитать, написать эссе в формате markdown, рецензию на книгу. В эссе так же указать какие приемы ты уже использовала с примерами своего кода, взять свои реквесты и применить на них новый изученный материал, вставить кусочек кода и написать какой прием надо было использовать и почему, а так же приложить исправленную версию.",
+                    status: "Не начато",
+                    commentsCount: 0,
+                    filesCount: 0,
+                },
+            ],
+        };
+    },
+    computed: {
+        calculateProgressPercent() {
+            return Math.round((100 / this.taskCards.length) * this.countCompleteTask);
+        },
+    },
+};
+</script>
+
 <style scoped lang="scss">
-@import "../styles/variables";
-.learning-progress {
-    background-color: white;
-    height: 55px;
-    border-radius: 20px;
+.tasks {
+    flex: 1;
+}
+
+.task-cards {
+    margin-top: 50px;
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-}
-
-.progress-label {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.progress-text {
-    color: $main-black;
-    font-family: 'Manrope', sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 23px;
-    letter-spacing: 0.3px;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 5px;
-    margin-top: 10px;
-    background-color: $soft-blue;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.fill-bar {
-    height: 100%;
-    background-color: $main-blue;
-    border-radius: 10px;
-    transition: width 0.5s ease-in-out;
-}
-.additional-text {
-    color: $main-blue;
-    font-family: 'Manrope', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 23px;
-    letter-spacing: 0.3px;
-}
-.progress-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 50px;
 }
 </style>

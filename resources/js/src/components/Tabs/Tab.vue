@@ -1,7 +1,7 @@
 <template>
     <div :class="{ 'active-tab': isActive }" @click="selectTab">
         <div class="tab">
-            <img :src="icon" :class="{ 'active-icon': isActive }" class="tab-icon" alt="Tab Icon">
+            <img :src="icon" :class="{ 'active-icon': isActive }" class="tab-icon" alt="Tab Icon"/>
             <span :class="{ 'active-text': isActive }" class="tab-text">{{ text }}</span>
         </div>
     </div>
@@ -22,8 +22,9 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../styles/variables";
+
 .tab {
     display: flex;
     flex-direction: row;
@@ -33,23 +34,23 @@ export default {
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
     box-sizing: border-box;
-}
 
-.tab-icon  {
-    font-size: 24px;
-    padding: 0 10px;
-    color: red;
-    filter: invert(53%) sepia(11%) saturate(22%) hue-rotate(337deg) brightness(97%) contrast(84%);
-}
+    .tab-icon {
+        font-size: 24px;
+        padding: 0 10px;
+        color: red;
+        filter: invert(53%) sepia(11%) saturate(22%) hue-rotate(337deg) brightness(97%) contrast(84%);
+    }
 
-.tab-text {
-    color: $text-grey;
-    text-align: right;
-    font-family: 'Manrope', sans-serif;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+    .tab-text {
+        color: $text-grey;
+        text-align: right;
+        font-family: 'Manrope', sans-serif;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
 }
 
 .active-tab {
@@ -57,14 +58,13 @@ export default {
     height: 50px;
     background-color: $main-blue-light;
     border-radius: 20px;
-}
 
-.active-tab .active-text {
-    color: $main-blue;
-}
+    .active-text {
+        color: $main-blue;
+    }
 
-.active-icon {
-    filter: invert(33%) sepia(62%) saturate(3901%) hue-rotate(207deg) brightness(97%) contrast(96%);
+    .active-icon {
+        filter: invert(33%) sepia(62%) saturate(3901%) hue-rotate(207deg) brightness(97%) contrast(96%);
+    }
 }
-
 </style>

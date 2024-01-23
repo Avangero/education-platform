@@ -22,7 +22,7 @@
     </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import "../styles/variables";
 
 .header {
@@ -66,24 +66,21 @@
     margin-right: 10px;
 }
 
-.name {
-    color: $main-black;
+.name, .role {
     text-align: right;
     font-family: 'Manrope', sans-serif;
+}
+
+.name {
+    color: $main-black;
     font-size: 20px;
-    font-style: normal;
     font-weight: 500;
-    line-height: normal;
 }
 
 .role {
     color: $text-grey;
-    text-align: right;
-    font-family: 'Manrope', sans-serif;
     font-size: 16px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
 }
 
 .user-photo {
@@ -94,5 +91,4 @@
     display: flex;
     align-items: center;
 }
-
 </style>

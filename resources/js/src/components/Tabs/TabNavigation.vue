@@ -24,7 +24,7 @@ export default {
         IconDashboard,
         IconNotification,
         IconCalendar,
-        IconStat
+        IconStat,
     },
     data() {
         return {
@@ -41,7 +41,7 @@ export default {
                 "Календарь": "CalendarComponent",
                 "Статистика": "StatisticsComponent",
             },
-            currentTabComponent: LearningComponent
+            currentTabComponent: LearningComponent,
         };
     },
     methods: {
@@ -49,13 +49,12 @@ export default {
             this.activeTab = index;
             const tabText = this.tabs[index].text;
             this.currentTabComponent = this.tabComponents[tabText];
-
         },
     },
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .page-container {
     display: flex;
     height: 100vh;
@@ -69,6 +68,8 @@ export default {
 }
 
 .workspace {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     margin: 50px;
 }
