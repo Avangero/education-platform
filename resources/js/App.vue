@@ -1,18 +1,8 @@
 <template>
-    <Header/>
-    <TabNavigation/>
+    <router-view></router-view>
 </template>
 
 <script>
-import Header from "./src/components/Header.vue";
-import TabNavigation from "./src/components/Tabs/TabNavigation.vue";
-
-export default {
-    components: {
-        TabNavigation,
-        Header,
-    },
-};
 </script>
 
 <style lang="scss">
