@@ -1,13 +1,9 @@
-import { createStore } from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
+import {createStore} from 'vuex'
 import auth from './auth.js'
 import tasks from './tasks.js'
 
 const store = createStore({
-    plugins:[
-        createPersistedState()
-    ],
-    modules:{
+    modules: {
         auth,
         tasks
     }

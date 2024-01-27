@@ -1,7 +1,6 @@
-import { createWebHistory, createRouter } from 'vue-router'
+import {createWebHistory, createRouter} from 'vue-router'
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
-import store from "../../store/index.js";
 import LearningComponent from "../pages/LearningComponent.vue";
 import Task from "../components/Task/Task.vue";
 
@@ -32,10 +31,6 @@ const routes = [
                 path: 'tasks/:id',
                 component: Task
             }
-            // {
-            //   path: 'notifications',
-            //   component: Notifications
-            // }
         ]
     }
 ]
@@ -46,15 +41,15 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     document.title = to.meta.title
     if (to.meta.middleware === "guest") {
-        if (store.state.auth.authenticated) {
-            next({ name: "home" })
+        if (localStorage.getItem('isAuth') === 'true') {
+            next({name: "home.tasks"})
         }
         next()
     } else {
-        if (store.state.auth.authenticated) {
+        if (localStorage.getItem('isAuth') === 'true') {
             next()
         } else {
-            next({ name: "login" })
+            next({name: "login"})
         }
     }
 })

@@ -1,8 +1,8 @@
-import axios from 'axios'
+import {get, post} from '../utils/index.js'
 
 export default {
     namespaced: true,
-    state:{
+    state: {
         list: [
             {
                 id: 1,
@@ -11,7 +11,10 @@ export default {
                 status: "Выполнено",
                 commentsCount: 10,
                 filesCount: 2,
-                comments: [{id: 1, text: '123123123'}, {id: 2, text: 'test123'}, {id:3, text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'}]
+                comments: [{id: 1, text: '123123123'}, {id: 2, text: 'test123'}, {
+                    id: 3,
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                }]
             },
             {
                 id: 2,
@@ -55,31 +58,31 @@ export default {
             },
         ],
     },
-    getters:{
-        getTasksList (state) {
+    getters: {
+        getTasksList(state) {
             return state.list
         },
         getTaskById: (state) => (taskId) => {
-            return state.list.find(task => task.id === taskId) 
+            return state.list.find(task => task.id === taskId)
         }
     },
-    mutations:{
-        SET_TASKS (state, value) {
+    mutations: {
+        SET_TASKS(state, value) {
             state.list = value
         },
     },
-    actions:{
-        getTasks ({commit}) {
-            return axios.get('/api/tasks').then(({data}) => {
-                commit('SET_TASKS',data)
-            }).catch(({response:{data}})=>{
-                commit('SET_TASKS',[])
+    actions: {
+        getTasks({commit}) {
+            return get('/api/tasks').then(({data}) => {
+                commit('SET_TASKS', data)
+            }).catch(({response: {data}}) => {
+                commit('SET_TASKS', [])
             })
         },
-        submitAnswer ({}, {taskId, file}) {
-            axios.post(
+        submitAnswer({}, {taskId, file}) {
+            post(
                 `/api/answer/${taskId}`,
-                file, 
+                file,
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data'
@@ -88,17 +91,17 @@ export default {
             ).then((response) => {
                 console.log(response);
             })
-            .catch((error) => {
-                console.log(error);
-            });
+                .catch((error) => {
+                    console.log(error);
+                });
         },
-        submitComment ({}, {taskId, commentText}) {
-            axios.post(`/api/comment/${taskId}`, commentText).then((response) => {
+        submitComment({}, {taskId, commentText}) {
+            post(`/api/comment/${taskId}`, commentText).then((response) => {
                 console.log(response);
             })
-            .catch((error) => {
-                console.log(error);
-            });
+                .catch((error) => {
+                    console.log(error);
+                });
         }
     }
 }

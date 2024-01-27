@@ -23,7 +23,6 @@
         "vue-loader": "^17.4.2",
         "vue-next": "^0.0.1",
         "vue-router": "^4.2.5",
-        "vuex": "^4.1.0",
-        "vuex-persistedstate": "^4.1.0"
+        "vuex": "^4.1.0"
     }
 }

@@ -1,42 +1,38 @@
-import axios from 'axios'
+import {get} from '../utils/index.js'
 import router from '../src/router/index.js'
 
 export default {
     namespaced: true,
-    state:{
-        authenticated:false,
-        user:{}
+    state: {
+        user: {}
     },
-    getters:{
-        authenticated(state){
-            return state.authenticated
-        },
-        user(state){
+    getters: {
+        user(state) {
             return state.user
         }
     },
-    mutations:{
-        SET_AUTHENTICATED (state, value) {
-            state.authenticated = value
-        },
-        SET_USER (state, value) {
+    mutations: {
+        SET_USER(state, value) {
             state.user = value
         }
     },
-    actions:{
-        login({commit}){
-            return axios.get('/api/user').then(({data})=>{
-                commit('SET_USER',data)
-                commit('SET_AUTHENTICATED',true)
-                router.push({name:'home.tasks'})
-            }).catch(({response:{data}})=>{
-                commit('SET_USER',{})
-                commit('SET_AUTHENTICATED',false)
+    actions: {
+        getUser({commit}) {
+            get('/api/user').then(({data}) => {
+                commit('SET_USER', data)
+            }).catch(({response: {data}}) => {
+                commit('SET_USER', {})
+                localStorage.setItem('isAuth', 'false')
+                router.push({name: "login"})
             })
         },
-        logout({commit}){
-            commit('SET_USER',{})
-            commit('SET_AUTHENTICATED',false)
+        logout({commit}) {
+            commit('SET_USER', {})
+            localStorage.setItem('isAuth', 'false')
+            router.push({name: "login"})
+        },
+        login() {
+            router.push({name: 'home.tasks'});
         }
     }
 }

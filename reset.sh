@@ -8,7 +8,7 @@ trap exit SIGINT
 ./vendor/bin/sail up --detach
 ./vendor/bin/sail artisan down
 ./vendor/bin/sail npm ci --no-audit --no-fund
-./vendor/bin/sail npm run build
+sleep 20
 ./vendor/bin/sail artisan migrate:fresh --force
 ./vendor/bin/sail artisan db:seed --force
 ./vendor/bin/sail artisan optimize

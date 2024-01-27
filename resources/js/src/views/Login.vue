@@ -20,7 +20,7 @@
 <script>
 import Logo from "../components/Logo.vue";
 import ProgressBar from "../components/ProgressBar.vue";
-import axios from "axios";
+import {get, post} from "../../utils/index";
 import {mapActions} from "vuex";
 
 export default {
@@ -34,27 +34,28 @@ export default {
                 email: "",
                 password: "",
             },
-            validationErrors:{},
-            processing:false
+            validationErrors: {},
+            processing: false
         };
     },
-    methods:{
+    methods: {
         ...mapActions({
-            signIn:'auth/login'
+            signIn: 'auth/login'
         }),
-        async login(){
+        async login() {
             this.processing = true
-            await axios.get('/sanctum/csrf-cookie')
-            await axios.post('/login',this.auth).then(({data})=>{
+            await get('/sanctum/csrf-cookie')
+            await post('/login', this.auth).then(({data}) => {
+                localStorage.setItem('isAuth', 'true');
                 this.signIn()
-            }).catch(({response})=>{
-                if(response.status===422){
+            }).catch(({response}) => {
+                if (response.status === 422) {
                     this.validationErrors = response.data.errors
-                }else{
+                } else {
                     this.validationErrors = {}
                     alert(response.data.message)
                 }
-            }).finally(()=>{
+            }).finally(() => {
                 this.processing = false
             })
         },
