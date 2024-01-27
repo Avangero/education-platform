@@ -1,27 +1,29 @@
 <template>
-    <div class="task-card" @click="handleClick">
+    <RouterLink
+        :to="taskLink"
+        class="task-card">
         <div class="card-content">
-            <h3 class="card-title">{{ data.title }}</h3>
-            <p class="card-description">{{ data.content }}</p>
+            <h3 class="card-title">{{ task.title }}</h3>
+            <p class="card-description">{{ task.content }}</p>
             <div class="additional-info">
                 <div class="status">
                     <div class="status-bg" :style="{ background: statusBgColor }">
-                        <span class="status-text" :style="{ color: statusTextColor }">{{ data.status }}</span>
+                        <span class="status-text" :style="{ color: statusTextColor }">{{ task.status }}</span>
                     </div>
                 </div>
                 <div class="info-container">
                     <div class="comments">
-                        <div class="counter-text">{{ data.commentsCount }}</div>
+                        <div class="counter-text">{{ task.commentsCount }}</div>
                         <img :src="CommentSvg" alt="Comment Icon"/>
                     </div>
                     <div class="files">
-                        <div class="counter-text">{{ data.filesCount }}</div>
+                        <div class="counter-text">{{ task.filesCount }}</div>
                         <img :src="FolderSvg" alt="File Icon"/>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </RouterLink>
 </template>
 
 <script>
@@ -30,7 +32,7 @@ import FolderSvg from "../../images/task-icons/folder.svg";
 
 export default {
     props: {
-        data: {
+        task: {
             type: Object,
             required: true,
         },
@@ -43,7 +45,7 @@ export default {
     },
     computed: {
         statusTextColor() {
-            switch (this.data.status) {
+            switch (this.task.status) {
                 case "Выполнено":
                     return "#74DF9F";
                 case "В работе":
@@ -55,7 +57,7 @@ export default {
             }
         },
         statusBgColor() {
-            switch (this.data.status) {
+            switch (this.task.status) {
                 case "Выполнено":
                     return "#E3F9EC";
                 case "В работе":
@@ -66,10 +68,12 @@ export default {
                     return "#F7E3E5";
             }
         },
+        taskLink() {
+            return `/tasks/${this.task.id}`
+        }
     },
     methods: {
-        handleClick() {
-        },
+        
     },
 };
 </script>
@@ -85,6 +89,7 @@ export default {
     height: 265px;
     transition: box-shadow 0.3s ease;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .task-card:hover {
