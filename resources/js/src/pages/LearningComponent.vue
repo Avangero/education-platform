@@ -1,6 +1,8 @@
 <template>
-    <ProgressBar :progress-percent="progressPercent"></ProgressBar>
-    <Tasks></Tasks>
+    <div class="page-learning">
+        <ProgressBar :progress-percent="progressPercent"></ProgressBar>
+        <Tasks></Tasks>
+    </div>
 </template>
 <script>
 import ProgressBar from "../components/ProgressBar.vue";
@@ -18,4 +20,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.page-learning {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 40px;
+}
 </style>

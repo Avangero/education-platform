@@ -4,7 +4,10 @@
             <UserInfo />
         </template>
     </Header>
-    <TabNavigation/>
+    <div class="page-content">
+        <TabNavigation/>
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
@@ -23,4 +26,8 @@ export default {
 
 <style lang="scss">
 @import "../styles/app.scss";
+
+.page-content {
+    display: flex;
+}
 </style>

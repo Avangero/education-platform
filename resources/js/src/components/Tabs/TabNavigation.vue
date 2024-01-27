@@ -1,13 +1,11 @@
 <template>
-    <div class="page-container">
-        <div class="tab-navigation">
-            <Tab v-for="(tab, index) in tabs" :key="index" :icon="tab.icon" :text="tab.text"
-                 :is-active="activeTab === index" @select="selectTab(index)"/>
-        </div>
-        <div class="workspace">
-            <component :is="currentTabComponent"></component>
-        </div>
+    <div class="tab-navigation">
+        <Tab v-for="(tab, index) in tabs" :key="index" :icon="tab.icon" :text="tab.text"
+                :is-active="activeTab === index" @select="selectTab(index)"/>
     </div>
+    <!-- <div class="workspace">
+        <component :is="currentTabComponent"></component>
+    </div> -->
 </template>
 
 <script>
@@ -55,16 +53,12 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.page-container {
-    display: flex;
-    height: 100vh;
-}
-
 .tab-navigation {
     display: flex;
     flex-direction: column;
     width: 265px;
     padding: 50px 40px;
+    min-height: 100vh;
 }
 
 .workspace {

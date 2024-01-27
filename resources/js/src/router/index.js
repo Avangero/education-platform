@@ -20,6 +20,20 @@ const routes = [
         meta: {
             middleware: "auth",
         },
+        children: [
+            {
+              path: 'tasks',
+              component: LearningComponent,
+            },
+            {
+                path: 'tasks/:id',
+                component: Task
+            }
+            // {
+            //   path: 'notifications',
+            //   component: Notifications
+            // }
+        ]
     }
 ]
 const router = createRouter({
@@ -27,7 +41,6 @@ const router = createRouter({
     routes,
 })
 router.beforeEach((to, from, next) => {
-    console.log('test123', to, from)
     document.title = to.meta.title
     if (to.meta.middleware === "guest") {
         if (store.state.auth.authenticated) {
