@@ -46,7 +46,7 @@ export default {
     .tab-text {
         color: $text-grey;
         text-align: right;
-        font-family: 'Manrope', sans-serif;
+        font-family: $font-manrop;
         font-size: 18px;
         font-style: normal;
         font-weight: 500;

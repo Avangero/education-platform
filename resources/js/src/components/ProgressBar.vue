@@ -48,7 +48,7 @@ export default {
 
 .progress-text {
     color: $main-black;
-    font-family: 'Manrope', sans-serif;
+    font-family: $font-manrop;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -74,7 +74,7 @@ export default {
 
 .additional-text {
     color: $main-blue;
-    font-family: 'Manrope', sans-serif;
+    font-family: $font-manrop;
     font-size: 16px;
     font-weight: 700;
     line-height: 23px;

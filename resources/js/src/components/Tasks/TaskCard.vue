@@ -105,7 +105,7 @@ export default {
 .card-title {
     margin-bottom: 10px;
     color: $main-black;
-    font-family: 'Manrope', sans-serif;
+    font-family: $font-manrop;
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
@@ -114,7 +114,7 @@ export default {
 
 .card-description {
     color: $text-grey;
-    font-family: 'Manrope', sans-serif;
+    font-family: $font-manrop;
     font-size: 12px;
     font-style: normal;
     font-weight: 400;
@@ -140,7 +140,7 @@ export default {
 }
 
 .status-text {
-    font-family: 'Manrope', sans-serif;
+    font-family: $font-manrop;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
@@ -163,7 +163,7 @@ export default {
 
 .counter-text {
     color: $main-blue;
-    font-family: 'Manrope', sans-serif;
+    font-family: $font-manrop;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;

@@ -5,17 +5,24 @@
     </div>
 </template>
 <script>
+import { mapActions } from 'vuex';
 import ProgressBar from "../components/ProgressBar.vue";
 import Tasks from "../components/Tasks/Tasks.vue";
 
 export default {
     name: "LearningComponent",
     components: {Tasks, ProgressBar},
+    created() {
+        // this.getTasks();
+    },
     data() {
         return {
             progressPercent: 17,
         };
     },
+    methods: {
+        ...mapActions(['getTasks'])
+    }
 };
 </script>
 

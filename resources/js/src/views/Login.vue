@@ -86,7 +86,7 @@ export default {
 }
 
 .login-header {
-    font-family: 'Manrope', sans-serif;
+    font-family: $font-manrop;
     font-size: 24px;
     font-style: normal;
     font-weight: 800;
@@ -118,7 +118,7 @@ export default {
 }
 
 input {
-    font-family: 'Manrope', sans-serif;
+    font-family: $font-manrop;
     font-size: 14px;
     font-style: normal;
     font-weight: 200;
@@ -141,7 +141,7 @@ input {
     border-radius: 24px;
     box-sizing: border-box;
     background-color: $main-blue;
-    font-family: 'Manrope', sans-serif;
+    font-family: $font-manrop;
     color: white;
     font-size: 16px;
     font-style: normal;

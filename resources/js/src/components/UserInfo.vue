@@ -36,7 +36,7 @@ export default {
 
 .name, .role {
     text-align: right;
-    font-family: 'Manrope', sans-serif;
+    font-family: $font-manrop;
 }
 
 .name {

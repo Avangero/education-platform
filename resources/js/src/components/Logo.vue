@@ -20,7 +20,7 @@ export default {
 }
 
 .title {
-    font-family: 'Manrope', sans-serif;
+    font-family: $font-manrop;
     font-size: 32px;
     font-style: normal;
     font-weight: 800;
