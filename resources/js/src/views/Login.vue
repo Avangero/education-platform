@@ -5,9 +5,9 @@
             <div class="form-container">
                 <form class="login-form" @submit.prevent="login">
                     <div class="login-header">Добро пожаловать!</div>
-                    <input v-model="loginForm.email" type="email" class="login-email" name="email" required
+                    <input v-model="auth.email" type="email" class="login-email" name="email" required
                            placeholder="Email">
-                    <input v-model="loginForm.password" type="password" class="login-password" name="password" required
+                    <input v-model="auth.password" type="password" class="login-password" name="password" required
                            placeholder="Password">
                     <button type="submit" class="login-button">Войти</button>
                 </form>
@@ -21,6 +21,7 @@
 import Logo from "../components/Logo.vue";
 import ProgressBar from "../components/ProgressBar.vue";
 import axios from "axios";
+import {mapActions} from "vuex";
 
 export default {
     components: {
@@ -29,26 +30,33 @@ export default {
     },
     data() {
         return {
-            loginForm: {
+            auth: {
                 email: "",
                 password: "",
             },
+            validationErrors:{},
+            processing:false
         };
     },
-    methods: {
-        async login() {
-            const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
-            axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
-
-            axios.post('/api/login', this.loginForm)
-                .then(response => {
-                    const token = response.data.access_token;
-                    localStorage.setItem('access_token', token);
-                    this.$router.push('/');
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+    methods:{
+        ...mapActions({
+            signIn:'auth/login'
+        }),
+        async login(){
+            this.processing = true
+            await axios.get('/sanctum/csrf-cookie')
+            await axios.post('/login',this.auth).then(({data})=>{
+                this.signIn()
+            }).catch(({response})=>{
+                if(response.status===422){
+                    this.validationErrors = response.data.errors
+                }else{
+                    this.validationErrors = {}
+                    alert(response.data.message)
+                }
+            }).finally(()=>{
+                this.processing = false
+            })
         },
     },
 };
