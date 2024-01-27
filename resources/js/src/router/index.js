@@ -2,8 +2,8 @@ import { createWebHistory, createRouter } from 'vue-router'
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import store from "../../store/index.js";
-import LearningComponent from '../pages/LearningComponent.vue'
-import Task from '../components/Task/Task.vue'
+import LearningComponent from "../pages/LearningComponent.vue";
+import Task from "../components/Task/Task.vue";
 
 const routes = [
     {
