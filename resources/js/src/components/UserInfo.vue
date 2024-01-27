@@ -2,22 +2,46 @@
     <div class="user-info">
         <div class="name-role">
             <div class="name">
-                <span>Александр Филин</span>
+                <span>{{user.name}} {{ user.surname }}</span>
             </div>
             <div class="role">
-                <span>Студент</span>
+                <span>{{user.role_title}}</span>
             </div>
         </div>
         <div class="user-photo">
-            <img src="../images/photo_2023-07-26_18-13-00.jpg" alt="Фотография пользователя" width="50" height="50"
-                 style="margin-right: 50px;">
+            <div class="user-photo-text">{{ user.name.charAt(0)}}</div>
+        </div>
+        <div class="logout" @click="logout">
+            <img :src="icon" alt="logout"/>
         </div>
     </div>
 </template>
 <script>
+import LogoutSvg from '../images/logout.svg'
+import {mapActions} from "vuex";
+import axios from "axios";
 
 export default {
-    name: "Header",
+    name: "UserInfo",
+    components: {LogoutSvg},
+    data() {
+        return {
+            user:this.$store.state.auth.user,
+            icon: LogoutSvg
+        };
+    },
+    methods: {
+        ...mapActions({
+            signOut:"auth/logout"
+
+        }),
+        async logout(){
+            await axios.post('/logout').then(({data})=>{
+                this.signOut()
+                this.$router.push({name:"login"})
+            })
+        }
+    }
 };
 
 </script>
@@ -58,5 +82,26 @@ export default {
     border-radius: 20px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    background: $main-blue-light;
+}
+
+.user-photo-text {
+    font-family: $font-manrop;
+    font-weight: 800;
+    color: white;
+    font-size: 24px;
+}
+
+.logout {
+    cursor: pointer;
+    margin-left: 10px;
+    filter: invert(13%) sepia(9%) saturate(0%) hue-rotate(136deg) brightness(96%) contrast(99%);
+}
+
+.logout:hover {
+    cursor: pointer;
+    margin-left: 10px;
+    filter: invert(28%) sepia(79%) saturate(2310%) hue-rotate(208deg) brightness(99%) contrast(92%);
 }
 </style>
