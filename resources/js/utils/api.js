@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: 'http://gocpa.education/',
+    baseURL: 'http://gocpa.education:8081',
     timeout: 10000
 });
 api.interceptors.response.use(function (response) {
