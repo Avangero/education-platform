@@ -4,7 +4,7 @@ namespace App\Repositories\Contracts;
 
 interface TaskRepositoryInterface
 {
-    public function getCourseDetails(): object;
+    public function getCourseDetails(int $userId): ?object;
 
     public function getMentorDetails($mentorId): object;
 

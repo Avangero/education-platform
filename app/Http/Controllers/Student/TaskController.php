@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Services\Contracts\TaskServiceInterface;
+use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
@@ -14,8 +15,10 @@ class TaskController extends Controller
         $this->service = $service;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json($this->service->get());
+        $userId = $request->user()->id;
+
+        return response()->json($this->service->get($userId));
     }
 }

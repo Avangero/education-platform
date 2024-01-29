@@ -14,9 +14,13 @@ class TaskService implements TaskServiceInterface
         $this->repository = $repository;
     }
 
-    public function get(): array
+    public function get(int $userId): array
     {
-        $course = $this->repository->getCourseDetails();
+        $course = $this->repository->getCourseDetails($userId);
+
+        if (!$course) {
+            return [];
+        }
 
         $user = $this->repository->getMentorDetails($course->mentor_id);
 

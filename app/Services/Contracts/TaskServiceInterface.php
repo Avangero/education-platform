@@ -4,5 +4,5 @@ namespace App\Services\Contracts;
 
 interface TaskServiceInterface
 {
-    public function get(): array;
+    public function get(int $userId): array;
 }

@@ -7,12 +7,13 @@ use Illuminate\Support\Facades\DB;
 
 class TaskRepository implements TaskRepositoryInterface
 {
-    public function getCourseDetails(): object
+    public function getCourseDetails(int $userId): ?object
     {
         return DB::table('courses as c')
             ->select('c.id', 'c.start_date', 'c.end_date', 'cs.status', 'c.mentor_id')
             ->join('course_status as cs', 'c.status', '=', 'cs.id')
             ->where('c.end_date', '=', null)
+            ->where('c.student_id', '=', $userId)
             ->first();
     }
 
