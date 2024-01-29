@@ -85,8 +85,7 @@ export default {
     background-color: white;
     border-radius: 10px;
     padding: 20px;
-    width: calc(50% - 65px);;
-    height: 265px;
+    width: calc(50% - 25px);
     transition: box-shadow 0.3s ease;
     cursor: pointer;
     text-decoration: none;

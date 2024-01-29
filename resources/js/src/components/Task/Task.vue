@@ -1,45 +1,55 @@
 <template>
     <div class="task">
         <h1 class="task__title">{{ task.title }}</h1>
-        <div class="task__content">{{ task.content }}</div>
-        <form 
-            class="task__answer-block"
-            @submit.prevent="() => submitAnswer({taskId, answerFile})"
-            action="">
-            <input
-                id="anwer"
-                type="file"
-                name="anwer"
-                @change="onFileChange">
-            <button @submit="Submit">Отправить</button>
-        </form>
+        <div class="task__mentor mentor">
+            <div class="mentor__photo photo">
+                <div class="text">{{ task.mentor.name?.charAt(0) }}</div>
+            </div>
+            <div class="mentor__name name">{{task.mentor.name + ' ' + task.mentor.surname}}</div>
+
+        </div>
+        <div class="task__content content">{{ task.content }}</div>
+        <Toast/>
+        <div class="task__answer">
+            <FileUpload 
+                name="answer"
+                :url="`http://gocpa.education:8082/student/courses/tasks/${this.task.id}/answer`"
+                @upload="onUpload($event)"
+                @error="onError($event)"
+                :multiple="true"
+                accept="image/*"
+                :maxFileSize="1000000">
+                    <template #empty>
+                    <p>Перетащите файл.</p>
+                </template>
+            </FileUpload>
+        </div>
+
         <div class="task__comments-block comments-block">
             <div class="comments-block__comment" v-for="(comment, index) in task.comments" :key="comment.id">
                 {{ index }}: {{ comment.text }}
             </div>
         </div>
-        <form 
-            class="task__comment-block comment-block"
-            @submit.prevent="() => submitComment({taskId, commentText})"
-            action=""
-            >
-            <input
-                class="comment-block__comment"
-                id="comment"
-                type="textarea"
-                name="comment"
-                rows="5"
-                cols="33"
-                v-model="commentText">
-            <button @submit="Submit">Отправить</button>
-        </form>
+        <div class="task__comment-block comment-block">
+            <Textarea 
+                v-model="commentText" 
+                autoResize
+                class="comment-block__comment" />
+            <Button @click="() => submitComment({taskId, commentText})">Отправить</Button>
+        </div>
     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import Toast from 'primevue/toast';
+import FileUpload from 'primevue/fileupload';
+import Textarea from "primevue/textarea";
+import Button from "primevue/button";
+
 export default {
     name: "TaskComponent",
+    components: {Toast, FileUpload, Textarea, Button},
     data() {
         return {
             answerFile: null,
@@ -62,14 +72,15 @@ export default {
             submitAnswer: 'tasks/submitAnswer',
             submitComment: 'tasks/submitComment'
         }),
-        onFileChange(e) {
-            const formData = new FormData();
-            const files = e.target.files || e.dataTransfer.files;
-
-            if (!files.length) return;
-
-            formData.append('file', files[0], files[0].name)
-            this.answerFile = formData;
+        sendAnswer() {
+            console.log('sendAnswer', this.$refs.dropzone)
+            // this.$refs.dropzone.processQueue()
+        },
+        onUpload() {
+            this.$toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
+        },
+        onError() {
+            this.$toast.add({ severity: 'error', summary: 'Error Message', detail: 'Message Content', life: 3000 });
         }
     }
 };
@@ -86,14 +97,84 @@ export default {
         font-family: $font-manrop;
         margin-top: 0;
     }
-    &__content {
-        color: $main-black;
-        font-family: $font-manrop;
+
+    &__mentor {
         margin: 10px 0;
     }
-    &__comment-block {
-        width: 100%;
+
+    .mentor {
+        display: flex;
+        align-items: center;
+
+        &__photo {
+            margin: 0 10px;
+        }
+
+        .photo {
+            width: 40px;
+            height: 40px;
+            overflow: hidden;
+            border-radius: $main-avatar-border-radius;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: $main-blue-light;
+
+            .text {
+                font-family: $font-manrop;
+                font-weight: 800;
+                color: white;
+                font-size: 18px;
+            }
+        }
+
+        &__name {
+            margin: 0 10px;
+        }
+
+        .name {
+            font-family: $font-manrop;
+            font-weight: 800;
+            color: black;
+            font-size: 16px;
+        }
     }
+
+    &__content {
+        margin: 10px 0;
+    }
+
+    .content {
+        color: $main-black;
+        font-family: $font-manrop;
+    }
+
+    &__answer {
+        margin: 20px 0;
+    }
+
+    &__comments-block {
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    .comments-block {
+        color: $main-black;
+        font-family: $font-manrop;
+        border: 1px dashed $main-blue;
+        border-radius: 20px;
+        padding: 20px;
+    }
+
+    &__comment-block {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+        width: 100%;
+        gap: 10px;
+    }
+
     .comment-block {
         &__comment {
             font-size: 0.8rem;
@@ -104,6 +185,8 @@ export default {
             border-radius: 5px;
             border: 1px solid #ccc;
             box-shadow: 1px 1px 1px #999;
+            flex-grow: 1;
+            width: 100%;
         }
     }
 }

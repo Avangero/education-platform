@@ -33,7 +33,6 @@ export default {
 
 .learning-progress {
     background-color: white;
-    height: 55px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;

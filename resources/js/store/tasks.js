@@ -11,6 +11,13 @@ export default {
                 status: "Выполнено",
                 commentsCount: 10,
                 filesCount: 2,
+                mentor: {
+                    id:11,
+                    name:"Игорь",
+                    role_id: 2,
+                    role_title:"Наставник",
+                    surname:"Менторович",
+                },
                 comments: [{id: 1, text: '123123123'}, {id: 2, text: 'test123'}, {
                     id: 3,
                     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
@@ -70,6 +77,9 @@ export default {
         SET_TASKS(state, value) {
             state.list = value
         },
+        ADD_COMMENT(state, {value, taskId}) {
+            state.list.find((task) => task.id === Number(taskId)).comments.push(value);
+        }
     },
     actions: {
         getTasks({commit}) {
@@ -95,9 +105,9 @@ export default {
                     console.log(error);
                 });
         },
-        submitComment({}, {taskId, commentText}) {
-            post(`/api/comment/${taskId}`, commentText).then((response) => {
-                console.log(response);
+        submitComment({commit}, {taskId, commentText}) {
+            post(`/api/comment/${taskId}`, {text: commentText}).then((response) => {
+                commit('ADD_COMMENT', {value: response, taskId: taskId});
             })
                 .catch((error) => {
                     console.log(error);

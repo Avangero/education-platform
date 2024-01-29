@@ -29,16 +29,16 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 265px;
     height: 50px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
     box-sizing: border-box;
+    padding-right: 50px;
 
     .tab-icon {
         height: 24px;
         width: 24px;
-        padding: 0 10px;
+        margin: 0 10px;
         color: red;
         filter: invert(53%) sepia(11%) saturate(22%) hue-rotate(337deg) brightness(97%) contrast(84%);
     }
@@ -51,11 +51,11 @@ export default {
         font-style: normal;
         font-weight: 500;
         line-height: normal;
+        white-space: nowrap;
     }
 }
 
 .active-tab {
-    width: 265px;
     height: 50px;
     background-color: $main-blue-light;
     border-radius: 20px;

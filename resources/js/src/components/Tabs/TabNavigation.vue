@@ -56,8 +56,7 @@ export default {
 .tab-navigation {
     display: flex;
     flex-direction: column;
-    width: 265px;
-    padding: 50px 40px;
+    padding: 50px 0 40px 50px;
     min-height: 100vh;
 }
 

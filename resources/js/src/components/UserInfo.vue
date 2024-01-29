@@ -86,7 +86,7 @@ export default {
     width: 50px;
     height: 50px;
     overflow: hidden;
-    border-radius: 20px;
+    border-radius: $main-avatar-border-radius;
     display: flex;
     align-items: center;
     justify-content: center;
