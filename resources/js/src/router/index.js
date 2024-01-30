@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import LearningComponent from "../pages/LearningComponent.vue";
 import Task from "../components/Task/Task.vue";
+import NotFound from "../pages/NotFound.vue";
 
 const routes = [
     {
@@ -13,8 +14,7 @@ const routes = [
             middleware: "guest",
             title: `Login`
         }
-    },
-    {
+    },{
         path: "/",
         name: "home",
         component: Home,
@@ -30,9 +30,13 @@ const routes = [
             {
                 path: 'tasks/:id',
                 component: Task
+            },
+            {
+                path: '/:pathMatch(.*)*',
+                component: NotFound
             }
         ]
-    }
+    },
 ]
 const router = createRouter({
     history: createWebHistory(),

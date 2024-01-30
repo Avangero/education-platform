@@ -1,11 +1,18 @@
 <template>
     <div class="tab-navigation">
-        <Tab v-for="(tab, index) in tabs" :key="index" :icon="tab.icon" :text="tab.text"
-                :is-active="activeTab === index" @select="selectTab(index)"/>
+        <RouterLink
+            v-for="(tab, index) in tabs"
+                :key="index"
+                :to="`/${tab.path}`"
+                class="tab-navigation__link">
+            <Tab 
+                :icon="tab.icon"
+                :text="tab.text"
+                :is-active="activeTab === index"
+                @select="selectTab(index)">
+            </Tab>
+        </RouterLink>
     </div>
-    <!-- <div class="workspace">
-        <component :is="currentTabComponent"></component>
-    </div> -->
 </template>
 
 <script>
@@ -14,7 +21,6 @@ import IconDashboard from '../../images/tab-icons/dashboard.svg';
 import IconCalendar from '../../images/tab-icons/calendar.svg';
 import IconNotification from '../../images/tab-icons/notification.svg';
 import IconStat from '../../images/tab-icons/stat.svg';
-import LearningComponent from "../../pages/LearningComponent.vue";
 
 export default {
     components: {
@@ -28,25 +34,16 @@ export default {
         return {
             activeTab: 0,
             tabs: [
-                {icon: IconDashboard, text: 'Мое обучение'},
-                {icon: IconNotification, text: 'Уведомления'},
-                {icon: IconCalendar, text: 'Календарь'},
-                {icon: IconStat, text: 'Моя статистика'},
+                {icon: IconDashboard, text: 'Мое обучение', path: 'tasks'},
+                {icon: IconNotification, text: 'Уведомления', path: 'notifications'},
+                {icon: IconCalendar, text: 'Календарь', path: 'calendar'},
+                {icon: IconStat, text: 'Моя статистика', path: 'myStatistics'},
             ],
-            tabComponents: {
-                "Мое обучение": LearningComponent,
-                "Уведомления": "NotificationsComponent",
-                "Календарь": "CalendarComponent",
-                "Статистика": "StatisticsComponent",
-            },
-            currentTabComponent: LearningComponent,
         };
     },
     methods: {
         selectTab(index) {
             this.activeTab = index;
-            const tabText = this.tabs[index].text;
-            this.currentTabComponent = this.tabComponents[tabText];
         },
     },
 };
@@ -57,7 +54,11 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 50px 0 40px 50px;
-    min-height: 100vh;
+    height: calc(100vh - 100px);
+    
+    &__link {
+        text-decoration: none;
+    }
 }
 
 .workspace {
