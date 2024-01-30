@@ -8,7 +8,7 @@ export default {
     },
     getters: {
         getTasks(state) {
-            return state.course.tasks
+            return state.course?.tasks
         },
         getTaskById: (state) => (taskId) => {
             return state.course.tasks.find(task => task.id === taskId)

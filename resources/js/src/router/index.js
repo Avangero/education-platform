@@ -18,6 +18,7 @@ const routes = [
         path: "/",
         name: "home",
         component: Home,
+        redirect: '/tasks',
         meta: {
             middleware: "auth",
         },
@@ -30,6 +31,16 @@ const routes = [
             {
                 path: 'tasks/:id',
                 component: Task
+            },
+            {
+                path: "courses-teplates",
+                name: "home.courses-teplates",
+                component: LearningComponent,
+            },
+            {
+                path: "tasks-teplates",
+                name: "home.tasks-teplates",
+                component: LearningComponent,
             },
             {
                 path: '/:pathMatch(.*)*',
