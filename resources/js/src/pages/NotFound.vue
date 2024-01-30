@@ -12,9 +12,8 @@ export default {
 <style scoped lang="scss">
 .page-404 {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     padding: 50px 40px;
     width: 100%;
     background-image: url("../images/notFoundPage.svg");
