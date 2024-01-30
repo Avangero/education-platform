@@ -1,7 +1,10 @@
 <template>
     <div class="tasks">
         <div class="task-cards">
-            <TaskCard v-for="card in tasks" :key="card.id" :task="card"/>
+            <TaskCard 
+                v-for="card in tasks"
+                :key="card.id"
+                :task="card"/>
         </div>
     </div>
 </template>
@@ -18,7 +21,7 @@ export default {
         return {};
     },
     computed: {
-        ...mapGetters({tasks: 'tasks/getTasksList'}),
+        ...mapGetters({tasks: 'tasks/getTasks'}),
     }
 };
 </script>

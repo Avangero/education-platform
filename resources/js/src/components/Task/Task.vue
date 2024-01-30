@@ -1,11 +1,13 @@
 <template>
-    <div class="task">
+    <div 
+        v-if="!getLoading"
+        class="task">
         <h1 class="task__title">{{ task.title }}</h1>
         <div class="task__mentor mentor">
             <div class="mentor__photo photo">
-                <div class="text">{{ task.mentor.name?.charAt(0) }}</div>
+                <div class="text">{{ getCourseInfo.mentor.name?.charAt(0) }}</div>
             </div>
-            <div class="mentor__name name">{{task.mentor.name + ' ' + task.mentor.surname}}</div>
+            <div class="mentor__name name">{{getCourseInfo.mentor.name + ' ' + getCourseInfo.mentor.surname}}</div>
 
         </div>
         <div class="task__content content">{{ task.content }}</div>
@@ -13,8 +15,8 @@
         <div class="task__answer">
             <FileUpload 
                 name="answer"
-                :url="`http://gocpa.education:8082/student/courses/tasks/${this.task.id}/answer`"
-                @upload="onUpload($event)"
+                :customUpload="true"
+                @uploader="onAnswerUpload($event)"
                 @error="onError($event)"
                 :multiple="true"
                 accept="image/*"
@@ -27,7 +29,7 @@
 
         <div class="task__comments-block comments-block">
             <div class="comments-block__comment" v-for="(comment, index) in task.comments" :key="comment.id">
-                {{ index }}: {{ comment.text }}
+                {{ comment.created_at }}: {{ comment.content }}
             </div>
         </div>
         <div class="task__comment-block comment-block">
@@ -38,6 +40,23 @@
             <Button @click="() => submitComment({taskId, commentText})">Отправить</Button>
         </div>
     </div>
+    <div 
+        v-else
+        class="border-round border-1 surface-border p-4 surface-card loader">
+        <div class="flex mb-3">
+            <Skeleton shape="circle" size="4rem" class="mr-2"></Skeleton>
+            <div>
+                <Skeleton width="10rem" class="mb-2"></Skeleton>
+                <Skeleton width="5rem" class="mb-2"></Skeleton>
+                <Skeleton height=".5rem"></Skeleton>
+            </div>
+        </div>
+        <Skeleton width="100%" height="150px"></Skeleton>
+        <div class="flex justify-content-between mt-3">
+            <Skeleton width="4rem" height="2rem"></Skeleton>
+            <Skeleton width="4rem" height="2rem"></Skeleton>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -46,19 +65,25 @@ import Toast from 'primevue/toast';
 import FileUpload from 'primevue/fileupload';
 import Textarea from "primevue/textarea";
 import Button from "primevue/button";
+import Skeleton from 'primevue/skeleton';
 
 export default {
     name: "TaskComponent",
-    components: {Toast, FileUpload, Textarea, Button},
+    components: {Toast, FileUpload, Textarea, Button, Skeleton},
     data() {
         return {
             answerFile: null,
             commentText: ''
         };
     },
+    async created() {
+        await this.getTasks()
+    },
     computed: {
         ...mapGetters({
-            getTaskById: 'tasks/getTaskById'
+            getTaskById: 'tasks/getTaskById',
+            getCourseInfo: 'tasks/getCourseInfo',
+            getLoading: 'tasks/getLoading'
         }),
         task () {
             return this.getTaskById(Number(this.taskId));
@@ -70,11 +95,11 @@ export default {
     methods: {
         ...mapActions({
             submitAnswer: 'tasks/submitAnswer',
-            submitComment: 'tasks/submitComment'
+            submitComment: 'tasks/submitComment',
+            getTasks: 'tasks/getTasks'
         }),
-        sendAnswer() {
-            console.log('sendAnswer', this.$refs.dropzone)
-            // this.$refs.dropzone.processQueue()
+        onAnswerUpload(files) {
+            this.submitAnswer({taskId: this.taskId, files: files});
         },
         onUpload() {
             this.$toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
@@ -89,6 +114,19 @@ export default {
 <style scoped lang="scss">
 @import "../../styles/variables";
 
+.loader{
+    width: 100%;
+    .card {
+        background: var(--surface-card);
+        padding: 2rem;
+        border-radius: 10px;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        line-height: 1.75;
+    }
+}
 .task {
     padding: 50px 40px;
 

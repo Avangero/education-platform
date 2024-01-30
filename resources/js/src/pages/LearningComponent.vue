@@ -13,7 +13,7 @@ export default {
     name: "LearningComponent",
     components: {Tasks, ProgressBar},
     created() {
-        // this.getTasks();
+        this.getTasks();
     },
     data() {
         return {
@@ -21,7 +21,9 @@ export default {
         };
     },
     methods: {
-        ...mapActions(['getTasks'])
+        ...mapActions({
+            getTasks: 'tasks/getTasks'
+        })
     }
 };
 </script>
@@ -31,5 +33,6 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 50px 40px;
+    width: 100%;
 }
 </style>
