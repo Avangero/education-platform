@@ -21,7 +21,7 @@ export async function get(url) {
 }
 
 export function post(url, payload) {
-    return api.post(url, payload).then((data) => {
-        return data
+    return api.post(url, payload).then((response) => {
+        return response.data
     })
 }

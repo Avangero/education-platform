@@ -132,7 +132,7 @@ export default {
     height: 100%;
     border: 2px solid $main-blue-light;
     border-radius: 24px;
-    padding: 20px;
+    padding: 20px 5px;
     display: flex;
     flex-direction: column;
 }

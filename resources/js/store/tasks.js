@@ -23,13 +23,13 @@ export default {
     },
     mutations: {
         SET_TASKS(state, value) {
-            state.list = value
+            state.course.tasks = value
         },
         SET_COURSE(state, value) {
             state.course = value
         },
         ADD_COMMENT(state, {value, taskId}) {
-            state.list.find((task) => task.id === Number(taskId)).comments.push(value);
+            state.course.tasks.find((task) => task.id === Number(taskId)).comments.push(value);
         },
         SET_LOADING(state, value) {
             state.loading = value
@@ -50,11 +50,6 @@ export default {
             post(
                 `/api/student/courses/tasks/${taskId}/answer`,
                 files,
-                // {
-                //     headers: {
-                //         'Content-Type': 'multipart/form-data'
-                //     }
-                // }
             ).then((response) => {
                 console.log(response);
             })
@@ -64,7 +59,7 @@ export default {
         },
         submitComment({commit}, {taskId, commentText}) {
             post(`/api/student/courses/tasks/${taskId}/comment`, {task_id: taskId, content: commentText, }).then((response) => {
-                commit('ADD_COMMENT', {value: response, taskId: taskId});
+                commit('ADD_COMMENT', {value: response, taskId: Number(taskId)});
             })
                 .catch((error) => {
                     console.log(error);

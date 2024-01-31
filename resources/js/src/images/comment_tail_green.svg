@@ -1,0 +1,9 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="20" height="20">
+	<title>Новый проект</title>
+	<defs>
+		<image  width="20" height="20" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAAAXNSR0IB2cksfwAAAJZQTFRF7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3e7/3eqHP+rQAAADJ0Uk5TACxmDaY83gyL/zLkkftW3QEpqRSO/XXmB1DLA0zTBU7PG84olRJdrwqc5QQTRJboQOGwRroSAAAAb0lEQVR4nG3I2wJCQBQF0NEQWyWJGd3oipTb//+cHptzZj0uITjHcmJhOela0lvy8wPwDFc85XrDM9qCZrxLwHKfZjyVBs38cATN0/kCmkV5Bc2buoPm46lB8lXVGcxsvHf7d7/8fLt+gEGMqp5AzLCJCOrIFubuAAAAAElFTkSuQmCC"/>
+	</defs>
+	<style>
+	</style>
+	<use id="Background" href="#img1" x="0" y="0"/>
+</svg>

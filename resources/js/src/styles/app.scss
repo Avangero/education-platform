@@ -6,3 +6,17 @@ body, html {
     margin: 0;
     padding: 0;
 }
+
+
+::-webkit-scrollbar {
+    width: $scrollbarWidth;
+}
+::-webkit-scrollbar-track {
+    background: $scrollbarBg;
+    border-radius: $scrollbarBorderRadius;
+}
+::-webkit-scrollbar-thumb {
+    background-color: $scrollbarThumb;
+    border-radius: $scrollbarBorderRadius;
+    border: $scrollbarBorder;
+}
