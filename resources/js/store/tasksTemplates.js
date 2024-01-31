@@ -1,0 +1,71 @@
+import {get, post} from '../utils/index.js'
+
+export default {
+    namespaced: true,
+    state: {
+        loading: false,
+        list: [
+            {
+                id: 1,
+                title: 'Title',
+                content: 'Text',
+            },
+            {
+                id: 2,
+                title: 'Title',
+                content: 'Text',
+            }
+        ],
+        newTask: {
+            title: '',
+            text: ''
+        }
+    },
+    getters: {
+        getList(state) {
+            return state.list
+        },
+        getListItemById: (state) => (taskTemplateId) => {
+            return state.list.find(taskTemplate => taskTemplate.id === Number(taskTemplateId))
+        },
+        getLoading(state) {
+            return state.loading
+        }
+    },
+    mutations: {
+        SET_TASKS_TEMPLATES(state, value) {
+            state.list = value
+        },
+        SET_LOADING(state, value) {
+            state.loading = value
+        },
+        CHANGE_TASK_TEMPLATE_TITLE(state, {value, taskTemplateId}) {
+            state.list.find(taskTemplate => taskTemplate.id === Number(taskTemplateId)).title = value
+        },
+        CHANGE_TASK_TEMPLATE_CONTENT(state, {value, taskTemplateId}) {
+            state.list.find(taskTemplate => taskTemplate.id === Number(taskTemplateId)).content = value
+        }
+    },
+    actions: {
+        async getTasksTemplates({commit}) {
+            commit('SET_LOADING', true)
+            return await get('/api/mentor/tasks-templates/').then(({data}) => {
+                commit('SET_TASKS_TEMPLATES', data)
+            }).catch(({response: {data}}) => {
+                commit('SET_TASKS_TEMPLATES', [])
+            }).finally(() => {
+                commit('SET_LOADING', false)
+            })
+        },
+        async createTaskTemplate({commit}) {
+            commit('SET_LOADING', true)
+            return await post('/api/mentor/tasks-templates/create').then(({data}) => {
+                commit('SET_TASKS_TEMPLATES', data)
+            }).catch(({response: {data}}) => {
+                
+            }).finally(() => {
+                commit('SET_LOADING', false)
+            })
+        },
+    }
+}

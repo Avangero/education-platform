@@ -31,6 +31,7 @@ import CommentSvg from "../../images/task-icons/comment.svg";
 import FolderSvg from "../../images/task-icons/folder.svg";
 
 export default {
+    name: "TaskCard",
     props: {
         task: {
             type: Object,

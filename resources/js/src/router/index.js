@@ -3,6 +3,8 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import LearningComponent from "../pages/LearningComponent.vue";
 import Task from "../components/Task/Task.vue";
+import TasksTemplatesPage from "../pages/TasksTemplatesPage.vue";
+import TaskTemplate from "../components/TaskTemplate/TaskTemplate.vue";
 import NotFound from "../pages/NotFound.vue";
 
 const routes = [
@@ -38,9 +40,13 @@ const routes = [
                 component: LearningComponent,
             },
             {
-                path: "tasks-teplates",
-                name: "home.tasks-teplates",
-                component: LearningComponent,
+                path: "tasks-templates",
+                name: "home.tasks-templates",
+                component: TasksTemplatesPage,
+            },
+            {
+                path: "tasks-templates/:id",
+                component: TaskTemplate,
             },
             {
                 path: '/:pathMatch(.*)*',
