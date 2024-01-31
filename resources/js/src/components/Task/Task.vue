@@ -1,5 +1,6 @@
 <template>
-    <div class="task-container">
+    <div class="task-container" v-click-outside="close">
+        <i class="pi pi-times task-close" @click="close"></i>
         <div v-if="!getLoading" class="task">
             <div class="task-body">
                 <TaskHeader :task="task" :mentorInfo="getCourseInfo.mentor"/>
@@ -40,11 +41,13 @@ export default {
     data() {
         return {
             answerFile: null,
-            commentText: ''
+            commentText: '',
+            isOpened: false
         };
     },
     async created() {
         await this.getTasks();
+        this.isOpened = true;
     },
     computed: {
         ...mapGetters({
@@ -78,6 +81,11 @@ export default {
             
 
             await this.submitAnswer({taskId: this.taskId, files: body});
+        },
+        close() {
+            if (this.isOpened) {
+                this.$router.push({name: "tasks"})
+            }
         }
     }
 };
@@ -86,13 +94,20 @@ export default {
 <style scoped lang="scss">
 @import "../../styles/variables";
 .task-container {
-    padding: 50px;
-    width: 100%;
-    height: 100%;
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 50px;
+    left: 50px;
+    right: 50px;
+    bottom: 50px;
     z-index: 2;
+}
+
+.task-close {
+    position: absolute;
+    top: -25px;
+    right: -25px;
+    font-size: 1.5rem;
+    cursor: pointer;
 }
 
 .task-status {

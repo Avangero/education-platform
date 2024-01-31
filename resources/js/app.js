@@ -8,10 +8,25 @@ import 'primevue/resources/themes/lara-light-blue/theme.css';
 import "primeflex/primeflex.css";
 import 'primeicons/primeicons.css'
 
+const clickOutside = {
+    beforeMount: (el, binding) => {
+        el.clickOutsideEvent = event => {
+            if (!(el == event.target || el.contains(event.target))) {
+                binding.value();
+            }
+        };
+        document.addEventListener("click", el.clickOutsideEvent);
+    },
+    unmounted: el => {
+        document.removeEventListener("click", el.clickOutsideEvent);
+    },
+};
+
 const app = createApp(App);
 app.use(Router)
 app.use(store)
 app.use(PrimeVue);
 app.use(ToastService);
+app.directive("click-outside", clickOutside)
 app.mount('#app')
 
