@@ -24,6 +24,7 @@ export default {
     font-family: $font-manrop;
     height: 80%;
     overflow: auto;
+    flex-grow: 1;
 }
 
 .comment {

@@ -12,7 +12,10 @@
             </div>
             <div class="chat">
                 <TaskComments :comments="task.comments"/>
-                <CommentInput @submit="addComment" v-model="commentText"/>
+                <div class="comment-block">
+                    <Textarea v-model="commentText" autoResize class="comment-input"/>
+                    <Button @click="addComment">Отправить</Button>
+                </div>
             </div>
         </div>
     </div>
@@ -23,11 +26,12 @@ import {mapGetters, mapActions} from 'vuex';
 import TaskHeader from './TaskHeader.vue';
 import TaskComments from './TaskComments.vue';
 import FileUploadComponent from './FileUploadComponent.vue';
-import CommentInput from './CommentInput.vue';
+import Textarea from 'primevue/textarea';
+import Button from 'primevue/button';
 
 export default {
     name: "TaskComponent",
-    components: {TaskHeader, TaskComments, FileUploadComponent, CommentInput},
+    components: {TaskHeader, TaskComments, FileUploadComponent, Textarea, Button},
     data() {
         return {
             answerFile: null,
@@ -129,5 +133,26 @@ export default {
     border: 2px solid $main-blue-light;
     border-radius: 24px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.comment-input {
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    padding: 10px;
+    max-width: 100%;
+    line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid $main-blue;
+    width: 100%;
 }
 </style>
