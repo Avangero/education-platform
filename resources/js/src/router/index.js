@@ -70,7 +70,7 @@ router.beforeEach((to, from, next) => {
     document.title = to.meta.title
     if (to.meta.middleware === "guest") {
         if (localStorage.getItem('isAuth') === 'true') {
-            next({name: "home.tasks"})
+            next({name: "tasks"})
         } else {
             next()
         }
