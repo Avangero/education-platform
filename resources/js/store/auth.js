@@ -32,7 +32,7 @@ export default {
             router.push({name: "login"})
         },
         login() {
-            router.push({name: 'home.tasks'});
+            router.push({name: 'tasks'});
         }
     }
 }

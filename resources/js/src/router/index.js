@@ -27,7 +27,7 @@ const routes = [
         children: [
             {
                 path: "tasks",
-                name: "home.tasks",
+                name: "tasks",
                 component: LearningComponent,
             },
             {
@@ -36,16 +36,17 @@ const routes = [
             },
             {
                 path: "courses-templates",
-                name: "home.courses-templates",
+                name: "courses-templates",
                 component: LearningComponent,
             },
             {
                 path: "tasks-templates",
-                name: "home.tasks-templates",
+                name: "tasks-templates",
                 component: TasksTemplatesPage,
             },
             {
                 path: "tasks-templates/:id",
+                name: "task-template",
                 component: TaskTemplate,
             },
             {

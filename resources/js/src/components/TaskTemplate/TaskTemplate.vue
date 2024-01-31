@@ -2,8 +2,6 @@
     <div 
         v-if="!getLoading"
         class="task-template">
-        <!-- <h1 class="task-template__title">{{ task.title }}</h1>
-        <div>{{ task.content }}</div> -->
         <Textarea 
                 v-model="templateTitle"
                 autoResize
@@ -37,11 +35,10 @@ import { mapGetters, mapActions } from 'vuex';
 import Skeleton from 'primevue/skeleton';
 import Textarea from 'primevue/textarea';
 import Editor from 'primevue/editor';
-import Toolbar from 'primevue/toolbar';
 
 export default {
     name: "TaskTemplate",
-    components: {Skeleton, Textarea, Editor, Toolbar},
+    components: {Skeleton, Textarea, Editor},
     data() {
         return {};
     },

@@ -1,3 +1,4 @@
 export {
     post, get
-} from './api'
+} from './api';
+export { toolbar } from './toolbar'

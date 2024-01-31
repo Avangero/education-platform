@@ -54,7 +54,6 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 50px 0 40px 50px;
-    height: calc(100vh - 100px);
     
     &__link {
         text-decoration: none;

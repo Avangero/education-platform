@@ -15,11 +15,7 @@ export default {
                 title: 'Title',
                 content: 'Text',
             }
-        ],
-        newTask: {
-            title: '',
-            text: ''
-        }
+        ]
     },
     getters: {
         getList(state) {
@@ -33,24 +29,30 @@ export default {
         }
     },
     mutations: {
-        SET_TASKS_TEMPLATES(state, value) {
+        SET_TASKS_TEMPLATES(state, {value}) {
             state.list = value
         },
         SET_LOADING(state, value) {
             state.loading = value
+        },
+        UPDATE_TASK_TEMPLATE(state, {value}) {
+            state.list.find(taskTemplate => taskTemplate.id === Number(value.id)) = value;
         },
         CHANGE_TASK_TEMPLATE_TITLE(state, {value, taskTemplateId}) {
             state.list.find(taskTemplate => taskTemplate.id === Number(taskTemplateId)).title = value
         },
         CHANGE_TASK_TEMPLATE_CONTENT(state, {value, taskTemplateId}) {
             state.list.find(taskTemplate => taskTemplate.id === Number(taskTemplateId)).content = value
+        },
+        CEATE_TASK_TEMPLATE(state, {value}) {
+            state.list.push(value)
         }
     },
     actions: {
         async getTasksTemplates({commit}) {
             commit('SET_LOADING', true)
             return await get('/api/mentor/tasks-templates/').then(({data}) => {
-                commit('SET_TASKS_TEMPLATES', data)
+                commit('SET_TASKS_TEMPLATES', {value: data})
             }).catch(({response: {data}}) => {
                 commit('SET_TASKS_TEMPLATES', [])
             }).finally(() => {
@@ -60,12 +62,17 @@ export default {
         async createTaskTemplate({commit}) {
             commit('SET_LOADING', true)
             return await post('/api/mentor/tasks-templates/create').then(({data}) => {
-                commit('SET_TASKS_TEMPLATES', data)
+                commit('CEATE_TASK_TEMPLATE', {value: data})
             }).catch(({response: {data}}) => {
                 
-            }).finally(() => {
-                commit('SET_LOADING', false)
             })
         },
+        async saveTaskTemplate({commit}, {taskTemplateId}) {
+            return await post(`/api/mentor/tasks-templates/${taskTemplateId}`).then(({data}) => {
+                commit('UPDATE_TASK_TEMPLATE', {value: data})
+            }).catch(({response: {data}}) => {
+                
+            })
+        }
     }
 }
