@@ -1,4 +1,5 @@
-import {get, post} from '../utils/index.js'
+import {get, post} from '../utils/index.js';
+import router from '../src/router/index.js';
 
 export default {
     namespaced: true,
@@ -44,7 +45,7 @@ export default {
         CHANGE_TASK_TEMPLATE_CONTENT(state, {value, taskTemplateId}) {
             state.list.find(taskTemplate => taskTemplate.id === Number(taskTemplateId)).content = value
         },
-        CEATE_TASK_TEMPLATE(state, {value}) {
+        ADD_TASK_TEMPLATE(state, {value}) {
             state.list.push(value)
         }
     },
@@ -62,16 +63,22 @@ export default {
         async createTaskTemplate({commit}) {
             commit('SET_LOADING', true)
             return await post('/api/mentor/tasks-templates/create').then(({data}) => {
-                commit('CEATE_TASK_TEMPLATE', {value: data})
+                commit('ADD_TASK_TEMPLATE', {value: data})
+                router.push({name: "task-template", params: {id: data.id}})
             }).catch(({response: {data}}) => {
                 
+            }).finally(() => {
+                commit('SET_LOADING', false)
             })
         },
         async saveTaskTemplate({commit, getters}, {taskTemplateId}) {
             return await post(`/api/mentor/tasks-templates/${taskTemplateId}`, getters.getListItemById(taskTemplateId)).then(({data}) => {
-                commit('UPDATE_TASK_TEMPLATE', {value: data})
+                commit('UPDATE_TASK_TEMPLATE', {value: data});
+                
             }).catch(({response: {data}}) => {
                 
+            }).finally(() => {
+                commit('SET_LOADING', false)
             })
         }
     }

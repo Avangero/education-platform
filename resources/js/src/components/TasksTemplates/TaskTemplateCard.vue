@@ -4,7 +4,7 @@
         class="task-template-card">
         <div class="card-content">
             <h3 class="card-title">{{ task.title }}</h3>
-            <p class="card-description">{{ task.content }}</p>
+            <div class="card-description" v-html="task.content"></div>
         </div>
     </RouterLink>
 </template>
@@ -30,7 +30,7 @@ export default {
     computed: {
         taskTemplateLink() {
             return `/tasks-templates/${this.task.id}`
-        }
+        },
     },
 };
 </script>
@@ -39,6 +39,7 @@ export default {
 @import '../../styles/variables';
 
 .task-template-card {
+    display: flex;
     background-color: white;
     border-radius: 10px;
     padding: 20px;
@@ -46,6 +47,7 @@ export default {
     transition: box-shadow 0.3s ease;
     cursor: pointer;
     text-decoration: none;
+    min-height: 200px;
 }
 
 .task-template-card:hover {
@@ -56,6 +58,7 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
 }
 
 .card-title {
@@ -76,5 +79,7 @@ export default {
     font-weight: 400;
     line-height: 23px;
     letter-spacing: 0.3px;
+    max-height: 200px;
+    overflow: hidden;
 }
 </style>
