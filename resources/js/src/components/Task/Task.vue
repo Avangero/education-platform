@@ -12,8 +12,7 @@
                 <FileUploadComponent
                     :custom-upload="true"
                     @uploader="onFileUpload"
-                    :multiple="true"
-                    accept="image/*"
+                    :multiple="false"
                     :maxFileSize="10000000"/>
             </div>
             <div class="chat">
@@ -75,17 +74,33 @@ export default {
             this.commentText = '';
         },
         async onFileUpload(event) {
-            const files = event.files;
-            const body = new FormData();
-            body.append("files", files);
-            
-
-            await this.submitAnswer({taskId: this.taskId, files: body});
+            const file = await this.readFileAsync(event.files[0]);
+            await this.submitAnswer({taskId: this.taskId, files: file});
         },
         close() {
             if (this.isOpened) {
                 this.$router.push({name: "tasks"})
             }
+        },
+        readFileAsync(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+
+                reader.onload = (event) => {
+                    resolve({
+                        name: file.name,
+                        type: file.type,
+                        size: file.size,
+                        data: event.target.result // Содержимое файла
+                    });
+                };
+
+                reader.onerror = (error) => {
+                    reject(error);
+                };
+
+                reader.readAsDataURL(file);
+            });
         }
     }
 };
