@@ -67,8 +67,8 @@ export default {
                 
             })
         },
-        async saveTaskTemplate({commit}, {taskTemplateId}) {
-            return await post(`/api/mentor/tasks-templates/${taskTemplateId}`).then(({data}) => {
+        async saveTaskTemplate({commit, getters}, {taskTemplateId}) {
+            return await post(`/api/mentor/tasks-templates/${taskTemplateId}`, getters.getListItemById(taskTemplateId)).then(({data}) => {
                 commit('UPDATE_TASK_TEMPLATE', {value: data})
             }).catch(({response: {data}}) => {
                 
