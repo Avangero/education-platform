@@ -1,17 +1,17 @@
 <template>
-    <div 
+    <div
         v-if="!getLoading"
         class="task-template">
-        <Textarea 
-                v-model="templateTitle"
-                autoResize
-                class="task-template__title" />
-        <Editor 
+        <Textarea
+            v-model="templateTitle"
+            autoResize
+            class="task-template__title"/>
+        <Editor
             v-model="templateContent"
             editorStyle="height: 320px"
-            class="task-template__content"/>            
+            class="task-template__content"/>
     </div>
-    <div 
+    <div
         v-else
         class="border-round border-1 surface-border p-4 surface-card loader">
         <div class="flex mb-3">
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import {mapGetters, mapActions} from 'vuex';
 import Skeleton from 'primevue/skeleton';
 import Textarea from 'primevue/textarea';
 import Editor from 'primevue/editor';
@@ -50,10 +50,10 @@ export default {
             getTaskTemplateById: 'tasksTemplates/getListItemById',
             getLoading: 'tasksTemplates/getLoading'
         }),
-        task () {
+        task() {
             return this.getTaskTemplateById(Number(this.taskId));
         },
-        taskId () {
+        taskId() {
             return this.$route.params.id;
         },
         templateTitle: {
@@ -61,7 +61,10 @@ export default {
                 return this.task.title
             },
             set(value) {
-                return this.$store.commit('tasksTemplates/CHANGE_TASK_TEMPLATE_TITLE', {value: value, taskTemplateId: this.taskId});
+                return this.$store.commit('tasksTemplates/CHANGE_TASK_TEMPLATE_TITLE', {
+                    value: value,
+                    taskTemplateId: this.taskId
+                });
             }
         },
         templateContent: {
@@ -69,7 +72,10 @@ export default {
                 return this.task.content
             },
             set(value) {
-                return this.$store.commit('tasksTemplates/CHANGE_TASK_TEMPLATE_CONTENT', {value: value, taskTemplateId: this.taskId});
+                return this.$store.commit('tasksTemplates/CHANGE_TASK_TEMPLATE_CONTENT', {
+                    value: value,
+                    taskTemplateId: this.taskId
+                });
             }
         },
     },
@@ -84,19 +90,22 @@ export default {
 <style scoped lang="scss">
 @import "../../styles/variables";
 
-.loader{
+.loader {
     width: 100%;
-    .card {
-        background: var(--surface-card);
-        padding: 2rem;
-        border-radius: 10px;
-        margin-bottom: 1rem;
-    }
-
-    p {
-        line-height: 1.75;
-    }
 }
+
+.card {
+    background: var(--surface-card);
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+p {
+    line-height: 1.75;
+}
+
+
 .task-template {
     padding: 50px 40px;
     width: 100%;
@@ -111,10 +120,11 @@ export default {
     &__content {
         margin: 10px 0;
     }
-
-    .content {
-        color: $main-black;
-        font-family: $font-manrop;
-    }
 }
+
+.content {
+    color: $main-black;
+    font-family: $font-manrop;
+}
+
 </style>

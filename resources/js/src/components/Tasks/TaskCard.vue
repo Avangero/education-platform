@@ -73,9 +73,7 @@ export default {
             return `/tasks/${this.task.id}`
         }
     },
-    methods: {
-        
-    },
+    methods: {},
 };
 </script>
 

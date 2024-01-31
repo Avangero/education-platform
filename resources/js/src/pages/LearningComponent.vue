@@ -5,7 +5,7 @@
     </div>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import {mapActions} from 'vuex';
 import ProgressBar from "../components/ProgressBar.vue";
 import Tasks from "../components/Tasks/Tasks.vue";
 

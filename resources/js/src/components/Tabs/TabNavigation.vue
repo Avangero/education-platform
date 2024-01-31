@@ -2,10 +2,10 @@
     <div class="tab-navigation">
         <RouterLink
             v-for="(tab, index) in tabs"
-                :key="index"
-                :to="`/${tab.path}`"
-                class="tab-navigation__link">
-            <Tab 
+            :key="index"
+            :to="`/${tab.path}`"
+            class="tab-navigation__link">
+            <Tab
                 :icon="tab.icon"
                 :text="tab.text"
                 :is-active="activeTab === index"
@@ -14,14 +14,13 @@
         </RouterLink>
     </div>
 </template>
-
 <script>
 import Tab from './Tab.vue';
 import IconDashboard from '../../images/tab-icons/dashboard.svg';
 import IconCalendar from '../../images/tab-icons/calendar.svg';
 import IconNotification from '../../images/tab-icons/notification.svg';
 import IconStat from '../../images/tab-icons/stat.svg';
-import { mapGetters, mapMutations } from 'vuex';
+import {mapGetters, mapMutations} from 'vuex';
 
 export default {
     components: {
@@ -59,7 +58,7 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 50px 0 40px 50px;
-    
+
     &__link {
         text-decoration: none;
     }

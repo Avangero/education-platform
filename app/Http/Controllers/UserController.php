@@ -14,14 +14,13 @@ class UserController extends Controller
     public function get(Request $request)
     {
         $user = $request->user();
-        $roleId =  $user->role;
-        $roleTitle = DB::table('roles')->select('title')->where('id', '=', $roleId)->value('title');
+
         return response()->json([
             'id' => $user->id,
             'name' => $user->name,
             'surname' => $user->surname,
             'role_id' => $user->role,
-            'role_title' => $roleTitle
+            'role_title' => $user->getRoleTitle()
         ]);
     }
 }

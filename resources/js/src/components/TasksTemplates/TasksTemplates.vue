@@ -1,20 +1,20 @@
 <template>
     <div class="tasks-templates">
-        <TaskTemplateCard 
+        <TaskTemplateCard
             v-for="card in tasksTemplates"
             :key="card.id"
             :task="card"/>
-        <TaskTemplateCardAdd />
+        <TaskTemplateCardAdd/>
     </div>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import {mapGetters} from 'vuex';
 import TaskTemplateCard from './TaskTemplateCard.vue'
 import TaskTemplateCardAdd from './TaskTemplateCardAdd.vue';
 
 export default {
     name: "TaskTemplatesComponent",
-    components: { TaskTemplateCard, TaskTemplateCardAdd },
+    components: {TaskTemplateCard, TaskTemplateCardAdd},
     data() {
         return {};
     },

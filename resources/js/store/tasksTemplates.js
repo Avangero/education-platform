@@ -66,7 +66,7 @@ export default {
                 commit('ADD_TASK_TEMPLATE', {value: data})
                 router.push({name: "task-template", params: {id: data.id}})
             }).catch(({response: {data}}) => {
-                
+
             }).finally(() => {
                 commit('SET_LOADING', false)
             })
@@ -74,9 +74,9 @@ export default {
         async saveTaskTemplate({commit, getters}, {taskTemplateId}) {
             return await post(`/api/mentor/tasks-templates/${taskTemplateId}`, getters.getListItemById(taskTemplateId)).then(({data}) => {
                 commit('UPDATE_TASK_TEMPLATE', {value: data});
-                
+
             }).catch(({response: {data}}) => {
-                
+
             }).finally(() => {
                 commit('SET_LOADING', false)
             })

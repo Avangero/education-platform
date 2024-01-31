@@ -16,7 +16,7 @@ const routes = [
             middleware: "guest",
             title: `Login`
         }
-    },{
+    }, {
         path: "/",
         name: "home",
         component: Home,
@@ -58,7 +58,7 @@ const routes = [
                 path: '/:pathMatch(.*)*',
                 component: NotFound,
                 meta: {activeTab: null}
-            }
+            },
         ]
     },
 ]
@@ -71,8 +71,9 @@ router.beforeEach((to, from, next) => {
     if (to.meta.middleware === "guest") {
         if (localStorage.getItem('isAuth') === 'true') {
             next({name: "home.tasks"})
+        } else {
+            next()
         }
-        next()
     } else {
         if (localStorage.getItem('isAuth') === 'true') {
             next()

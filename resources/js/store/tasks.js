@@ -63,7 +63,7 @@ export default {
                 });
         },
         submitComment({commit}, {taskId, commentText}) {
-            post(`/api/student/courses/tasks/${taskId}/comment`, {text: commentText}).then((response) => {
+            post(`/api/student/courses/tasks/${taskId}/comment`, {task_id: taskId, content: commentText, }).then((response) => {
                 commit('ADD_COMMENT', {value: response, taskId: taskId});
             })
                 .catch((error) => {

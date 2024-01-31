@@ -17,8 +17,6 @@ class TaskController extends Controller
 
     public function index(Request $request)
     {
-        $userId = $request->user()->id;
-
-        return response()->json($this->service->get($userId));
+        return response()->json($this->service->get($request->user()->id));
     }
 }
