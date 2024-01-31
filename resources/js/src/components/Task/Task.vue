@@ -8,7 +8,12 @@
                     <p class="task-created-date">Дедлайн: 30.01.2024</p>
                 </div>
                 <div class="task-content content">{{ task.content }}</div>
-                <FileUploadComponent @upload="onAnswerUpload" @error="onError"/>
+                <FileUploadComponent
+                    :custom-upload="true"
+                    @uploader="onFileUpload"
+                    :multiple="true"
+                    accept="image/*"
+                    :maxFileSize="10000000"/>
             </div>
             <div class="chat">
                 <TaskComments :comments="task.comments"/>
@@ -65,6 +70,14 @@ export default {
             if (this.commentText.trim() === '') return;
             await this.submitComment({taskId: this.taskId, commentText: this.commentText});
             this.commentText = '';
+        },
+        async onFileUpload(event) {
+            const files = event.files;
+            const body = new FormData();
+            body.append("files", files);
+            
+
+            await this.submitAnswer({taskId: this.taskId, files: body});
         }
     }
 };
