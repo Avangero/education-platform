@@ -27,6 +27,6 @@ class CommentController extends Controller
 
         $comment->save();
 
-        return response()->json(['message' => 'Success'], 201);
+        return response()->json($comment->toArray());
     }
 }
