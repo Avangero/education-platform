@@ -37,7 +37,9 @@ export default {
             state.loading = value
         },
         UPDATE_TASK_TEMPLATE(state, {value}) {
-            state.list.find(taskTemplate => taskTemplate.id === Number(value.id)) = value;
+            state.list.find(taskTemplate => taskTemplate.id === Number(value.id)).id = value.id
+            state.list.find(taskTemplate => taskTemplate.id === Number(value.id)).title = value.title
+            state.list.find(taskTemplate => taskTemplate.id === Number(value.id)).content = value.content
         },
         CHANGE_TASK_TEMPLATE_TITLE(state, {value, taskTemplateId}) {
             state.list.find(taskTemplate => taskTemplate.id === Number(taskTemplateId)).title = value
