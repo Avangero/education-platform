@@ -4,7 +4,7 @@
             v-for="(comment, index) in comments"
             :key="comment.id"
             :class="['comment', {'my-comment': comment.author === user.id}]">
-            <div class="comment__content">
+            <div class="comment-content">
                 {{ comment.content }}
             </div>
             <div class="comment-date">{{ getDate(comment.created_at) }}</div>
@@ -95,6 +95,7 @@ export default {
     justify-content: space-between;
     flex-direction: column;
     align-items: flex-start;
+    max-width: 100%;
 
     &::before {
         content: url('../../images/comment_tail_blue.svg');
@@ -133,6 +134,11 @@ export default {
             overflow: hidden;
         }
     }
+}
+
+.comment-content {
+    overflow-wrap: break-word;
+    max-width: 100%;
 }
 
 .comment-date {
