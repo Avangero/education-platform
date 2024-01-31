@@ -35,8 +35,8 @@ const routes = [
                 component: Task
             },
             {
-                path: "courses-teplates",
-                name: "home.courses-teplates",
+                path: "courses-templates",
+                name: "home.courses-templates",
                 component: LearningComponent,
             },
             {

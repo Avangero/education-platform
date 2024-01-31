@@ -11,8 +11,8 @@ export default {
             {icon: IconNotification, text: 'Уведомления', path: 'notifications', accessToRoles: [1,2,3]},
             {icon: IconCalendar, text: 'Календарь', path: 'calendar', accessToRoles: [1,2,3]},
             {icon: IconStat, text: 'Моя статистика', path: 'myStatistics', accessToRoles: [1,2,3]},
-            {icon: IconDashboard, text: 'Шаблоны курсов', path: 'courses-teplates', accessToRoles: [1,2]},
-            {icon: IconDashboard, text: 'Шаблоны задач', path: 'tasks-teplates', accessToRoles: [1,2]},
+            {icon: IconDashboard, text: 'Шаблоны курсов', path: 'courses-templates', accessToRoles: [1,2]},
+            {icon: IconDashboard, text: 'Шаблоны задач', path: 'tasks-templates', accessToRoles: [1,2]},
         ],
     },
     getters: {
