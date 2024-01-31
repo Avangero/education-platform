@@ -29,29 +29,35 @@ const routes = [
                 path: "tasks",
                 name: "tasks",
                 component: LearningComponent,
+                meta: {activeTab: 0}
             },
             {
                 path: 'tasks/:id',
-                component: Task
+                component: Task,
+                meta: {activeTab: 0}
             },
             {
                 path: "courses-templates",
                 name: "courses-templates",
                 component: LearningComponent,
+                meta: {activeTab: 4}
             },
             {
                 path: "tasks-templates",
                 name: "tasks-templates",
                 component: TasksTemplatesPage,
+                meta: {activeTab: 5}
             },
             {
                 path: "tasks-templates/:id",
                 name: "task-template",
                 component: TaskTemplate,
+                meta: {activeTab: 5}
             },
             {
                 path: '/:pathMatch(.*)*',
-                component: NotFound
+                component: NotFound,
+                meta: {activeTab: null}
             }
         ]
     },

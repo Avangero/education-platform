@@ -6,6 +6,7 @@ import IconStat from '../src/images/tab-icons/stat.svg';
 export default {
     namespaced: true,
     state: {
+        activeTab: 0,
         navbarList: [
             {icon: IconDashboard, text: 'Мое обучение', path: 'tasks', accessToRoles: [1,2,3]},
             {icon: IconNotification, text: 'Уведомления', path: 'notifications', accessToRoles: [1,2,3]},
@@ -18,6 +19,14 @@ export default {
     getters: {
         getNavbarForRole(state, getters, rootState, rootGetters) {
             return state.navbarList.filter((navbarItem) => navbarItem.accessToRoles.includes(rootGetters['auth/user'].role_id))
+        },
+        getActiveTab(state) {
+            return state.activeTab
+        }
+    },
+    mutations: {
+        SET_ACTIVE_TAB(state, value) {
+            state.activeTab = value
         }
     }
 }

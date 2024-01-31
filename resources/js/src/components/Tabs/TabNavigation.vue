@@ -21,7 +21,7 @@ import IconDashboard from '../../images/tab-icons/dashboard.svg';
 import IconCalendar from '../../images/tab-icons/calendar.svg';
 import IconNotification from '../../images/tab-icons/notification.svg';
 import IconStat from '../../images/tab-icons/stat.svg';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default {
     components: {
@@ -32,18 +32,23 @@ export default {
         IconStat,
     },
     data() {
-        return {
-            activeTab: 0,
-        };
+        return {};
     },
     computed: {
         ...mapGetters({
             tabs: 'navbar/getNavbarForRole',
+            activeTab: 'navbar/getActiveTab'
         })
     },
+    created() {
+        this.setActiveTab(this.$route.meta.activeTab);
+    },
     methods: {
+        ...mapMutations({
+            setActiveTab: 'navbar/SET_ACTIVE_TAB'
+        }),
         selectTab(index) {
-            this.activeTab = index;
+            this.setActiveTab(index);
         },
     },
 };
