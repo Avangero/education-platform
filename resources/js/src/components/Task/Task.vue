@@ -9,11 +9,18 @@
                     <p class="task-created-date">Дедлайн: 30.01.2024</p>
                 </div>
                 <div class="task-content content">{{ task.content }}</div>
-                <FileUploadComponent
-                    :custom-upload="true"
-                    @uploader="onFileUpload"
+                <FileUpload
+                    ref="fileUploadRef"
+                    name="answer"
+                    :customUpload="true"
                     :multiple="false"
-                    :maxFileSize="10000000"/>
+                    :maxFileSize="1000000"
+                    @uploader="onFileUpload"
+                >
+                    <template #empty>
+                        <p>Перетащите файл.</p>
+                    </template>
+                </FileUpload>
             </div>
             <div class="chat">
                 <TaskComments :comments="task.comments"/>
@@ -30,18 +37,20 @@
 import {mapGetters, mapActions} from 'vuex';
 import TaskHeader from './TaskHeader.vue';
 import TaskComments from './TaskComments.vue';
-import FileUploadComponent from './FileUploadComponent.vue';
 import Textarea from 'primevue/textarea';
 import Button from 'primevue/button';
+import FileUpload from "primevue/fileupload";
+
 
 export default {
     name: "TaskComponent",
-    components: {TaskHeader, TaskComments, FileUploadComponent, Textarea, Button},
+    components: {TaskHeader, TaskComments, FileUpload, Textarea, Button},
     data() {
         return {
             answerFile: null,
             commentText: '',
-            isOpened: false
+            isOpened: false,
+            uploadedFileCount: 2
         };
     },
     async created() {
@@ -74,8 +83,11 @@ export default {
             this.commentText = '';
         },
         async onFileUpload(event) {
+            const fileUploadComponent = this.$refs.fileUploadRef;
             const file = await this.readFileAsync(event.files[0]);
             await this.submitAnswer({taskId: this.taskId, files: file});
+            fileUploadComponent.uploadedFileCount++;
+            fileUploadComponent.uploadedFiles.push(event.files[0]);
         },
         close() {
             if (this.isOpened) {
@@ -91,7 +103,7 @@ export default {
                         name: file.name,
                         type: file.type,
                         size: file.size,
-                        data: event.target.result // Содержимое файла
+                        data: event.target.result
                     });
                 };
 
@@ -108,6 +120,7 @@ export default {
 
 <style scoped lang="scss">
 @import "../../styles/variables";
+
 .task-container {
     position: fixed;
     top: 50px;
@@ -136,6 +149,7 @@ export default {
     font-family: $font-manrop;
     font-size: 14px;
 }
+
 .task {
     padding: 40px;
     border-radius: 50px;
