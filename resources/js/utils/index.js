@@ -1,4 +1,4 @@
 export {
-    post, get
+    post, get, del
 } from './api';
 export { toolbar } from './toolbar'

@@ -1,5 +1,7 @@
 <template>
-    <div class="task-container" v-click-outside="close">
+    <!-- <div class="task-container" v-click-outside="close"> -->
+    <!-- при удаление вызывается обработчик который смотрит на не существующий элемент -->  
+    <div class="task-container">
         <i class="pi pi-times task-close" @click="close"></i>
         <div v-if="!getLoading" class="task">
             <div class="task-body">
@@ -15,10 +17,71 @@
                     :customUpload="true"
                     :multiple="false"
                     :maxFileSize="1000000"
-                    @uploader="onFileUpload"
+                    @uploader="onFileUpload"  
+                    :auto="true"
+                    :showUploadButton="false"
+                    :showCancelButton="false"
+                    chooseLabel="Выбрать"
                 >
                     <template #empty>
                         <p>Перетащите файл.</p>
+                    </template>
+                    <template #content="{ files, uploadedFiles, removeFileCallback }">
+                        <div v-if="files.length > 0">
+                            <h5>Pending</h5>
+                            <div class="file-upload-content__group">
+                                <div v-for="(file, index) of files" :key="file.name + file.type + file.size" class="file-upload-content__item">
+                                    <div class="file-upload-content__left">
+                                        <div class="file-upload-content__image">
+                                            <img
+                                                v-if="file.type.includes('image/')"
+                                                role="presentation"
+                                                :alt="file.name"
+                                                :src="file.objectURL"
+                                                width="50"/>
+                                            <i v-else class="pi pi-file"></i>
+                                        </div>
+                                        <div class="file-upload-content__info">
+                                            <span class="font-semibold">{{ file.name }}</span>
+                                            <div>{{ formatSize(file.size) }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="file-upload-content__right">
+                                        <Button icon="pi pi-times" @click="onRemoveTemplatingFile(file, removeFileCallback, index)" rounded text severity="danger" />
+                                        <Badge value="Pending" severity="warning" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-if="uploadedFiles.length > 0">
+                            <h5>Completed</h5>
+                            <div class="file-upload-content__group">
+                                <div v-for="(file, index) of uploadedFiles" :key="file.name + file.type + file.size" class="file-upload-content__item">
+                                    <div class="file-upload-content__left">
+                                        <div class="file-upload-content__image">
+                                            <img 
+                                                v-if="file.type.includes('image/')"
+                                                role="presentation"
+                                                :alt="file.name"
+                                                :src="file.objectURL"
+                                                width="50"/>
+                                            <i v-else class="pi pi-file"></i>
+                                        </div>
+                                        <div class="file-upload-content__info">
+                                            <span class="font-semibold">{{ file.name }}</span>
+                                            <div>{{ formatSize(file.size) }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="file-upload-content__right">
+                                        <a :href="file.objectURL" download>
+                                            <i class="pi pi-download"></i>
+                                        </a>
+                                        <Button icon="pi pi-times" @click="onRemoveUploadedFile(file, index)" rounded text severity="danger" />
+                                        <Badge value="Completed" severity="success" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </template>
                 </FileUpload>
             </div>
@@ -40,22 +103,23 @@ import TaskComments from './TaskComments.vue';
 import Textarea from 'primevue/textarea';
 import Button from 'primevue/button';
 import FileUpload from "primevue/fileupload";
+import Badge from 'primevue/badge';
 
 
 export default {
     name: "TaskComponent",
-    components: {TaskHeader, TaskComments, FileUpload, Textarea, Button},
+    components: {TaskHeader, TaskComments, FileUpload, Textarea, Button, Badge},
     data() {
         return {
             answerFile: null,
             commentText: '',
             isOpened: false,
-            uploadedFileCount: 2
         };
     },
     async created() {
         await this.getTasks();
         this.isOpened = true;
+        this.addUploadedFiles();
     },
     computed: {
         ...mapGetters({
@@ -74,6 +138,7 @@ export default {
     methods: {
         ...mapActions({
             submitAnswer: 'tasks/submitAnswer',
+            removeAnswer: 'tasks/removeAnswer',
             submitComment: 'tasks/submitComment',
             getTasks: 'tasks/getTasks'
         }),
@@ -88,6 +153,18 @@ export default {
             await this.submitAnswer({taskId: this.taskId, files: file});
             fileUploadComponent.uploadedFileCount++;
             fileUploadComponent.uploadedFiles.push(event.files[0]);
+        },
+        onRemoveFile() {
+            console.log('onRemoveFile')
+        },
+        async onRemoveUploadedFile(file, fileIndex) {
+            const fileName = file.name;
+            await this.removeAnswer({taskId: this.taskId, fileName: fileName})
+                .then(() => {
+                    const fileUploadComponent = this.$refs.fileUploadRef;
+                    fileUploadComponent.uploadedFileCount--;
+                    fileUploadComponent.uploadedFiles.splice(fileIndex, 1);
+                });
         },
         close() {
             if (this.isOpened) {
@@ -113,6 +190,77 @@ export default {
 
                 reader.readAsDataURL(file);
             });
+        },
+        addUploadedFiles() {
+            const fileUploadComponent = this.$refs.fileUploadRef;
+            this.task.answers.forEach(file => {
+                const byteCharacters = atob(file.data);
+                const byteNumbers = new Array(byteCharacters.length);
+                for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+                }
+                const byteArray = new Uint8Array(byteNumbers);
+                
+                const fileData = new File([byteArray], file.name, {type: this.getFileType(file.name)});
+                const fileUrl = URL.createObjectURL(fileData);
+                fileData.objectURL = fileUrl;
+                
+                fileUploadComponent.uploadedFileCount++;
+                fileUploadComponent.uploadedFiles.push(fileData);
+            });
+        },
+
+        getFileType(fileName) {
+            const fileExtension = fileName.split('.').pop().toLowerCase();
+
+            const imageExtensions = ['png', 'jpg', 'jpeg', 'gif', 'bmp'];
+            const documentExtensions = ['txt', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'];
+
+            if (imageExtensions.includes(fileExtension)) {
+                return 'image/' + fileExtension;
+            } else if (documentExtensions.includes(fileExtension)) {
+                return 'application/' + fileExtension;
+            } else {
+                return 'application/octet-stream';
+            }
+        },
+
+        onRemoveTemplatingFile(file, removeFileCallback, index) {
+            removeFileCallback(index);
+            this.totalSize -= parseInt(this.formatSize(file.size));
+            this.totalSizePercent = this.totalSize / 10;
+        },
+        onClearTemplatingUpload(clear) {
+            clear();
+            this.totalSize = 0;
+            this.totalSizePercent = 0;
+        },
+        onSelectedFiles(event) {
+            this.files = event.files;
+            this.files.forEach((file) => {
+                this.totalSize += parseInt(this.formatSize(file.size));
+            });
+        },
+        uploadEvent(callback) {
+            this.totalSizePercent = this.totalSize / 10;
+            callback();
+        },
+        onTemplatedUpload() {
+            this.$toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
+        },
+        formatSize(bytes) {
+            const k = 1024;
+            const dm = 3;
+            const sizes = this.$primevue.config.locale.fileSizeTypes;
+
+            if (bytes === 0) {
+                return `0 ${sizes[0]}`;
+            }
+
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            const formattedSize = parseFloat((bytes / Math.pow(k, i)).toFixed(dm));
+
+            return `${formattedSize} ${sizes[i]}`;
         }
     }
 };
@@ -162,8 +310,10 @@ export default {
 }
 
 .task-body {
-    width: 70%;
     height: 100%;
+    overflow-y: auto;
+    padding-right: 40px;
+    margin-right: 10px;
 }
 
 .task-statuses {
@@ -185,13 +335,14 @@ export default {
 }
 
 .chat {
-    width: 25%;
+    width: 400px;
     height: 100%;
     border: 2px solid $main-blue-light;
     border-radius: 24px;
     padding: 20px 5px;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
 }
 
 .comment-block {
@@ -211,5 +362,42 @@ export default {
     border-radius: 5px;
     border: 1px solid $main-blue;
     width: 100%;
+}
+
+.file-upload-content {
+    &__group {
+
+    }
+
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__left {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__image {
+        margin-right: 10px;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
 </style>

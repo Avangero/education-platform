@@ -1,4 +1,4 @@
-import {get, post} from '../utils/index.js'
+import {get, post, del} from '../utils/index.js'
 
 export default {
     namespaced: true,
@@ -33,6 +33,11 @@ export default {
         },
         SET_LOADING(state, value) {
             state.loading = value
+        },
+        REMOVE_ANSWER(state, {taskId, fileName}) {
+            const answers = state.course.tasks.find((task) => task.id === Number(taskId)).answers
+            const answerIndex = answers.findIndex((answer) => answer.name === fileName);
+            answers.splice(answerIndex, 1);
         }
     },
     actions: {
@@ -57,8 +62,19 @@ export default {
                     console.log(error);
                 });
         },
+        removeAnswer({commit}, {taskId, fileName}) {
+            del(
+                `/api/student/courses/tasks/${taskId}/answer`,
+                {name: fileName},
+            ).then((response) => {
+                commit('REMOVE_ANSWER', {taskId, fileName})
+            })
+                .catch((error) => {
+                    console.log(error);
+                });
+        },
         submitComment({commit}, {taskId, commentText}) {
-            post(`/api/student/courses/tasks/${taskId}/comment`, {task_id: taskId, content: commentText, }).then((response) => {
+            post(`/api/student/courses/tasks/${taskId}/comment`, {content: commentText}).then((response) => {
                 commit('ADD_COMMENT', {value: response, taskId: Number(taskId)});
             })
                 .catch((error) => {

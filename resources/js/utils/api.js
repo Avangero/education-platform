@@ -25,3 +25,10 @@ export function post(url, payload) {
         return response.data
     })
 }
+
+export function del(url, payload) {
+    console.log('te', payload)
+    return api.delete(url, {data: {...payload}}).then((response) => {
+        return response.data
+    })
+}
