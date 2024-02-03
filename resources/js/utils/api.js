@@ -19,7 +19,8 @@ export async function get(url) {
     return api.get(url).then((data) => {
         return data
     }).catch(e => {
-        store.commit('errorHandling/ADD_ERROR', e)
+        store.commit('errorHandling/ADD_ERROR', e);
+        return Promise.reject(e);
     })
 }
 
@@ -27,7 +28,8 @@ export function post(url, payload) {
     return api.post(url, payload).then((response) => {
         return response.data
     }).catch(e => {
-        store.commit('errorHandling/ADD_ERROR', e)
+        store.commit('errorHandling/ADD_ERROR', e);
+        return Promise.reject(e);
     })
 }
 
@@ -35,6 +37,7 @@ export function del(url, payload) {
     return api.delete(url, {data: {...payload}}).then((response) => {
         return response.data
     }).catch(e => {
-        store.commit('errorHandling/ADD_ERROR', e)
+        store.commit('errorHandling/ADD_ERROR', e);
+        return Promise.reject(e);
     })
 }

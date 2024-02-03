@@ -55,11 +55,10 @@ export default {
             })
         },
         submitAnswer({}, {taskId, files}) {
-            post(
+            return post(
                 `/api/student/courses/tasks/${taskId}/answer`,
                 files,
-            ).then((response) => {
-            })
+            )
         },
         removeAnswer({commit}, {taskId, fileName}) {
             del(
@@ -77,8 +76,6 @@ export default {
         setStatus({commit}, {taskId, status}) {
             post(`/api/student/courses/tasks/${taskId}/status`, {status: status}).then((response) => {
                 commit('SET_STATUS', {taskId: taskId, status: status});
-            }).catch((error) => {
-                console.log(error);
             });
         }
     }

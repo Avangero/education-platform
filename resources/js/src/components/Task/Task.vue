@@ -192,20 +192,10 @@ export default {
         async onFileUpload(event) {
             const fileUploadComponent = this.$refs.fileUploadRef;
             const file = await this.readFileAsync(event.files[0]);
-            await this.submitAnswer({taskId: this.taskId, files: file}).then(() => {
-                console.log('tes1')
-            })
-                .catch((error) => {
-                console.log(3)
-                this.toast.add({
-                    severity: "error",
-                    summary: "Произошла ошибка",
-                    detail: error.response.data.message,
-                    life: 3000,
-                });
+            await this.submitAnswer({taskId: this.taskId, files: file}).then((test) => {
+                fileUploadComponent.uploadedFileCount++;
+                fileUploadComponent.uploadedFiles.push(event.files[0]);
             });
-            fileUploadComponent.uploadedFileCount++;
-            fileUploadComponent.uploadedFiles.push(event.files[0]);
         },
         async onRemoveUploadedFile(file, fileIndex) {
             const fileName = file.name;
