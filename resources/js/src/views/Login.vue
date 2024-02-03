@@ -6,9 +6,9 @@
                 <form class="login-form" @submit.prevent="login">
                     <div class="login-header">Добро пожаловать!</div>
                     <input v-model="auth.email" type="email" class="login-email" name="email" required
-                           placeholder="Email">
+                           placeholder="Email" autocomplete="login">
                     <input v-model="auth.password" type="password" class="login-password" name="password" required
-                           placeholder="Password">
+                           placeholder="Password" autocomplete="current-password">
                     <button type="submit" class="login-button">Войти</button>
                 </form>
             </div>
@@ -22,6 +22,7 @@ import Logo from "../components/Logo.vue";
 import ProgressBar from "../components/ProgressBar.vue";
 import {get, post} from "../../utils/index";
 import {mapActions} from "vuex";
+import { useToast } from "primevue/usetoast";
 
 export default {
     components: {
@@ -35,7 +36,8 @@ export default {
                 password: "",
             },
             validationErrors: {},
-            processing: false
+            processing: false,
+            toast: useToast()
         };
     },
     methods: {
@@ -48,13 +50,6 @@ export default {
             await post('/login', this.auth).then(({data}) => {
                 localStorage.setItem('isAuth', 'true');
                 this.signIn()
-            }).catch(({response}) => {
-                if (response.status === 422) {
-                    this.validationErrors = response.data.errors
-                } else {
-                    this.validationErrors = {}
-                    alert(response.data.message)
-                }
             }).finally(() => {
                 this.processing = false
             })
@@ -62,7 +57,6 @@ export default {
     },
 };
 </script>
-
 
 <style lang="scss">
 @import "../styles/variables";

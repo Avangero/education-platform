@@ -15,7 +15,7 @@ class CommentController extends Controller
         $content = $request->get('content');
 
         if (!Task::isMyTask($taskId, $userId)) {
-            return response()->json(['message' => 'Access to the requested resource is denied'], 403);
+            return response()->json(['message' => 'Доступ к задаче запрещен'], 403);
         }
 
         $comment = new Comments([

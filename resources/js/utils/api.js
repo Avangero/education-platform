@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from '../store/index.js'
 
 const api = axios.create({
     baseURL: 'http://gocpa.education:8082',
@@ -17,18 +18,23 @@ api.interceptors.response.use(function (response) {
 export async function get(url) {
     return api.get(url).then((data) => {
         return data
+    }).catch(e => {
+        store.commit('errorHandling/ADD_ERROR', e)
     })
 }
 
 export function post(url, payload) {
     return api.post(url, payload).then((response) => {
         return response.data
+    }).catch(e => {
+        store.commit('errorHandling/ADD_ERROR', e)
     })
 }
 
 export function del(url, payload) {
-    console.log('te', payload)
     return api.delete(url, {data: {...payload}}).then((response) => {
         return response.data
+    }).catch(e => {
+        store.commit('errorHandling/ADD_ERROR', e)
     })
 }

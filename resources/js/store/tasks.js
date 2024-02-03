@@ -59,11 +59,7 @@ export default {
                 `/api/student/courses/tasks/${taskId}/answer`,
                 files,
             ).then((response) => {
-                console.log(response);
             })
-                .catch((error) => {
-                    console.log(error);
-                });
         },
         removeAnswer({commit}, {taskId, fileName}) {
             del(
@@ -72,16 +68,11 @@ export default {
             ).then((response) => {
                 commit('REMOVE_ANSWER', {taskId, fileName})
             })
-                .catch((error) => {
-                    console.log(error);
-                });
         },
         submitComment({commit}, {taskId, commentText}) {
             post(`/api/student/courses/tasks/${taskId}/comment`, {content: commentText}).then((response) => {
                 commit('ADD_COMMENT', {value: response, taskId: Number(taskId)});
-            }).catch((error) => {
-                console.log(error);
-            });
+            })
         },
         setStatus({commit}, {taskId, status}) {
             post(`/api/student/courses/tasks/${taskId}/status`, {status: status}).then((response) => {

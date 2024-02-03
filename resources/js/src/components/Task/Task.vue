@@ -1,6 +1,7 @@
 <template>
+    <Toast/>
     <!-- <div class="task-container" v-click-outside="close"> -->
-    <!-- при удаление вызывается обработчик который смотрит на не существующий элемент -->  
+    <!-- при удаление вызывается обработчик который смотрит на не существующий элемент -->
     <div class="task-container">
         <i class="pi pi-times task-close" @click="close"></i>
         <div v-if="!getLoading" class="task">
@@ -30,7 +31,7 @@
                     :customUpload="true"
                     :multiple="false"
                     :maxFileSize="1000000"
-                    @uploader="onFileUpload"  
+                    @uploader="onFileUpload"
                     :auto="true"
                     :showUploadButton="false"
                     :showCancelButton="false"
@@ -43,7 +44,8 @@
                         <div v-if="files.length > 0">
                             <h5>Pending</h5>
                             <div class="file-upload-content__group">
-                                <div v-for="(file, index) of files" :key="file.name + file.type + file.size" class="file-upload-content__item">
+                                <div v-for="(file, index) of files" :key="file.name + file.type + file.size"
+                                     class="file-upload-content__item">
                                     <div class="file-upload-content__left">
                                         <div class="file-upload-content__image">
                                             <img
@@ -60,8 +62,10 @@
                                         </div>
                                     </div>
                                     <div class="file-upload-content__right">
-                                        <Button icon="pi pi-times" @click="onRemoveTemplatingFile(file, removeFileCallback, index)" rounded text severity="danger" />
-                                        <Badge value="Pending" severity="warning" />
+                                        <Button icon="pi pi-times"
+                                                @click="onRemoveTemplatingFile(file, removeFileCallback, index)" rounded
+                                                text severity="danger"/>
+                                        <Badge value="Pending" severity="warning"/>
                                     </div>
                                 </div>
                             </div>
@@ -69,10 +73,11 @@
                         <div v-if="uploadedFiles.length > 0">
                             <h5>Completed</h5>
                             <div class="file-upload-content__group">
-                                <div v-for="(file, index) of uploadedFiles" :key="file.name + file.type + file.size" class="file-upload-content__item">
+                                <div v-for="(file, index) of uploadedFiles" :key="file.name + file.type + file.size"
+                                     class="file-upload-content__item">
                                     <div class="file-upload-content__left">
                                         <div class="file-upload-content__image">
-                                            <img 
+                                            <img
                                                 v-if="file.type.includes('image/')"
                                                 role="presentation"
                                                 :alt="file.name"
@@ -89,8 +94,9 @@
                                         <a :href="file.objectURL" download>
                                             <i class="pi pi-download"></i>
                                         </a>
-                                        <Button icon="pi pi-times" @click="onRemoveUploadedFile(file, index)" rounded text severity="danger" />
-                                        <Badge value="Completed" severity="success" />
+                                        <Button icon="pi pi-times" @click="onRemoveUploadedFile(file, index)" rounded
+                                                text severity="danger"/>
+                                        <Badge value="Completed" severity="success"/>
                                     </div>
                                 </div>
                             </div>
@@ -119,16 +125,18 @@ import FileUpload from "primevue/fileupload";
 import Badge from 'primevue/badge';
 import SplitButton from 'primevue/splitbutton';
 import { buttons } from "../../../utils/index.js";
-
+import { useToast } from "primevue/usetoast";
+import Toast from "primevue/toast";
 
 export default {
     name: "TaskComponent",
-    components: {TaskHeader, TaskComments, FileUpload, Textarea, Button, Badge, SplitButton},
+    components: {TaskHeader, TaskComments, FileUpload, Textarea, Button, Badge, SplitButton, Toast},
     data() {
         return {
             answerFile: null,
             commentText: '',
-            isOpened: false
+            isOpened: false,
+            toast: useToast()
         };
     },
     async created() {
@@ -170,18 +178,34 @@ export default {
         }),
         async addComment() {
             if (this.commentText.trim() === '') return;
-            await this.submitComment({taskId: this.taskId, commentText: this.commentText});
+            await this.submitComment({taskId: this.taskId, commentText: this.commentText})
+                .catch((error) => {
+                    this.toast.add({
+                        severity: "error",
+                        summary: "Произошла ошибка",
+                        detail: error.response.data.message,
+                        life: 3000,
+                    });
+                });
             this.commentText = '';
         },
         async onFileUpload(event) {
             const fileUploadComponent = this.$refs.fileUploadRef;
             const file = await this.readFileAsync(event.files[0]);
-            await this.submitAnswer({taskId: this.taskId, files: file});
+            await this.submitAnswer({taskId: this.taskId, files: file}).then(() => {
+                console.log('tes1')
+            })
+                .catch((error) => {
+                console.log(3)
+                this.toast.add({
+                    severity: "error",
+                    summary: "Произошла ошибка",
+                    detail: error.response.data.message,
+                    life: 3000,
+                });
+            });
             fileUploadComponent.uploadedFileCount++;
             fileUploadComponent.uploadedFiles.push(event.files[0]);
-        },
-        onRemoveFile() {
-            console.log('onRemoveFile')
         },
         async onRemoveUploadedFile(file, fileIndex) {
             const fileName = file.name;
@@ -190,6 +214,13 @@ export default {
                     const fileUploadComponent = this.$refs.fileUploadRef;
                     fileUploadComponent.uploadedFileCount--;
                     fileUploadComponent.uploadedFiles.splice(fileIndex, 1);
+                }).catch((error) => {
+                    this.toast.add({
+                        severity: "error",
+                        summary: "Произошла ошибка",
+                        detail: error.response.data.message,
+                        life: 3000,
+                    });
                 });
         },
         close() {
@@ -223,14 +254,14 @@ export default {
                 const byteCharacters = atob(file.data);
                 const byteNumbers = new Array(byteCharacters.length);
                 for (let i = 0; i < byteCharacters.length; i++) {
-                byteNumbers[i] = byteCharacters.charCodeAt(i);
+                    byteNumbers[i] = byteCharacters.charCodeAt(i);
                 }
                 const byteArray = new Uint8Array(byteNumbers);
-                
+
                 const fileData = new File([byteArray], file.name, {type: this.getFileType(file.name)});
                 const fileUrl = URL.createObjectURL(fileData);
                 fileData.objectURL = fileUrl;
-                
+
                 fileUploadComponent.uploadedFileCount++;
                 fileUploadComponent.uploadedFiles.push(fileData);
             });
@@ -255,24 +286,6 @@ export default {
             removeFileCallback(index);
             this.totalSize -= parseInt(this.formatSize(file.size));
             this.totalSizePercent = this.totalSize / 10;
-        },
-        onClearTemplatingUpload(clear) {
-            clear();
-            this.totalSize = 0;
-            this.totalSizePercent = 0;
-        },
-        onSelectedFiles(event) {
-            this.files = event.files;
-            this.files.forEach((file) => {
-                this.totalSize += parseInt(this.formatSize(file.size));
-            });
-        },
-        uploadEvent(callback) {
-            this.totalSizePercent = this.totalSize / 10;
-            callback();
-        },
-        onTemplatedUpload() {
-            this.$toast.add({ severity: 'info', summary: 'Success', detail: 'File Uploaded', life: 3000 });
         },
         formatSize(bytes) {
             const k = 1024;
@@ -337,7 +350,7 @@ export default {
 }
 
 .task-statuses {
-    
+
 }
 
 .task-status {

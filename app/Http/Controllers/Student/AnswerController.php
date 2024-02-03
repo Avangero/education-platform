@@ -17,6 +17,10 @@ class AnswerController extends Controller
 
         $path = "uploads/answer/task/{$taskId}/$name";
 
+        if (Storage::get($path)) {
+            return response()->json(['message' => 'Файл уже сохранен'], 409);
+        }
+
         if (Storage::put($path, $decodedData)) {
             return response()->json(['message' => 'Файл успешно загружен']);
         } else {
