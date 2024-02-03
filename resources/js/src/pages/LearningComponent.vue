@@ -5,7 +5,7 @@
     </div>
 </template>
 <script>
-import {mapActions} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 import ProgressBar from "../components/ProgressBar.vue";
 import Tasks from "../components/Tasks/Tasks.vue";
 
@@ -16,9 +16,21 @@ export default {
         this.getTasks();
     },
     data() {
-        return {
-            progressPercent: 17,
-        };
+        return {};
+    },
+    computed: {
+        ...mapGetters({
+            tasks: 'tasks/getTasks'
+        }),
+        progressPercent() {
+            if (!this.tasks) return 0;
+            const numberOfCompletedTasks = 0;
+            this.tasks?.forEach(task => {
+                if (task.status === 'Выполненно') numberOfCompletedTasks++;
+            });
+            const progressPercent = Math.round(numberOfCompletedTasks / this.tasks?.length * 100);
+            return progressPercent;
+        }
     },
     methods: {
         ...mapActions({

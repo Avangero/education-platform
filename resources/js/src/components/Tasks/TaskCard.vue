@@ -13,11 +13,11 @@
                 </div>
                 <div class="info-container">
                     <div class="comments">
-                        <div class="counter-text">{{ task.commentsCount }}</div>
+                        <div class="counter-text">{{ task.comments.length }}</div>
                         <img :src="CommentSvg" alt="Comment Icon"/>
                     </div>
                     <div class="files">
-                        <div class="counter-text">{{ task.filesCount }}</div>
+                        <div class="counter-text">{{ task.answers.length }}</div>
                         <img :src="FolderSvg" alt="File Icon"/>
                     </div>
                 </div>
@@ -156,7 +156,10 @@ export default {
     display: flex;
     align-items: center;
     gap: 5px;
-    filter: invert(33%) sepia(62%) saturate(3901%) hue-rotate(207deg) brightness(97%) contrast(96%);
+    
+    img {
+        filter: invert(33%) sepia(62%) saturate(3901%) hue-rotate(207deg) brightness(97%) contrast(96%);
+    }
 }
 
 .counter-text {
