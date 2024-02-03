@@ -9,17 +9,6 @@
             <TabNavigation/>
             <router-view></router-view>
         </div>
-        <Toolbar v-if="buttons.length">
-            <template #end>
-                <Button 
-                    v-for="button in buttons"
-                    :key="button.id"
-                    :label="button.label"
-                    class="mr-2"
-                    :severity="button.severity"
-                    @click="button.action({taskTemplateId: taskTemplateId})"/>
-            </template>
-        </Toolbar>
     </div>
 </template>
 
@@ -29,7 +18,6 @@ import TabNavigation from "../components/Tabs/TabNavigation.vue";
 import UserInfo from "../components/UserInfo.vue";
 import Toolbar from 'primevue/toolbar';
 import Button from 'primevue/button';
-import { toolbar } from "../../utils/index.js";
 
 export default {
     components: {
@@ -40,9 +28,6 @@ export default {
         Button
     },
     computed: {
-        buttons() {
-            return toolbar[this.$route.name]?.buttons ?? [];
-        },
         taskTemplateId() {
             return this.$route.params.id
         }

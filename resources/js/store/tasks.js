@@ -38,6 +38,9 @@ export default {
             const answers = state.course.tasks.find((task) => task.id === Number(taskId)).answers
             const answerIndex = answers.findIndex((answer) => answer.name === fileName);
             answers.splice(answerIndex, 1);
+        },
+        SET_STATUS(state, {taskId, status}) {
+            state.course.tasks[taskId].status = status
         }
     },
     actions: {
@@ -76,10 +79,16 @@ export default {
         submitComment({commit}, {taskId, commentText}) {
             post(`/api/student/courses/tasks/${taskId}/comment`, {content: commentText}).then((response) => {
                 commit('ADD_COMMENT', {value: response, taskId: Number(taskId)});
-            })
-                .catch((error) => {
-                    console.log(error);
-                });
+            }).catch((error) => {
+                console.log(error);
+            });
+        },
+        setStatus({commit}, {taskId, status}) {
+            post(`/api/student/courses/tasks/${taskId}/status`, {status: status}).then((response) => {
+                commit('SET_STATUS', {taskId: taskId, status: status});
+            }).catch((error) => {
+                console.log(error);
+            });
         }
     }
 }

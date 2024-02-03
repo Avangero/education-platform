@@ -6,8 +6,21 @@
         <div v-if="!getLoading" class="task">
             <div class="task-body">
                 <TaskHeader :task="task" :mentorInfo="getCourseInfo.mentor"/>
-                <div class="task-statuses">
-                    <button class="task-status">Взять в работу</button>
+                <div class="task-info">
+                    <SplitButton
+                        class="task-statuses"
+                        :label="statusesButtons[0].label"
+                        :model="statusesButtons"
+                        :icon="statusesButtons[0].icon"
+                        :severity="statusesButtons[0].severity">
+                        <template #item="{item}">
+                            <Button
+                                :label="item.label"
+                                :icon="item.icon"
+                                :severity="item.severity"
+                                text/>
+                        </template>
+                    </SplitButton>
                     <p class="task-created-date">Дедлайн: 30.01.2024</p>
                 </div>
                 <div class="task-content content">{{ task.content }}</div>
@@ -104,16 +117,18 @@ import Textarea from 'primevue/textarea';
 import Button from 'primevue/button';
 import FileUpload from "primevue/fileupload";
 import Badge from 'primevue/badge';
+import SplitButton from 'primevue/splitbutton';
+import { buttons } from "../../../utils/index.js";
 
 
 export default {
     name: "TaskComponent",
-    components: {TaskHeader, TaskComments, FileUpload, Textarea, Button, Badge},
+    components: {TaskHeader, TaskComments, FileUpload, Textarea, Button, Badge, SplitButton},
     data() {
         return {
             answerFile: null,
             commentText: '',
-            isOpened: false,
+            isOpened: false
         };
     },
     async created() {
@@ -134,6 +149,17 @@ export default {
         taskId() {
             return this.$route.params.id;
         },
+        statusesButtons() {
+            return buttons.map((button) => {
+                return {
+                    ...button,
+                    command: () => {
+                        console.log(this.taskId);
+                        button.command(this.taskId)
+                    }
+                }
+            })
+        }
     },
     methods: {
         ...mapActions({
@@ -286,18 +312,6 @@ export default {
     cursor: pointer;
 }
 
-.task-status {
-    padding: 10px;
-    background: $main-blue;
-    border-radius: 16px;
-    text-align: center;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-family: $font-manrop;
-    font-size: 14px;
-}
-
 .task {
     padding: 40px;
     border-radius: 50px;
@@ -316,10 +330,18 @@ export default {
     margin-right: 10px;
 }
 
-.task-statuses {
+.task-info {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.task-statuses {
+    
+}
+
+.task-status {
+    width: 100%;
 }
 
 .content {
