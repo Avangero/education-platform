@@ -24,7 +24,7 @@ export default {
         }),
         progressPercent() {
             if (!this.tasks) return 0;
-            const numberOfCompletedTasks = 0;
+            let numberOfCompletedTasks = 0;
             this.tasks?.forEach(task => {
                 if (task.status === 'Выполненно') numberOfCompletedTasks++;
             });

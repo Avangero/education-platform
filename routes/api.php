@@ -33,7 +33,7 @@ Route::middleware('auth:sanctum')->prefix('student')->group(function () {
             Route::post('answer', [AnswerController::class, 'store']);
             Route::delete('answer', [AnswerController::class, 'destroy']);
 
-            Route::put('status', [StatusController::class, 'update']);
+            Route::post('status', [StatusController::class, 'update']);
         });
 
     });

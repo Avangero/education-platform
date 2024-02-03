@@ -1,10 +1,10 @@
 import store from '../store/index.js'
 export const buttons = [
     {
-        label: 'Выполнено',
-        icon: 'pi pi-check',
-        severity: 'success',
-        command: (taskId) => store.dispatch('tasks/setStatus', {taskId, status: 1}),
+        label: 'Не начато',
+        icon: 'pi pi-clock',
+        severity: 'secondary',
+        command: (taskId) => store.dispatch('tasks/setStatus', {taskId, status: 1})
     },
     {
         label: 'В работе',
@@ -16,12 +16,12 @@ export const buttons = [
         label: 'На проверке',
         icon: 'pi pi-search',
         severity: 'help',
-        command: (taskId) => store.dispatch('tasks/setStatus', {taskId, status: 2})
+        command: (taskId) => store.dispatch('tasks/setStatus', {taskId, status: 3})
     },
     {
-        label: 'Не начато',
-        icon: 'pi pi-clock',
-        severity: 'secondary',
-        command: (taskId) => store.dispatch('tasks/setStatus', {taskId, status: 2})
-    }
+        label: 'Выполнено',
+        icon: 'pi pi-check',
+        severity: 'success',
+        command: (taskId) => store.dispatch('tasks/setStatus', {taskId, status: 4}),
+    },
 ]
