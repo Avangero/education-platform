@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\Contracts\TaskRepositoryInterface;
 use App\Services\Contracts\TaskServiceInterface;
+use Illuminate\Support\Facades\Storage;
 
 class TaskService implements TaskServiceInterface
 {
@@ -28,7 +29,7 @@ class TaskService implements TaskServiceInterface
 
         $comments = $this->repository->getTaskComments();
 
-        $tasksWithComments = $this->mergeCommentsWithTasks($tasks, $comments);
+        $tasksWithComments = $this->mergeTasks($tasks, $comments);
 
         return [
             'course' => [
@@ -42,7 +43,7 @@ class TaskService implements TaskServiceInterface
         ];
     }
 
-    protected function mergeCommentsWithTasks($tasks, $comments)
+    protected function mergeTasks($tasks, $comments)
     {
         foreach ($tasks as $task) {
             $taskComments = $comments[$task->id] ?? [];
@@ -52,9 +53,26 @@ class TaskService implements TaskServiceInterface
             }
 
             $task->comments = $taskComments;
-            $task->answers = [];
+            $task->answers = $this->getFiles($task->id);
         }
 
         return $tasks;
+    }
+
+    protected function getFiles(int $taskId): array
+    {
+        $files = [];
+        $path = "uploads/answer/task/";
+
+        $filesFromStorage = Storage::files($path . $taskId);
+
+        foreach ($filesFromStorage as $path) {
+            $files[] =  [
+                'data' => base64_encode(Storage::get($path)),
+                'name' => basename($path)
+            ];
+        }
+
+        return $files;
     }
 }

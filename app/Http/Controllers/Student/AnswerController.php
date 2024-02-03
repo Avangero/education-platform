@@ -8,14 +8,14 @@ use Illuminate\Support\Facades\Storage;
 
 class AnswerController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request, int $taskId)
     {
         $name = $request->input('name');
         $data = $request->input('data');
 
         $decodedData = base64_decode(preg_replace('#^data:\w+/\w+;base64,#i', '', $data));
 
-        $path = 'uploads/'.$name;
+        $path = "uploads/answer/task/{$taskId}/$name";
 
         if (Storage::put($path, $decodedData)) {
             $fileContent =  base64_encode(Storage::get($path));
