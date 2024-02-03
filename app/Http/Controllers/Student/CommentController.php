@@ -9,9 +9,8 @@ use App\Models\Task;
 
 class CommentController extends Controller
 {
-    public function store(StoreCommentRequest $request)
+    public function store(StoreCommentRequest $request, $taskId)
     {
-        $taskId = $request->get('task_id');
         $userId = $request->user()->id;
         $content = $request->get('content');
 
