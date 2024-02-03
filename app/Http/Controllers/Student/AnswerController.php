@@ -18,14 +18,21 @@ class AnswerController extends Controller
         $path = "uploads/answer/task/{$taskId}/$name";
 
         if (Storage::put($path, $decodedData)) {
-            $fileContent =  base64_encode(Storage::get($path));
-
-            return response()->json([
-                'message' => 'Файл успешно загружен',
-                'file' => $fileContent,
-            ]);
+            return response()->json(['message' => 'Файл успешно загружен']);
         } else {
             return response()->json(['message' => 'Ошибка при сохранении файла'], 500);
         }
+    }
+
+    public function destroy(Request $request, int $taskId)
+    {
+        $name = $request->input('name');
+        $path = "uploads/answer/task/{$taskId}/$name";
+
+        if (Storage::get($path)) {
+            Storage::delete($path);
+        }
+
+        return response()->json(['message' => 'Файл успешно удален']);
     }
 }

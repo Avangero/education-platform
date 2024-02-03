@@ -30,7 +30,6 @@ Route::middleware('auth:sanctum')->prefix('student')->group(function () {
         Route::prefix('{id}')->group(function (){
             Route::post('comment', [CommentController::class, 'store']);
 
-            Route::put('answer', [AnswerController::class, 'update']);
             Route::post('answer', [AnswerController::class, 'store']);
             Route::delete('answer', [AnswerController::class, 'destroy']);
 
