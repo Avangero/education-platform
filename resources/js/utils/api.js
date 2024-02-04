@@ -33,7 +33,7 @@ export function post(url, payload) {
         if (data?.message) {
             store.commit('toasts/ADD_SUCCESS', data.message);
         }
-        return data?.content ?? data
+        return data?.content || data
     }).catch(e => {
         store.commit('toasts/ADD_ERROR', e);
         return Promise.reject(e);
@@ -45,7 +45,7 @@ export function del(url, payload) {
         if (data?.message) {
             store.commit('toasts/ADD_SUCCESS', data.message);
         }
-        return data?.content ?? data
+        return data?.content || data
     }).catch(e => {
         store.commit('toasts/ADD_ERROR', e);
         return Promise.reject(e);
