@@ -30,7 +30,7 @@ class AnswerController extends Controller
 
     public function destroy(Request $request, int $taskId)
     {
-        $name =  $request->get('name');
+        $name = $request->get('name');
         $path = "uploads/answer/task/{$taskId}/$name";
 
         if (Storage::get($path)) {

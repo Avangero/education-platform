@@ -21,7 +21,7 @@ class StatusController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage(),
-            ], 409);
+            ], 500);
         }
 
         return response()->json([

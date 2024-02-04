@@ -17,6 +17,18 @@ class TaskController extends Controller
 
     public function index(Request $request)
     {
-        return response()->json($this->service->get($request->user()->id));
+        try {
+            $content = $this->service->get($request->user()->id);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+
+        return response()->json([
+                'message' => 'Курс успешно загружен',
+                'content' => $content
+            ]
+        );
     }
 }

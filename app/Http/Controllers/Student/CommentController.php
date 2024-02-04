@@ -17,9 +17,17 @@ class CommentController extends Controller
             'author' => $userId,
             'task_id' => $taskId
         ]);
+        try {
+            $comment->save();
+        } catch (\Error $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+            ], 500);
+        }
 
-        $comment->save();
-
-        return response()->json($comment->toArray());
+        return response()->json([
+            'message' => 'Сообщение успешно отправленно.',
+            'сontent' => $comment->toArray()
+        ]);
     }
 }

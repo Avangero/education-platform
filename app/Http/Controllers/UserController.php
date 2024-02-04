@@ -15,12 +15,17 @@ class UserController extends Controller
     {
         $user = $request->user();
 
-        return response()->json([
+        $content = [
             'id' => $user->id,
             'name' => $user->name,
             'surname' => $user->surname,
             'role_id' => $user->role,
             'role_title' => $user->getRoleTitle()
+        ];
+
+        return response()->json([
+            'message' => 'Вы успешно вошли',
+            'content' => $content
         ]);
     }
 }
