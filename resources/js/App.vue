@@ -18,13 +18,13 @@ export default {
     },
     computed: {
         ...mapGetters({
-            errors: 'errorHandling/errors'
+            errors: 'toasts/errors',
+            successes: 'toasts/successes'
         })
     },
     watch: {
         errors: {
             handler(newVal) {
-                console.log(newVal, this.toast)
                 if (newVal) {
                     newVal.forEach((error) => {
                         this.toast.add({
@@ -38,11 +38,29 @@ export default {
                 }
             },
             deep: true
+        },
+        successes: {
+            handler(newVal) {
+                console.log('test123', newVal)
+                if (newVal) {
+                    newVal.forEach((success) => {
+                        this.toast.add({
+                            severity: "success",
+                            summary: "Успех",
+                            detail: success,
+                            life: 3000,
+                        });
+                    });
+                    this.cleareSuccesses();
+                }
+            },
+            deep: true
         }
     },
     methods: {
         ...mapMutations({
-            clearErrors: 'errorHandling/CLEAR_ERRORS'
+            clearErrors: 'toasts/CLEAR_ERRORS',
+            cleareSuccesses: 'toasts/CLEAR_SUCCESSES'
         })
     }
 }

@@ -18,9 +18,9 @@ export default {
     },
     actions: {
         getUser({commit}) {
-            get('/api/user').then(({data}) => {
+            get('/api/user').then((data) => {
                 commit('SET_USER', data)
-            }).catch(({response: {data}}) => {
+            }).catch(() => {
                 commit('SET_USER', {})
                 localStorage.setItem('isAuth', 'false')
                 router.push({name: "login"})

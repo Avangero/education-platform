@@ -16,28 +16,38 @@ api.interceptors.response.use(function (response) {
 });
 
 export async function get(url) {
-    return api.get(url).then((data) => {
-        return data
+    return api.get(url).then(({data}) => {
+        console.log(data)
+        if (data.message) {
+            store.commit('toasts/ADD_SUCCESS', data.message);
+        }
+        return data.content ?? data
     }).catch(e => {
-        store.commit('errorHandling/ADD_ERROR', e);
+        store.commit('toasts/ADD_ERROR', e);
         return Promise.reject(e);
     })
 }
 
 export function post(url, payload) {
-    return api.post(url, payload).then((response) => {
-        return response.data
+    return api.post(url, payload).then(({data}) => {
+        if (data?.message) {
+            store.commit('toasts/ADD_SUCCESS', data.message);
+        }
+        return data?.content ?? data
     }).catch(e => {
-        store.commit('errorHandling/ADD_ERROR', e);
+        store.commit('toasts/ADD_ERROR', e);
         return Promise.reject(e);
     })
 }
 
 export function del(url, payload) {
-    return api.delete(url, {data: {...payload}}).then((response) => {
-        return response.data
+    return api.delete(url, {data: {...payload}}).then(({data}) => {
+        if (data?.message) {
+            store.commit('toasts/ADD_SUCCESS', data.message);
+        }
+        return data?.content ?? data
     }).catch(e => {
-        store.commit('errorHandling/ADD_ERROR', e);
+        store.commit('toasts/ADD_ERROR', e);
         return Promise.reject(e);
     })
 }

@@ -54,7 +54,7 @@ export default {
     actions: {
         async getTasksTemplates({commit}) {
             commit('SET_LOADING', true)
-            return await get('/api/mentor/tasks-templates/').then(({data}) => {
+            return await get('/api/mentor/tasks-templates/').then((data) => {
                 commit('SET_TASKS_TEMPLATES', {value: data})
             }).catch(({response: {data}}) => {
                 commit('SET_TASKS_TEMPLATES', [])
@@ -64,7 +64,7 @@ export default {
         },
         async createTaskTemplate({commit}) {
             commit('SET_LOADING', true)
-            return await post('/api/mentor/tasks-templates/create').then(({data}) => {
+            return await post('/api/mentor/tasks-templates/create').then((data) => {
                 commit('ADD_TASK_TEMPLATE', {value: data})
                 router.push({name: "task-template", params: {id: data.id}})
             }).catch(({response: {data}}) => {
@@ -74,7 +74,7 @@ export default {
             })
         },
         async saveTaskTemplate({commit, getters}, {taskTemplateId}) {
-            return await post(`/api/mentor/tasks-templates/${taskTemplateId}`, getters.getListItemById(taskTemplateId)).then(({data}) => {
+            return await post(`/api/mentor/tasks-templates/${taskTemplateId}`, getters.getListItemById(taskTemplateId)).then((data) => {
                 commit('UPDATE_TASK_TEMPLATE', {value: data});
 
             }).catch(({response: {data}}) => {

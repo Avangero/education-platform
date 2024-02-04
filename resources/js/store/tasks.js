@@ -46,9 +46,9 @@ export default {
     actions: {
         async getTasks({commit}) {
             commit('SET_LOADING', true)
-            return await get('/api/student/courses/tasks/').then(({data}) => {
+            return await get('/api/student/courses/tasks/').then((data) => {
                 commit('SET_COURSE', data.course)
-            }).catch(({response: {data}}) => {
+            }).catch(() => {
                 commit('SET_COURSE', [])
             }).finally(() => {
                 commit('SET_LOADING', false)
@@ -64,18 +64,18 @@ export default {
             del(
                 `/api/student/courses/tasks/${taskId}/answer`,
                 {name: fileName},
-            ).then((response) => {
+            ).then(() => {
                 commit('REMOVE_ANSWER', {taskId, fileName})
             })
         },
         submitComment({commit}, {taskId, commentText}) {
-            post(`/api/student/courses/tasks/${taskId}/comment`, {content: commentText}).then((response) => {
-                commit('ADD_COMMENT', {value: response, taskId: Number(taskId)});
+            post(`/api/student/courses/tasks/${taskId}/comment`, {content: commentText}).then((data) => {
+                commit('ADD_COMMENT', {value: data, taskId: Number(taskId)});
             })
         },
         setStatus({commit}, {taskId, status}) {
-            post(`/api/student/courses/tasks/${taskId}/status`, {status: status}).then((response) => {
-                commit('SET_STATUS', {taskId: taskId, status: response.title});
+            post(`/api/student/courses/tasks/${taskId}/status`, {status: status}).then((data) => {
+                commit('SET_STATUS', {taskId: taskId, status: data.title});
             });
         }
     }

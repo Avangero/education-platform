@@ -3,7 +3,7 @@ import auth from './auth.js'
 import tasks from './tasks.js'
 import navbar from './navbar.js'
 import tasksTemplates from "./tasksTemplates";
-import errorHandling from "./errorHandling.js";
+import toasts from "./toasts.js";
 
 const store = createStore({
     modules: {
@@ -11,7 +11,7 @@ const store = createStore({
         tasks,
         navbar,
         tasksTemplates,
-        errorHandling
+        toasts
     }
 })
 export default store
