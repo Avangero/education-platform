@@ -27,7 +27,7 @@ class CommentController extends Controller
 
         return response()->json([
             'message' => 'Сообщение успешно отправленно.',
-            'сontent' => $comment->toArray()
+            'content' => $comment->toArray()
         ]);
     }
 }

@@ -24,7 +24,6 @@ class UserController extends Controller
         ];
 
         return response()->json([
-            'message' => 'Вы успешно вошли',
             'content' => $content
         ]);
     }

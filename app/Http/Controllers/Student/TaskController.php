@@ -26,7 +26,6 @@ class TaskController extends Controller
         }
 
         return response()->json([
-                'message' => 'Курс успешно загружен',
                 'content' => $content
             ]
         );

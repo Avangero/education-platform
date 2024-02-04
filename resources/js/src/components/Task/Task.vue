@@ -22,7 +22,6 @@
                                 text/>
                         </template>
                     </SplitButton>
-                    <p class="task-created-date">Дедлайн: 30.01.2024</p>
                 </div>
                 <div class="task-content content">{{ task.content }}</div>
                 <FileUpload
@@ -71,7 +70,7 @@
                             </div>
                         </div>
                         <div v-if="uploadedFiles.length > 0">
-                            <h5>Completed</h5>
+                            <h5>Ответы:</h5>
                             <div class="file-upload-content__group">
                                 <div v-for="(file, index) of uploadedFiles" :key="file.name + file.type + file.size"
                                      class="file-upload-content__item">
@@ -175,7 +174,7 @@ export default {
             } else {
                 buttons[0];
             }
-            
+
         }
     },
     methods: {
