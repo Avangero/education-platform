@@ -169,7 +169,13 @@ export default {
             })
         },
         currentStatusButton() {
-            return buttons.find((button) => button.label === this.task.status)
+            const taskStatus = this.task.status;
+            if (taskStatus) {
+                return buttons.find((button) => button.label === this.task.status);
+            } else {
+                buttons[0];
+            }
+            
         }
     },
     methods: {

@@ -75,7 +75,7 @@ export default {
         },
         setStatus({commit}, {taskId, status}) {
             post(`/api/student/courses/tasks/${taskId}/status`, {status: status}).then((data) => {
-                commit('SET_STATUS', {taskId: taskId, status: data.title});
+                commit('SET_STATUS', {taskId: taskId, status: data.status});
             });
         }
     }
