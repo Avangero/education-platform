@@ -10,10 +10,10 @@
                 <div class="task-info">
                     <SplitButton
                         class="task-statuses"
-                        :label="statusesButtons[0].label"
+                        :label="currentStatusButton.label"
                         :model="statusesButtons"
-                        :icon="statusesButtons[0].icon"
-                        :severity="statusesButtons[0].severity">
+                        :icon="currentStatusButton.icon"
+                        :severity="currentStatusButton.severity">
                         <template #item="{item}">
                             <Button
                                 :label="item.label"
@@ -167,6 +167,9 @@ export default {
                     }
                 }
             })
+        },
+        currentStatusButton() {
+            return buttons.find((button) => button.label === this.task.status)
         }
     },
     methods: {

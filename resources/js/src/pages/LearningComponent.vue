@@ -26,7 +26,7 @@ export default {
             if (!this.tasks) return 0;
             let numberOfCompletedTasks = 0;
             this.tasks?.forEach(task => {
-                if (task.status === 'Выполненно') numberOfCompletedTasks++;
+                if (task.status === 'Выполнено') numberOfCompletedTasks++;
             });
             const progressPercent = Math.round(numberOfCompletedTasks / this.tasks?.length * 100);
             return progressPercent;

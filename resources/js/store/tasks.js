@@ -40,7 +40,7 @@ export default {
             answers.splice(answerIndex, 1);
         },
         SET_STATUS(state, {taskId, status}) {
-            state.course.tasks[taskId].status = status
+            state.course.tasks.find((task) => task.id === Number(taskId)).status = status
         }
     },
     actions: {
@@ -75,7 +75,7 @@ export default {
         },
         setStatus({commit}, {taskId, status}) {
             post(`/api/student/courses/tasks/${taskId}/status`, {status: status}).then((response) => {
-                commit('SET_STATUS', {taskId: taskId, status: status});
+                commit('SET_STATUS', {taskId: taskId, status: response.title});
             });
         }
     }
