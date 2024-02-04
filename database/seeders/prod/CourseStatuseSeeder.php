@@ -27,7 +27,7 @@ class CourseStatuseSeeder extends Seeder
             ],
             [
                 'id' => 4,
-                'title' => 'Выполненно'
+                'title' => 'Выполнено'
             ],
         ];
 

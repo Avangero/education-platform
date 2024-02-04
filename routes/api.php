@@ -34,7 +34,6 @@ Route::middleware('auth:sanctum')->prefix('student')->group(function () {
             Route::delete('answer', [AnswerController::class, 'destroy']);
 
             Route::post('status', [StatusController::class, 'update']);
-        });
-
+        })->middleware('check.access');
     });
 });
