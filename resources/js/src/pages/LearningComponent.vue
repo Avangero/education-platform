@@ -1,17 +1,17 @@
 <template>
     <div class="page-learning">
-        <ProgressBar :progress-percent="progressPercent"></ProgressBar>
+        <EPProgressBar :progress-percent="progressPercent"></EPProgressBar>
         <Tasks></Tasks>
     </div>
 </template>
 <script>
 import {mapActions, mapGetters} from 'vuex';
-import ProgressBar from "../components/ProgressBar.vue";
+import EPProgressBar from "../components/EPProgressBar.vue";
 import Tasks from "../components/Tasks/Tasks.vue";
 
 export default {
     name: "LearningComponent",
-    components: {Tasks, ProgressBar},
+    components: {Tasks, EPProgressBar},
     created() {
         this.getTasks();
     },
@@ -44,7 +44,7 @@ export default {
 .page-learning {
     display: flex;
     flex-direction: column;
-    padding: 50px 40px;
+    padding: 10px 40px 50px 40px;
     width: 100%;
 }
 </style>

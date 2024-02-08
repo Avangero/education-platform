@@ -14,9 +14,8 @@ export default {
 @import "../styles/variables";
 
 .logo {
-    height: 100px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 }
 
 .title {

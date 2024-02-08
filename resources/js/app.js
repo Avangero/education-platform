@@ -6,7 +6,8 @@ import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
 import 'primevue/resources/themes/lara-light-blue/theme.css';
 import "primeflex/primeflex.css";
-import 'primeicons/primeicons.css'
+import 'primeicons/primeicons.css';
+import Ripple from 'primevue/ripple';
 
 const clickOutside = {
     beforeMount: (el, binding) => {
@@ -23,10 +24,11 @@ const clickOutside = {
 };
 
 const app = createApp(App);
-app.use(Router)
-app.use(store)
+app.use(Router);
+app.use(store);
 app.use(PrimeVue);
 app.use(ToastService);
-app.directive("click-outside", clickOutside)
-app.mount('#app')
+app.directive('click-outside', clickOutside);
+app.directive('ripple', Ripple);
+app.mount('#app');
 

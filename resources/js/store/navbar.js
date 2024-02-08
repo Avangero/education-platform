@@ -6,14 +6,15 @@ import IconStat from '../src/images/tab-icons/stat.svg';
 export default {
     namespaced: true,
     state: {
+        isShow: true,
         activeTab: 0,
         navbarList: [
-            {icon: IconDashboard, text: 'Мое обучение', path: 'tasks', accessToRoles: [1,2,3]},
-            {icon: IconNotification, text: 'Уведомления', path: 'notifications', accessToRoles: [1,2,3]},
-            {icon: IconCalendar, text: 'Календарь', path: 'calendar', accessToRoles: [1,2,3]},
-            {icon: IconStat, text: 'Моя статистика', path: 'myStatistics', accessToRoles: [1,2,3]},
-            {icon: IconDashboard, text: 'Шаблоны курсов', path: 'courses-templates', accessToRoles: [1,2]},
-            {icon: IconDashboard, text: 'Шаблоны задач', path: 'tasks-templates', accessToRoles: [1,2]},
+            {icon: 'pi pi-home', label: 'Мое обучение', route: 'tasks', accessToRoles: [1,2,3]},
+            {icon: 'pi pi-bell', label: 'Уведомления', route: 'notifications', accessToRoles: [1,2,3]},
+            {icon: 'pi pi-calendar', label: 'Календарь', route: 'calendar', accessToRoles: [1,2,3]},
+            {icon: 'pi pi-chart-bar', label: 'Моя статистика', route: 'myStatistics', accessToRoles: [1,2,3]},
+            {icon: 'pi pi-plus-circle', label: 'Шаблоны курсов', route: 'courses-templates', accessToRoles: [1,2]},
+            {icon: 'pi pi-plus-circle', label: 'Шаблоны задач', route: 'tasks-templates', accessToRoles: [1,2]},
         ],
     },
     getters: {
@@ -22,11 +23,18 @@ export default {
         },
         getActiveTab(state) {
             return state.activeTab
+        },
+        isShow(state) {
+            return state.isShow
         }
     },
     mutations: {
         SET_ACTIVE_TAB(state, value) {
             state.activeTab = value
+        },
+        TOGGLE_VISIBILITY(state) {
+            console.log(123)
+            state.isShow = !state.isShow
         }
     }
 }

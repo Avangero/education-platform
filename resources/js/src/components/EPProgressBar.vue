@@ -4,15 +4,18 @@
             <div class="progress-text">Прогресс изучения курса</div>
             <div class="additional-text">{{ formattedProgressPercent }}</div>
         </div>
-        <div class="progress-bar">
-            <div class="fill-bar" :style="{ width: `${progressPercent}%` }"></div>
-        </div>
+        <ProgressBar :value="progressPercent" :showValue="false" style="height: 5px"></ProgressBar>
     </div>
 </template>
 
 <script>
+import ProgressBar from 'primevue/progressbar';
+
 export default {
-    name: "ProgressBar",
+    name: "EPProgressBar",
+    components: {
+        ProgressBar
+    },
     props: {
         progressPercent: {
             type: Number,
@@ -32,7 +35,6 @@ export default {
 @import "../styles/variables";
 
 .learning-progress {
-    background-color: white;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -53,22 +55,6 @@ export default {
     font-weight: 700;
     line-height: 23px;
     letter-spacing: 0.3px;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 5px;
-    margin-top: 10px;
-    background-color: $soft-blue;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.fill-bar {
-    height: 100%;
-    background-color: $main-blue;
-    border-radius: 10px;
-    transition: width 0.5s ease-in-out;
 }
 
 .additional-text {

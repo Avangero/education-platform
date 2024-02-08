@@ -1,37 +1,45 @@
 <template>
     <RouterLink
         :to="taskLink"
-        class="task-card">
-        <div class="card-content">
-            <h3 class="card-title">{{ task.title }}</h3>
-            <p class="card-description">{{ task.content }}</p>
-            <div class="additional-info">
-                <div class="status">
-                    <div class="status-bg" :style="{ background: statusBgColor }">
-                        <span class="status-text" :style="{ color: statusTextColor }">{{ task.status }}</span>
+        class="task-link">
+        <Card class="task-card" style="overflow: hidden">
+            <template #title>
+                {{ task.title }}
+            </template>
+            <template #content>
+                <p class="card-description">{{ task.content }}</p>
+                <div class="additional-info">
+                    <div class="status">
+                        <div class="status-bg" :style="{ background: statusBgColor }">
+                            <span class="status-text" :style="{ color: statusTextColor }">{{ task.status }}</span>
+                        </div>
+                    </div>
+                    <div class="info-container">
+                        <div class="comments">
+                            <div class="counter-text">{{ task.comments.length }}</div>
+                            <img :src="CommentSvg" alt="Comment Icon"/>
+                        </div>
+                        <div class="files">
+                            <div class="counter-text">{{ task.answers.length }}</div>
+                            <img :src="FolderSvg" alt="File Icon"/>
+                        </div>
                     </div>
                 </div>
-                <div class="info-container">
-                    <div class="comments">
-                        <div class="counter-text">{{ task.comments.length }}</div>
-                        <img :src="CommentSvg" alt="Comment Icon"/>
-                    </div>
-                    <div class="files">
-                        <div class="counter-text">{{ task.answers.length }}</div>
-                        <img :src="FolderSvg" alt="File Icon"/>
-                    </div>
-                </div>
-            </div>
-        </div>
+            </template>
+        </Card>
     </RouterLink>
 </template>
 
 <script>
 import CommentSvg from "../../images/task-icons/comment.svg";
 import FolderSvg from "../../images/task-icons/folder.svg";
+import Card from 'primevue/card';
 
 export default {
     name: "TaskCard",
+    components: {
+        Card
+    },
     props: {
         task: {
             type: Object,
@@ -80,35 +88,19 @@ export default {
 <style scoped lang="scss">
 @import '../../styles/variables';
 
-.task-card {
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
+.task-link {
     width: calc(50% - 25px);
-    transition: box-shadow 0.3s ease;
     cursor: pointer;
     text-decoration: none;
 }
 
-.task-card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-.card-content {
+.task-card {
     height: 100%;
-    display: flex;
-    flex-direction: column;
+    border: 1px solid #dfe7ef;
+    box-shadow: 0px 4px 30px rgba(221, 224, 255, .54);
+    border-radius: 12px;
 }
 
-.card-title {
-    margin-bottom: 10px;
-    color: $main-black;
-    font-family: $font-manrop;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 40px;
-}
 
 .card-description {
     color: $text-grey;
@@ -169,5 +161,11 @@ export default {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+}
+</style>
+
+<style>
+.p-card-content {
+    padding: 0;
 }
 </style>

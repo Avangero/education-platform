@@ -32,10 +32,9 @@ export default {
 }
 
 .task-cards {
-    margin-top: 50px;
+    margin: 25px 0;
     display: flex;
     flex-wrap: wrap;
     gap: 50px;
-    margin-bottom: 50px;
 }
 </style>
