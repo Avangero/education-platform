@@ -1,33 +1,78 @@
 <template>
-    <div class="page-container">
-        <div class="login-container">
-            <Logo style="margin-left: 20px"></Logo>
-            <div class="form-container">
-                <form class="login-form" @submit.prevent="login">
-                    <div class="login-header">Добро пожаловать!</div>
-                    <input v-model="auth.email" type="email" class="login-email" name="email" required
-                           placeholder="Email" autocomplete="login">
-                    <input v-model="auth.password" type="password" class="login-password" name="password" required
-                           placeholder="Password" autocomplete="current-password">
-                    <button type="submit" class="login-button">Войти</button>
-                </form>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 800" class="fixed left-0 top-0 min-h-screen min-w-screen"
+         preserveAspectRatio="none">
+        <rect fill="var(--primary-500)" width="1600" height="800"></rect>
+        <path fill="var(--primary-400)" d="M478.4 581c3.2 0.8 6.4 1.7 9.5 2.5c196.2 52.5 388.7 133.5 593.5 176.6c174.2 36.6 349.5 29.2 518.6-10.2V0H0v574.9c52.3-17.6 106.5-27.7 161.1-30.9C268.4 537.4 375.7 554.2
+        478.4 581z"></path>
+        <path fill="var(--primary-300)"
+              d="M181.8 259.4c98.2 6 191.9 35.2 281.3 72.1c2.8 1.1 5.5 2.3 8.3 3.4c171 71.6 342.7 158.5 531.3 207.7c198.8 51.8 403.4 40.8 597.3-14.8V0H0v283.2C59 263.6 120.6 255.7 181.8 259.4z"></path>
+        <path fill="var(--primary-200)"
+              d="M454.9 86.3C600.7 177 751.6 269.3 924.1 325c208.6 67.4 431.3 60.8 637.9-5.3c12.8-4.1 25.4-8.4 38.1-12.9V0H288.1c56 21.3 108.7 50.6 159.7 82C450.2 83.4 452.5 84.9 454.9 86.3z"></path>
+        <path fill="var(--primary-100)"
+              d="M1397.5 154.8c47.2-10.6 93.6-25.3 138.6-43.8c21.7-8.9 43-18.8 63.9-29.5V0H643.4c62.9 41.7 129.7 78.2 202.1 107.4C1020.4 178.1 1214.2 196.1 1397.5 154.8z"></path>
+    </svg>
+
+    <div class="px-5 min-h-screen flex justify-content-center align-items-center">
+        <div class="border-1 surface-border surface-card border-round py-7 px-4 md:px-7 z-1">
+            <div class="mb-4">
+                <div class="text-900 text-xl font-bold mb-2">Добро пожаловать</div>
+                <span class="text-600 font-medium">Пожалуйста, введите свои данные</span>
             </div>
+
+            <form class="flex flex-column">
+                <span class="p-input-icon-left w-full mb-4">
+                    <i class="pi pi-envelope"></i>
+                    <input
+                        class="p-inputtext p-component w-full md:w-25rem"
+                        data-pc-name="inputtext"
+                        data-pc-section="root"
+                        id="email" type="text"
+                        placeholder="Почта"
+                        v-model="auth.email"
+                        autocomplete="username"
+                    >
+                </span>
+
+                <span class="p-input-icon-left w-full mb-4">
+                    <i class="pi pi-lock"></i>
+                    <input
+                        class="p-inputtext p-component w-full md:w-25rem"
+                        data-pc-name="inputtext"
+                        data-pc-section="root"
+                        id="password" type="password"
+                        placeholder="Пароль"
+                        v-model="auth.password"
+                        autocomplete="current-password"
+                    >
+                </span>
+            </form>
+
+            <button
+                class="p-button p-component w-full"
+                type="button"
+                aria-label="Log In"
+                data-pc-name="button"
+                data-pc-section="root"
+                data-pd-ripple="true"
+                @click="login"
+            >
+                <span class="p-button-label" data-pc-section="label">Войти</span>
+            </button>
         </div>
-        <div class="bg"></div>
     </div>
+
+    <Toast/>
 </template>
 
 <script>
-import Logo from "../components/Logo.vue";
-import ProgressBar from "../components/ProgressBar.vue";
 import {get, post} from "../../utils/index";
 import {mapActions} from "vuex";
-import { useToast } from "primevue/usetoast";
+import {useToast} from "primevue/usetoast";
+import Toast from "primevue/toast";
 
 export default {
     components: {
-        ProgressBar,
-        Logo,
+        Toast
     },
     data() {
         return {
@@ -35,7 +80,6 @@ export default {
                 email: "",
                 password: "",
             },
-            validationErrors: {},
             processing: false,
             toast: useToast()
         };
@@ -59,90 +103,4 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../styles/variables";
-
-.page-container {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-}
-
-.login-container {
-    height: 100%;
-    width: 35%;
-}
-
-.bg {
-    height: 100%;
-    width: 65%;
-    background: $main-blue;
-    background: linear-gradient(60deg, rgba(232, 240, 254, 1) 0%, rgba(23, 110, 242, 1) 100%);
-}
-
-.login-header {
-    font-family: $font-manrop;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 800;
-    line-height: normal;
-    color: $main-black;
-    text-align: center;
-
-    margin-bottom: 30px;
-}
-
-.login-form {
-    margin-top: 200px;
-    height: calc(100% - 100px);
-    width: 60%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.login-email,
-.login-password {
-    width: 80%;
-    height: 50px;
-    border: none;
-    border-radius: 24px;
-    box-sizing: border-box;
-    padding: 20px;
-    margin-top: 20px;
-}
-
-input {
-    font-family: $font-manrop;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 200;
-    line-height: normal;
-    color: $main-black;
-}
-
-.form-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-}
-
-.login-button {
-    width: 80%;
-    margin-top: 20px;
-    height: 50px;
-    border: none;
-    border-radius: 24px;
-    box-sizing: border-box;
-    background-color: $main-blue;
-    font-family: $font-manrop;
-    color: white;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-
-    cursor: pointer;
-}
 </style>
