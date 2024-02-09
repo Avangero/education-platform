@@ -6,8 +6,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/js/src/styles/app.scss',
-                'resources/js/app.js',
+                '../vue/app.js',
             ],
             refresh: true,
         }),
