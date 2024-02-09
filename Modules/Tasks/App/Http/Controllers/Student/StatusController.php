@@ -3,6 +3,7 @@
 namespace Modules\Tasks\App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Modules\Tasks\App\Http\Requests\Student\UpdateStatusRequest;
 use Modules\Tasks\App\Models\Task;
 use Modules\Tasks\App\Models\TaskStatus;
@@ -18,7 +19,7 @@ class StatusController extends Controller
 
         try {
             $task->save();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json([
                 'message' => $e->getMessage(),
             ], 500);
@@ -28,8 +29,8 @@ class StatusController extends Controller
             'message' => 'Статус успешно изменен',
             'content' => [
                 'id' => $task->status,
-                'status' => TaskStatus::find($task->status)->status
-            ]
+                'status' => TaskStatus::find($task->status)->status,
+            ],
         ]);
     }
 }

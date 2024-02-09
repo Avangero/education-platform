@@ -14,6 +14,6 @@ class Comments extends Model
     protected $fillable = [
         'task_id',
         'author',
-        'content'
+        'content',
     ];
 }

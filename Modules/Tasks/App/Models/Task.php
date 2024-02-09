@@ -16,7 +16,7 @@ class Task extends Model
         'course_id',
         'title',
         'content',
-        'status'
+        'status',
     ];
 
     public static function isMyTask(int $taskId, int $userId)
@@ -27,7 +27,7 @@ class Task extends Model
             ->where('t.id', '=', $taskId)
             ->first();
 
-        if (!$ids) {
+        if (! $ids) {
             return false;
         }
 

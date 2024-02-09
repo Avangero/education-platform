@@ -15,7 +15,7 @@ class AnswerController extends Controller
 
         $decodedData = base64_decode(preg_replace('#^data:\w+/\w+;base64,#i', '', $data));
 
-        $path = "uploads/answer/task/{$taskId}/$name";
+        $path = "uploads/answer/task/{$taskId}/{$name}";
 
         if (Storage::get($path)) {
             return response()->json(['message' => 'Файл уже сохранен'], 409);
@@ -31,7 +31,7 @@ class AnswerController extends Controller
     public function destroy(Request $request, int $taskId)
     {
         $name = $request->get('name');
-        $path = "uploads/answer/task/{$taskId}/$name";
+        $path = "uploads/answer/task/{$taskId}/{$name}";
 
         if (Storage::get($path)) {
             Storage::delete($path);

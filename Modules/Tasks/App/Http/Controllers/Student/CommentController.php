@@ -3,6 +3,7 @@
 namespace Modules\Tasks\App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use Error;
 use Modules\Tasks\App\Http\Requests\Student\StoreCommentRequest;
 use Modules\Tasks\App\Models\Comments;
 
@@ -15,11 +16,11 @@ class CommentController extends Controller
         $comment = new Comments([
             'content' => $content,
             'author' => $userId,
-            'task_id' => $taskId
+            'task_id' => $taskId,
         ]);
         try {
             $comment->save();
-        } catch (\Error $e) {
+        } catch (Error $e) {
             return response()->json([
                 'message' => $e->getMessage(),
             ], 500);
@@ -27,7 +28,7 @@ class CommentController extends Controller
 
         return response()->json([
             'message' => 'Сообщение успешно отправленно.',
-            'content' => $comment->toArray()
+            'content' => $comment->toArray(),
         ]);
     }
 }

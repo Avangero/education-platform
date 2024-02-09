@@ -12,7 +12,7 @@ class CheckAccess
         $taskId = $request->route('id');
         $userId = auth()->id();
 
-        if (!Task::isMyTask($taskId, $userId)) {
+        if (! Task::isMyTask($taskId, $userId)) {
             return response()->json(['message' => 'Доступ к задаче запрещен'], 403);
         }
 

@@ -11,6 +11,7 @@ trap exit SIGINT
 sleep 20
 ./vendor/bin/sail artisan migrate:fresh --force
 ./vendor/bin/sail artisan db:seed --force
+./vendor/bin/sail artisan module:seed --force
 ./vendor/bin/sail artisan optimize
 ./vendor/bin/sail artisan up
 ./vendor/bin/sail npm run dev

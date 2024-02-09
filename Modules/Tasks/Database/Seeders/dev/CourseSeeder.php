@@ -14,7 +14,7 @@ class CourseSeeder extends Seeder
                 'id' => 1,
                 'mentor_id' => 2,
                 'student_id' => 3,
-                'status' => 2
+                'status' => 2,
             ],
         ];
 

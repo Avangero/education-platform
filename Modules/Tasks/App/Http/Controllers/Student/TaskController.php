@@ -3,8 +3,9 @@
 namespace Modules\Tasks\App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
-use Modules\Tasks\App\Services\Contracts\TaskServiceInterface;
+use Exception;
 use Illuminate\Http\Request;
+use Modules\Tasks\App\Services\Contracts\TaskServiceInterface;
 
 class TaskController extends Controller
 {
@@ -19,15 +20,15 @@ class TaskController extends Controller
     {
         try {
             $content = $this->service->get($request->user()->id);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json([
                 'message' => $e->getMessage(),
             ], 500);
         }
 
         return response()->json([
-                'content' => $content
-            ]
+            'content' => $content,
+        ]
         );
     }
 }

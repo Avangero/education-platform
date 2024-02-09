@@ -2,9 +2,9 @@
 
 namespace Modules\Tasks\App\Services;
 
+use Illuminate\Support\Facades\Storage;
 use Modules\Tasks\App\Repositories\Contracts\TaskRepositoryInterface;
 use Modules\Tasks\App\Services\Contracts\TaskServiceInterface;
-use Illuminate\Support\Facades\Storage;
 
 class TaskService implements TaskServiceInterface
 {
@@ -19,7 +19,7 @@ class TaskService implements TaskServiceInterface
     {
         $course = $this->repository->getCourseDetails($userId);
 
-        if (!$course) {
+        if (! $course) {
             return [];
         }
 
@@ -39,7 +39,7 @@ class TaskService implements TaskServiceInterface
                 'mentor' => $user,
                 'start_date' => $course->start_date,
                 'end_date' => $course->end_date,
-            ]
+            ],
         ];
     }
 
@@ -62,14 +62,14 @@ class TaskService implements TaskServiceInterface
     protected function getFiles(int $taskId): array
     {
         $files = [];
-        $path = "uploads/answer/task/";
+        $path = 'uploads/answer/task/';
 
-        $filesFromStorage = Storage::files($path.$taskId);
+        $filesFromStorage = Storage::files($path . $taskId);
 
         foreach ($filesFromStorage as $path) {
             $files[] = [
                 'data' => base64_encode(Storage::get($path)),
-                'name' => basename($path)
+                'name' => basename($path),
             ];
         }
 

@@ -2,8 +2,8 @@
 
 namespace Modules\Tasks\App\Repositories;
 
-use Modules\Tasks\App\Repositories\Contracts\TaskRepositoryInterface;
 use Illuminate\Support\Facades\DB;
+use Modules\Tasks\App\Repositories\Contracts\TaskRepositoryInterface;
 
 class TaskRepository implements TaskRepositoryInterface
 {

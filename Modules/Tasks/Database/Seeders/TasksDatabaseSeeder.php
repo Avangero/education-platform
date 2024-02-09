@@ -3,23 +3,29 @@
 namespace Modules\Tasks\Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Modules\Tasks\Database\Seeders\dev\CommentsSeeder;
-use Modules\Tasks\Database\Seeders\dev\CourseSeeder;
-use Modules\Tasks\Database\Seeders\dev\TasksSeeder;
-use Modules\Tasks\Database\Seeders\prod\CourseStatuseSeeder;
-use Modules\Tasks\Database\Seeders\prod\TaskStatusSeeder;
+use Illuminate\Support\Facades\App;
 
 class TasksDatabaseSeeder extends Seeder
 {
+    protected array $prod = [
+        prod\CourseStatuseSeeder::class,
+        prod\TaskStatusSeeder::class,
+    ];
+
+    protected array $dev = [
+        dev\CourseSeeder::class,
+        dev\TasksSeeder::class,
+        dev\CommentsSeeder::class,
+    ];
+
     public function run(): void
     {
-        $this->call([
-            CourseStatuseSeeder::class,
-            TaskStatusSeeder::class,
+        $call = $this->prod;
 
-            CourseSeeder::class,
-            TasksSeeder::class,
-            CommentsSeeder::class
-        ]);
+        if (App::environment() === 'local') {
+            $call = array_merge($call, $this->dev);
+        }
+
+        $this->call($call);
     }
 }

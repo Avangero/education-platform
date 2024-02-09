@@ -1,10 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use Modules\Tasks\App\Http\Controllers\Student\AnswerController;
 use Modules\Tasks\App\Http\Controllers\Student\CommentController;
 use Modules\Tasks\App\Http\Controllers\Student\StatusController;
 use Modules\Tasks\App\Http\Controllers\Student\TaskController;
-use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->prefix('student')->group(function () {
     Route::prefix('courses/tasks')->group(function () {

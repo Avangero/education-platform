@@ -2,25 +2,27 @@
 
 namespace Database\Seeders;
 
-use Database\Seeders;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
+    protected array $prod = [
+        prod\RolesTableSeeder::class,
+    ];
+
+    protected array $dev = [
+        dev\UsersSeeder::class,
+    ];
+
     public function run(): void
     {
-        $this->call([
-            Seeders\prod\RolesTableSeeder::class,
-            \Modules\Tasks\Database\Seeders\prod\CourseStatuseSeeder::class,
-            \Modules\Tasks\Database\Seeders\prod\TaskStatusSeeder::class,
+        $call = $this->prod;
 
-            Seeders\dev\UsersSeeder::class,
-            \Modules\Tasks\Database\Seeders\dev\CourseSeeder::class,
-            \Modules\Tasks\Database\Seeders\dev\TasksSeeder::class,
-            \Modules\Tasks\Database\Seeders\dev\CommentsSeeder::class
-        ]);
+        if (App::environment() === 'local') {
+            $call = array_merge($call, $this->dev);
+        }
+
+        $this->call($call);
     }
 }

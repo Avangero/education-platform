@@ -12,15 +12,15 @@ class RolesTableSeeder extends Seeder
         $data = [
             [
                 'id' => 1,
-                'title' => 'Админ'
+                'title' => 'Админ',
             ],
             [
                 'id' => 2,
-                'title' => 'Наставник'
+                'title' => 'Наставник',
             ],
             [
                 'id' => 3,
-                'title' => 'Студент'
+                'title' => 'Студент',
             ],
         ];
 

@@ -16,14 +16,14 @@ class CommentsSeeder extends Seeder
                 'task_id' => 1,
                 'author' => 2,
                 'content' => 'Тестовый комент для таски от ментора',
-                'created_at' => Carbon::now()
+                'created_at' => Carbon::now(),
             ],
             [
                 'id' => 2,
                 'task_id' => 1,
                 'author' => 3,
                 'content' => 'Тестовый ответ для таски от студента',
-                'created_at' => Carbon::now()
+                'created_at' => Carbon::now(),
             ],
         ];
 

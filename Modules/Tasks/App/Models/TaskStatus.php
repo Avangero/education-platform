@@ -13,6 +13,6 @@ class TaskStatus extends Model
 
     protected $fillable = [
         'id',
-        'status'
+        'status',
     ];
 }

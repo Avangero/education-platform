@@ -12,19 +12,19 @@ class TaskStatusSeeder extends Seeder
         $data = [
             [
                 'id' => 1,
-                'status' => 'Не начато'
+                'status' => 'Не начато',
             ],
             [
                 'id' => 2,
-                'title' => 'В работе'
+                'title' => 'В работе',
             ],
             [
                 'id' => 3,
-                'title' => 'На проверке'
+                'title' => 'На проверке',
             ],
             [
                 'id' => 4,
-                'title' => 'Выполнено'
+                'title' => 'Выполнено',
             ],
         ];
 

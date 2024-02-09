@@ -19,11 +19,11 @@ class UserController extends Controller
             'name' => $user->name,
             'surname' => $user->surname,
             'role_id' => $user->role,
-            'role_title' => $user->getRoleTitle()
+            'role_title' => $user->getRoleTitle(),
         ];
 
         return response()->json([
-            'content' => $content
+            'content' => $content,
         ]);
     }
 }
