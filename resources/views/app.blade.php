@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&display=swap">
         <title>GoCpa.education</title>
-        @vite('resources/js/app.js')
+        @vite('../vue/app.js')
     </head>
     <body>
     <div id="app"></div>
