@@ -41,6 +41,7 @@ export default {
         },
         successes: {
             handler(newVal) {
+                console.log('test123', newVal)
                 if (newVal) {
                     newVal.forEach((success) => {
                         this.toast.add({

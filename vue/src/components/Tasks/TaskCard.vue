@@ -148,7 +148,7 @@ export default {
     display: flex;
     align-items: center;
     gap: 5px;
-    
+
     img {
         filter: invert(33%) sepia(62%) saturate(3901%) hue-rotate(207deg) brightness(97%) contrast(96%);
     }

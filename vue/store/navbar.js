@@ -1,8 +1,3 @@
-import IconDashboard from '../src/images/tab-icons/dashboard.svg';
-import IconCalendar from '../src/images/tab-icons/calendar.svg';
-import IconNotification from '../src/images/tab-icons/notification.svg';
-import IconStat from '../src/images/tab-icons/stat.svg';
-
 export default {
     namespaced: true,
     state: {
