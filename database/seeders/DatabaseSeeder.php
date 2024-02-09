@@ -14,13 +14,14 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             Seeders\prod\RolesTableSeeder::class,
-            \Modules\Tasks\Database\Seeders\prod\CourseStatuseSeeder::class,
-            \Modules\Tasks\Database\Seeders\prod\TaskStatusSeeder::class,
+            Seeders\prod\CourseStatuseSeeder::class,
+            Seeders\prod\TaskStatusSeeder::class,
 
             Seeders\dev\UsersSeeder::class,
-            \Modules\Tasks\Database\Seeders\dev\CourseSeeder::class,
-            \Modules\Tasks\Database\Seeders\dev\TasksSeeder::class,
-            \Modules\Tasks\Database\Seeders\dev\CommentsSeeder::class
+            Seeders\dev\CourseSeeder::class,
+            Seeders\dev\TasksSeeder::class,
+            Seeders\dev\CommentsSeeder::class
         ]);
+
     }
 }
