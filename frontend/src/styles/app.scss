@@ -1,0 +1,38 @@
+@import "variables";
+@import 'normalize';
+
+:root {
+    --font-family: 'Manrope', sans-serif !important;
+}
+html {
+    height: 100%;
+    font-size: 16px;
+}
+
+body {
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+    min-height: 100%;
+    background: var(--surface-ground);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+*:focus {
+    box-shadow: none !important;
+}
+::-webkit-scrollbar {
+    width: $scrollbarWidth;
+}
+::-webkit-scrollbar-track {
+    background: $scrollbarBg;
+    border-radius: $scrollbarBorderRadius;
+}
+::-webkit-scrollbar-thumb {
+    background-color: $scrollbarThumb;
+    border-radius: $scrollbarBorderRadius;
+    border: $scrollbarBorder;
+}
