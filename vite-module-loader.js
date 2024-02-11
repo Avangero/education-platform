@@ -7,7 +7,10 @@ async function collectModuleAssetsPaths(paths, modulesPath) {
   const moduleStatusesPath = path.join(__dirname, 'modules_statuses.json');
 
   try {
-    const moduleStatusesContent = await fs.readFile(moduleStatusesPath, 'utf-8');
+    const moduleStatusesContent = await fs.readFile(
+      moduleStatusesPath,
+      'utf-8'
+    );
     const moduleStatuses = JSON.parse(moduleStatusesContent);
 
     const moduleDirectories = await fs.readdir(modulesPath);
@@ -18,7 +21,11 @@ async function collectModuleAssetsPaths(paths, modulesPath) {
       }
 
       if (moduleStatuses[moduleDir] === true) {
-        const viteConfigPath = path.join(modulesPath, moduleDir, 'vite.config.js');
+        const viteConfigPath = path.join(
+          modulesPath,
+          moduleDir,
+          'vite.config.js'
+        );
         const stat = await fs.stat(viteConfigPath);
 
         if (stat.isFile()) {
@@ -31,7 +38,9 @@ async function collectModuleAssetsPaths(paths, modulesPath) {
       }
     }
   } catch (error) {
-    console.error(`Error reading module statuses or module configurations: ${error}`);
+    console.error(
+      `Error reading module statuses or module configurations: ${error}`
+    );
   }
 
   return paths;
