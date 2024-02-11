@@ -12,15 +12,15 @@
             <template #footer>
                 <div class="flex gap-3 mt-1">
                     <div class="status">
-                        <Button class="status-btn" :label="task.status" :severity="severity" outlined :disabled="true"/>
+                        <Button class="status-btn" :label="task.status" outlined :severity="severity"/>
                     </div>
                     <div class="comments">
                         <div class="counter-text">{{ task.comments.length }}</div>
-                        <i class="pi pi-comment" style="color: var(--text-color)"></i>
+                        <i class="pi pi-comment"></i>
                     </div>
                     <div class="files">
                         <div class="counter-text">{{ task.answers.length }}</div>
-                        <i class="pi pi-folder" style="color: var(--text-color)"></i>
+                        <i class="pi pi-folder"></i>
                     </div>
                 </div>
             </template>
@@ -78,15 +78,12 @@ export default {
 }
 
 .task-card {
-    box-shadow: none;
     border-radius: var(--border-radius);
-    border-style: solid;
-    border-width: 1px;
-    border-color: var(--gray-200);
     height: 100%;
+    box-shadow: 0 4px 1rem var(--gray-200);
 
     &:hover {
-        box-shadow: 0 4px 30px var(--primary-100);
+        box-shadow: 0 4px 2rem var(--primary-100);
         border-width: 0.1px;
     }
 }
@@ -121,7 +118,7 @@ export default {
 }
 
 .counter-text {
-    color: $text-main;
+    color: $main;
     font-size: 0.8rem;
     font-style: normal;
     font-weight: 500;
@@ -135,17 +132,12 @@ export default {
 
 .p-card-body {
     height: 100%;
-}
-
-.p-card-caption {
-    height: 15%;
+    display: flex;
+    flex-direction: column;
 }
 
 .p-card-footer {
-    height: 15%;
+    margin-top: auto;
 }
 
-.p-card-content {
-    height: 70%;
-}
 </style>

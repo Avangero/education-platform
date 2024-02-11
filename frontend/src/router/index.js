@@ -1,11 +1,11 @@
 import {createWebHistory, createRouter} from 'vue-router'
 import Home from "../views/HomePage.vue";
 import Login from "../views/LoginPage.vue";
-import LearningComponent from "../pages/LearningComponent.vue";
-import Task from "../components/Task/Task.vue";
+import LearningComponent from "../pages/LearningComponentPage.vue";
 import TasksTemplatesPage from "../pages/TasksTemplatesPage.vue";
 import TaskTemplate from "../components/TaskTemplate/TaskTemplate.vue";
-import NotFound from "../pages/NotFound.vue";
+import NotFound from "../pages/NotFoundPage.vue";
+import TaskPage from "../pages/TaskPage.vue";
 
 const routes = [
     {
@@ -29,12 +29,12 @@ const routes = [
                 path: "tasks",
                 name: "tasks",
                 component: LearningComponent,
-                meta: {activeTab: 0}
+                meta: {activeTab: 0},
             },
             {
                 path: 'tasks/:id',
-                component: Task,
-                meta: {activeTab: 0}
+                component: TaskPage,
+                meta: {activeTab: 0},
             },
             {
                 path: "courses-templates",

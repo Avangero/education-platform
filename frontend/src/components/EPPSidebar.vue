@@ -46,7 +46,6 @@ export default {
     height: 100%;
     padding: 2.5rem 0 2rem;
     box-shadow: 0 4px 50px var(--primary-100);
-    border-radius: 0 1.5rem 1.5rem 0;
 }
 
 .pi {

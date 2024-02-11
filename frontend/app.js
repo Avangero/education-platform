@@ -4,7 +4,7 @@ import {createApp} from 'vue';
 import store from "./store/index.js";
 import PrimeVue from 'primevue/config';
 import ToastService from 'primevue/toastservice';
-import 'primevue/resources/themes/lara-light-blue/theme.css';
+import 'primevue/resources/themes/lara-light-indigo/theme.css';
 import "primeflex/primeflex.css";
 import 'primeicons/primeicons.css';
 import Ripple from 'primevue/ripple';

@@ -12,8 +12,8 @@
         </div>
     </div>
 </template>
-
 <script>
+
 export default {
     props: {
         task: Object,
@@ -42,12 +42,20 @@ export default {
 .name-role {
     display: flex;
     flex-direction: column;
-    margin-right: 10px;
+    margin-right: 10px
+}
+
+.task-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: $text-main;
+    margin-right: auto;
 }
 
 .name {
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 800;
+    color: $text-main;
 }
 
 .role {
@@ -56,6 +64,7 @@ export default {
 }
 
 .user-photo {
+    background: $soft-main;
     width: 50px;
     height: 50px;
     overflow: hidden;
@@ -69,5 +78,10 @@ export default {
     font-size: 18px;
     font-weight: 800;
     color: white;
+}
+
+.task-info {
+    display: flex;
+    align-items: center;
 }
 </style>

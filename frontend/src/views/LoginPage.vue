@@ -19,7 +19,7 @@
                 <span class="text-600 font-medium">Пожалуйста, введите свои данные</span>
             </div>
 
-            <form class="flex flex-column">
+            <form class="flex flex-column" @keydown.enter.prevent="login">
                 <span class="p-input-icon-left w-full mb-4">
                     <i class="pi pi-envelope"></i>
                     <input
