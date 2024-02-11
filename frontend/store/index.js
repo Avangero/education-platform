@@ -6,12 +6,12 @@ import tasksTemplates from './tasksTemplates';
 import toasts from './toasts.js';
 
 const store = createStore({
-  modules: {
-    auth,
-    tasks,
-    navbar,
-    tasksTemplates,
-    toasts
-  }
+    modules: {
+        auth,
+        tasks,
+        navbar,
+        tasksTemplates,
+        toasts
+    }
 });
 export default store;

@@ -1,13 +1,13 @@
 <template>
-  <div :class="['app', { 'app--sidebar-margin': isShowNavbar }]">
-    <EppSidebar />
-    <div class="page-content-wrapper">
-      <EPPHeader />
-      <div class="page-content">
-        <router-view></router-view>
-      </div>
+    <div :class="['app', { 'app--sidebar-margin': isShowNavbar }]">
+        <EppSidebar />
+        <div class="page-content-wrapper">
+            <EPPHeader />
+            <div class="page-content">
+                <router-view></router-view>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -17,28 +17,28 @@ import EPPBreadCrumb from '../components/EPPBreadCrumb.vue';
 import EppSidebar from '../components/EppSidebar.vue';
 
 export default {
-  components: {
-    EppSidebar,
-    EPPBreadCrumb,
-    EPPHeader
-  },
-  computed: {
-    ...mapGetters({
-      isShowNavbar: 'navbar/isShow'
-    }),
-    taskTemplateId() {
-      return this.$route.params.id;
-    }
-  },
-  methods: {
-    ...mapActions({
-      getUser: 'auth/getUser'
-    })
-  },
+    components: {
+        EppSidebar,
+        EPPBreadCrumb,
+        EPPHeader
+    },
+    computed: {
+        ...mapGetters({
+            isShowNavbar: 'navbar/isShow'
+        }),
+        taskTemplateId() {
+            return this.$route.params.id;
+        }
+    },
+    methods: {
+        ...mapActions({
+            getUser: 'auth/getUser'
+        })
+    },
 
-  created() {
-    this.getUser();
-  }
+    created() {
+        this.getUser();
+    }
 };
 </script>
 
@@ -46,29 +46,28 @@ export default {
 @import '../styles/app.scss';
 
 .app {
-  transition: margin-left 0.3s;
-  margin-left: 0;
+    transition: margin-left 0.3s;
+    margin-left: 0;
 
-  &--sidebar-margin {
-    margin-left: 15rem;
-  }
+    &--sidebar-margin {
+        margin-left: 15rem;
+    }
 }
 
 .page-content-wrapper {
-  width: 100%;
-  padding: 2rem;
-  margin-left: auto !important;
-  margin-right: auto !important;
+    width: 100%;
+    padding: 2rem;
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 
 .page-content {
-  display: flex;
-  flex-grow: 1;
-  background: var(--surface-card);
-  border: 1px solid var(--surface-border);
-  padding: 2rem;
-  margin-bottom: 1rem;
-  box-shadow: var(--card-shadow);
-  border-radius: 12px;
+    display: flex;
+    flex-grow: 1;
+    background: var(--surface-card);
+    border: 1px solid var(--surface-border);
+    margin-bottom: 1rem;
+    box-shadow: var(--card-shadow);
+    border-radius: 1rem;
 }
 </style>
