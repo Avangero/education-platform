@@ -1,11 +1,11 @@
 import { createWebHistory, createRouter } from 'vue-router';
-import Home from '../views/HomePage.vue';
-import Login from '../views/LoginPage.vue';
-import LearningComponent from '../pages/LearningComponentPage.vue';
-import TasksTemplatesPage from '../pages/TasksTemplatesPage.vue';
-import TaskTemplate from '../components/TaskTemplate/TaskTemplate.vue';
-import NotFound from '../pages/NotFoundPage.vue';
-import TaskPage from '../pages/TaskPage.vue';
+import Home from '../pages/core/HomePage.vue';
+import Login from '../pages/core/LoginPage.vue';
+import TaskListPage from "../pages/Tasks/TaskListPage.vue";
+import TasksTemplatesPage from '../pages/admin/TasksTemplatesPage.vue';
+import TaskTemplate from '../components/Tasks/admin/TaskTemplate/TaskTemplate.vue';
+import NotFound from '../pages/core/NotFoundPage.vue';
+import TaskPage from '../pages/Tasks/TaskPage.vue';
 
 const routes = [
   {
@@ -29,7 +29,7 @@ const routes = [
       {
         path: 'tasks',
         name: 'tasks',
-        component: LearningComponent,
+        component: TaskListPage,
         meta: { activeTab: 0 }
       },
       {
@@ -40,7 +40,7 @@ const routes = [
       {
         path: 'courses-templates',
         name: 'courses-templates',
-        component: LearningComponent,
+        component: TaskListPage,
         meta: { activeTab: 4 }
       },
       {

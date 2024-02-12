@@ -1,9 +1,9 @@
 import { createStore } from 'vuex';
-import auth from './auth.js';
-import tasks from './tasks.js';
-import navbar from './navbar.js';
-import tasksTemplates from './tasksTemplates';
-import toasts from './toasts.js';
+import auth from './core/auth.js';
+import tasks from './tasks/tasks.js';
+import navbar from './core/navbar.js';
+import tasksTemplates from './tasks/tasksTemplates.js';
+import toasts from './core/toasts.js';
 
 const store = createStore({
     modules: {
