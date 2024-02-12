@@ -37,8 +37,9 @@ class TaskRepository implements TaskRepositoryInterface
 
     public function getTaskComments(): array
     {
-        return DB::table('comments')
-            ->select('id', 'author', 'content', 'created_at', 'task_id')
+        return DB::table('comments as c')
+            ->select('c.id', 'c.author', 'c.content', 'c.created_at', 'c.task_id', 'u.name', 'u.surname')
+            ->join('users as u', 'c.author', '=', 'u.id')
             ->get()
             ->groupBy('task_id')
             ->toArray();

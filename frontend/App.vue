@@ -50,7 +50,7 @@ export default {
                             life: 3000
                         });
                     });
-                    this.cleareSuccesses();
+                    this.clearSuccesses();
                 }
             },
             deep: true
@@ -59,12 +59,10 @@ export default {
     methods: {
         ...mapMutations({
             clearErrors: 'toasts/CLEAR_ERRORS',
-            cleareSuccesses: 'toasts/CLEAR_SUCCESSES'
+            clearSuccesses: 'toasts/CLEAR_SUCCESSES'
         })
     }
 };
 </script>
 
-<style lang="scss">
-@import './src/styles/app.scss';
-</style>
+<style lang="scss"></style>

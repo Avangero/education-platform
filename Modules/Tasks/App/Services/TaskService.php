@@ -53,18 +53,17 @@ class TaskService implements TaskServiceInterface
             }
 
             $task->comments = $taskComments;
-            $task->answers = $this->getFiles($task->id);
+            $task->answers = $this->getFiles($task->id, 'uploads/answer/task/');
         }
 
         return $tasks;
     }
 
-    protected function getFiles(int $taskId): array
+    protected function getFiles(int $id, $path): array
     {
         $files = [];
-        $path = 'uploads/answer/task/';
 
-        $filesFromStorage = Storage::files($path . $taskId);
+        $filesFromStorage = Storage::files($path . $id);
 
         foreach ($filesFromStorage as $path) {
             $files[] = [

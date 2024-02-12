@@ -1,0 +1,151 @@
+///////////////////////////////// БЛОК КУРСА
+// Получение
+GET /api/course
+
+payload: {}
+response: Course
+
+///////////////////////////////// БЛОК ШАБЛОНОВ КУРСОВ У КУРАТОРА
+// получение
+GET /api/course-templates
+payload: {}
+response: [CourseTemplate]
+
+// создание
+POST /api/course-template
+payload: {
+	tasks: [Task],
+	pupils: [User]
+}
+response: CourseTemplate
+
+// редактирование 
+PUTCH /api/course-template/{$courseId: Number} // id шаблона курса
+payload: CourseTemplate
+response: CourseTemplate
+// удаление
+DELETE /api/course-template/{$courseId: Number} // id шаблона курса
+payload: {}
+response: {
+	id: Number, // id шаблона курса
+}
+
+///////////////////////////////// БЛОК КОММЕНТАРИЕВ К ТАСКЕ
+// добавление
+POST /api/course/${courseId: Number}/task/${taskId: Number}/comment // id курса id таски
+payload: {
+	text: String
+}
+response: Comment
+
+///////////////////////////////// БЛОК ОТВЕТОВ К ТАСКЕ
+// добавление
+POST `/api/course/${courseId: Number}/task/${taskId: Number}/answer` // id курса id таски
+
+payload: {
+	files: [Binary]
+}
+response: Answer
+
+// изменение
+PUTCH `/api/course/${courseId: Number}/task/${taskId: Number}/answer` // id курса id таски
+payload: {
+	files: [Binary]
+}
+response: Answer
+// Удаление
+DELETE `/api/course/${courseId: Number}/task/${taskId: Number}/answer` // id курса id таски
+
+payload: {}
+response: {
+	id: Number, // id ответа
+	taskId: Number,
+}
+
+///////////////////////////////// БЛОК СТАТУСА ТАСКИ
+// изменение
+PUTCH `/api/course/${courseId: Number}/task/${taskId: Number}/status` // id курса id таски
+payload: {
+	status: String
+}
+response: {
+	courseId: Number,
+	taskId: Number,
+	status: String
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Сущности
+Course: {
+	id: Number, // id курса
+	mentor: User,
+	tasks: Tasks,
+	progress: Number,
+}
+
+CourseTemplate: {
+	id: Number, // id шаблона курса
+	tasks: Tasks,
+	pupils: [Users]
+}
+
+Tasks: [Task]
+
+Task: {
+	id: Number,
+        title: Sting,
+        content: String,
+        status: String,
+        files: Binary, 
+        comments: [{
+        	id: Number, 
+                text: String,
+		author: User
+	}]
+}
+
+User: {
+	id: Number
+	name: Sting
+	role_id: Number
+	role_title: String
+	surname: String
+}
+
+Comment: {
+	id: Number,
+	text: String,
+	author: User
+}
+
+Answer: {
+	id: Number, // id ответа
+	taskId: Number, // id таски
+	files: [Binary]
+}
+
+// описание кнопок
+"Вернуть на доработку" => status = inProgress
+"Передать на ревью" => status = onReview
+"Передать на подтверждение" => status = onApprove
+"Подтвердить" => status = done
+
+// Допустимые значения
+statuses: [
+	'inProgress': 'В работе',
+	'onReview': 'На ревью',
+	'onApprove': 'На подтвержении',
+	'done': 'Выполено'
+]

@@ -28,7 +28,6 @@ class TaskController extends Controller
 
         return response()->json([
             'content' => $content,
-        ]
-        );
+        ]);
     }
 }
