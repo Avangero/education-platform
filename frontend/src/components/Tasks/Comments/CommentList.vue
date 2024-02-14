@@ -1,5 +1,5 @@
 <template>
-    <div class="flex align-items-center mb-4 font-bold">
+    <div class="flex align-items-center font-bold">
         <span class="text-xl text-900 mr-4">Комментарии</span>
         <span
             class="inline-flex align-items-center justify-content-center w-2rem h-2rem border-1 surface-border border-round"
