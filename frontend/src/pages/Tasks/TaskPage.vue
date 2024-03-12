@@ -7,8 +7,8 @@
                 <TaskInfo :task="task" />
             </div>
             <div class="task-content content">{{ task.content }}</div>
-            <EPFileUpload :task="task" />
             <CommentList :comments="task.comments" />
+            <EPFileUpload :task="task" />
         </div>
     </div>
 </template>

@@ -58,7 +58,7 @@ export default {
     },
     created() {
         const statusSeverityMap = {
-            Выполнено: 'success',
+            'Выполнено': 'success',
             'В работе': 'info',
             'На проверке': 'secondary'
         };
