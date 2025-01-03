@@ -1,0 +1,11 @@
+$background-grey: var(--surface-ground);
+$main: var(--primary-color);
+$soft-main:  var(--primary-400);
+$text-main: var(--surface-900);
+$text-secondary: var(--text-color);
+
+$scrollbarBg: white;
+$scrollbarThumb: var(--gray-300);
+$scrollbarWidth: 12px;
+$scrollbarBorder: 3px solid $scrollbarBg;
+$scrollbarBorderRadius: calc($scrollbarWidth / 2);
