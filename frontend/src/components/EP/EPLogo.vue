@@ -1,8 +1,8 @@
 <template>
     <div class="logo">
         <h1 class="title">
-            <span class="first-part">GoCpa</span>.<span class="second-part"
-                >education</span
+            <span class="first-part">GoCPA</span>.<span class="second-part"
+                >Education</span
             >
         </h1>
     </div>
