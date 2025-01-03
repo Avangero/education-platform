@@ -17,21 +17,21 @@
     </div>
 </template>
 <script>
-import {mapActions} from 'vuex';
+import { mapActions } from 'vuex';
 import axios from 'axios';
 import EPAvatar from '@components/EP/EPAvatar.vue';
 
 export default {
     name: 'UserInfo',
-    components: {EPAvatar},
+    components: { EPAvatar },
     methods: {
         ...mapActions({
             signOut: 'auth/logout'
         }),
         async logout() {
-            await axios.post('/logout').then(({data}) => {
+            await axios.post('/logout').then(({ data }) => {
                 this.signOut();
-                this.$router.push({name: 'login'});
+                this.$router.push({ name: 'login' });
             });
         }
     },

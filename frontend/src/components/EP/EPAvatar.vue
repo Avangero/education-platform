@@ -61,7 +61,7 @@ export default {
         },
         getPath() {
             return `/storage/avatars/${this.id}/img.png`;
-        },
+        }
     }
 };
 </script>
