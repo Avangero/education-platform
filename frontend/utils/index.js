@@ -1,2 +1,2 @@
-export { post, get, del } from './api';
-export { buttons } from './buttons';
+export { post, get, del } from '@utils/api';
+export { buttons } from '@utils/buttons';

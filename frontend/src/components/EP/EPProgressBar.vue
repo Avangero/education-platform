@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/variables';
+@import '@styles/variables';
 
 .learning-progress {
     display: flex;

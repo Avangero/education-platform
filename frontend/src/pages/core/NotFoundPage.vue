@@ -12,7 +12,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/variables';
+@import '@styles/variables';
 
 .container {
     width: 100%;
@@ -25,7 +25,7 @@ export default {
     align-items: flex-end;
     height: 100%;
 
-    background-image: url('../../images/notFoundPage.svg');
+    background-image: url('@images/notFoundPage.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto;

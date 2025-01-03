@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import { get, post } from '../../../utils/index.js';
+import { get, post } from '@utils/index.js';
 import { mapActions } from 'vuex';
 import { useToast } from 'primevue/usetoast';
 import Toast from 'primevue/toast';

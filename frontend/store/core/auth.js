@@ -1,5 +1,5 @@
-import { get } from '../../utils/index.js';
-import router from '../../src/router/index.js';
+import { get } from '@utils/index.js';
+import router from '@router/index.js';
 
 export default {
     namespaced: true,

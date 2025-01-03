@@ -6,8 +6,8 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import EPProgressBar from '../../components/EP/EPProgressBar.vue';
-import TaskList from '../../components/Tasks/TaskList/TaskList.vue';
+import EPProgressBar from '@components/EP/EPProgressBar.vue';
+import TaskList from '@components/Tasks/TaskList/TaskList.vue';
 
 export default {
     name: 'LearningComponent',

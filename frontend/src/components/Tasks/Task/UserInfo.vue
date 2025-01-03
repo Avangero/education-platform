@@ -19,7 +19,7 @@
 <script>
 import {mapActions} from 'vuex';
 import axios from 'axios';
-import EPAvatar from '../../EP/EPAvatar.vue';
+import EPAvatar from '@components/EP/EPAvatar.vue';
 
 export default {
     name: 'UserInfo',
@@ -43,7 +43,7 @@ export default {
 };
 </script>
 <style lang="scss">
-@import '../../../styles/variables';
+@import '@styles/variables';
 
 .user-info {
     display: flex;

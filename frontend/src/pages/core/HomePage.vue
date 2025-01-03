@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import EPHeader from '../../components/EP/EPHeader.vue';
+import EPHeader from '@components/EP/EPHeader.vue';
 import { mapActions, mapGetters } from 'vuex';
-import EPBreadCrumb from '../../components/EP/EPBreadCrumb.vue';
-import EPSidebar from '../../components/EP/EPSidebar.vue';
+import EPBreadCrumb from '@components/EP/EPBreadCrumb.vue';
+import EPSidebar from '@components/EP/EPSidebar.vue';
 
 export default {
     components: {
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../styles/app';
+@import '@styles/app';
 
 .app {
     transition: margin-left 0.3s;

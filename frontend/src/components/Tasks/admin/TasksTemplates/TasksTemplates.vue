@@ -10,8 +10,8 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import TaskTemplateCard from './TaskTemplateCard.vue';
-import TaskTemplateCardAdd from './TaskTemplateCardAdd.vue';
+import TaskTemplateCard from '@components/Tasks/admin/TasksTemplates/TaskTemplateCard.vue';
+import TaskTemplateCardAdd from '@components/Tasks/admin/TasksTemplates/TaskTemplateCardAdd.vue';
 
 export default {
     name: 'TaskTemplatesComponent',
