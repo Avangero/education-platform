@@ -2,28 +2,27 @@
     <Toast />
     <div v-if="!getLoading" class="task">
         <div class="task-body">
-            <TaskHeader :task="task" :mentorInfo="getCourseInfo.mentor" />
-            <div class="task-content content">{{ task.content }}</div>
-            <div class="panel-tools">
+            <div class="task-header">
+                <h1 class="task-title">{{ task.title }}</h1>
                 <TaskInfo :task="task" />
             </div>
-            <CommentList :comments="task.comments" />
+            <div class="task-content content">{{ task.content }}</div>
             <EPFileUpload :task="task" />
+            <CommentList :comments="task.comments" :taskId="task.id" />
         </div>
     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import TaskHeader from '../../components/Tasks/Task/TaskHeader.vue';
 import Toast from 'primevue/toast';
-import EPFileUpload from '../../components/EP/EPFileUpload.vue';
-import TaskInfo from '../../components/Tasks/Task/TaskInfo.vue';
-import CommentList from '../../components/Tasks/Comments/CommentList.vue';
+import EPFileUpload from '@components/EP/EPFileUpload.vue';
+import TaskInfo from '@components/Tasks/Task/TaskInfo.vue';
+import CommentList from '@components/Tasks/Comments/CommentList.vue';
 
 export default {
     name: 'TaskComponent',
-    components: { TaskInfo, EPFileUpload, TaskHeader, Toast, CommentList },
+    components: { TaskInfo, EPFileUpload, Toast, CommentList },
 
     async created() {
         await this.getTasks();
@@ -51,7 +50,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/variables';
+@import '@styles/variables';
 
 .task {
     display: flex;
@@ -61,6 +60,9 @@ export default {
 .task-body {
     height: 100%;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .content {
@@ -69,13 +71,21 @@ export default {
     line-height: 1.8rem;
     letter-spacing: normal;
     text-align: start;
-
-    margin-bottom: 2rem;
 }
-.panel-tools {
+
+.task-header {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    margin-bottom: 2rem;
+    justify-content: space-between;
+    flex-grow: 0;
+    height: 10%;
+    border-radius: 24px;
+}
+
+.task-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: $text-main;
+    margin-right: auto;
 }
 </style>

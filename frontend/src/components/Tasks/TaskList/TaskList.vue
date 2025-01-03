@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import TaskListCard from './TaskListCard.vue';
+import TaskListCard from '@components/Tasks/TaskList/TaskListCard.vue';
 import { mapGetters } from 'vuex';
 
 export default {

@@ -14,10 +14,10 @@
 <script>
 import Button from 'primevue/button';
 import SplitButton from 'primevue/splitbutton';
-import { buttons } from '../../../../utils/index.js';
+import { buttons } from '@utils/index.js';
 
 export default {
-    name: 'EPTaskInfo',
+    name: 'TaskInfo',
     components: { Button, SplitButton },
     props: {
         task: {

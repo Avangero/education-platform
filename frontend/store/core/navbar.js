@@ -7,37 +7,37 @@ export default {
             {
                 icon: 'pi pi-home',
                 label: 'Мое обучение',
-                route: 'tasks',
+                route: '/tasks',
                 accessToRoles: [1, 2, 3]
             },
             {
                 icon: 'pi pi-bell',
                 label: 'Уведомления',
-                route: 'notifications',
+                route: '/notifications',
                 accessToRoles: [1, 2, 3]
             },
             {
                 icon: 'pi pi-calendar',
                 label: 'Календарь',
-                route: 'calendar',
+                route: '/calendar',
                 accessToRoles: [1, 2, 3]
             },
             {
                 icon: 'pi pi-chart-bar',
                 label: 'Статистика',
-                route: 'statistics',
+                route: '/statistics',
                 accessToRoles: [1, 2, 3]
             },
             {
                 icon: 'pi pi-plus-circle',
                 label: 'Шаблоны курсов',
-                route: 'courses-templates',
+                route: '/courses-templates',
                 accessToRoles: [1, 2]
             },
             {
                 icon: 'pi pi-plus-circle',
                 label: 'Шаблоны задач',
-                route: 'tasks-templates',
+                route: '/tasks-templates',
                 accessToRoles: [1, 2]
             }
         ]

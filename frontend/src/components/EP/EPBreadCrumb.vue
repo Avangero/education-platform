@@ -44,12 +44,13 @@ export default {
             navbarList: 'navbar/getNavbarForRole'
         }),
         routesArr() {
+            let fullPath = '';
             return this.$route.path.split('/').reduce((acc, el) => {
                 if (el) {
-                    return [...acc, { label: el, route: el }];
-                } else {
-                    return acc;
+                    fullPath += `/${el}`;
+                    return [...acc, { label: el, route: fullPath }];
                 }
+                return acc;
             }, []);
         }
     },
@@ -62,7 +63,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../styles/variables';
+@import '@styles/variables';
 
 .content {
     display: flex;

@@ -1,11 +1,9 @@
 import { createWebHistory, createRouter } from 'vue-router';
-import Home from '../pages/core/HomePage.vue';
-import Login from '../pages/core/LoginPage.vue';
-import TaskListPage from "../pages/Tasks/TaskListPage.vue";
-import TasksTemplatesPage from '../pages/admin/TasksTemplatesPage.vue';
-import TaskTemplate from '../components/Tasks/admin/TaskTemplate/TaskTemplate.vue';
-import NotFound from '../pages/core/NotFoundPage.vue';
-import TaskPage from '../pages/Tasks/TaskPage.vue';
+import Home from '@pages/core/HomePage.vue';
+import Login from '@pages/core/LoginPage.vue';
+import TaskListPage from "@pages/Tasks/TaskListPage.vue";
+import NotFound from '@pages/core/NotFoundPage.vue';
+import TaskPage from '@pages/Tasks/TaskPage.vue';
 
 const routes = [
   {
@@ -36,24 +34,6 @@ const routes = [
         path: 'tasks/:id',
         component: TaskPage,
         meta: { activeTab: 0 }
-      },
-      {
-        path: 'courses-templates',
-        name: 'courses-templates',
-        component: TaskListPage,
-        meta: { activeTab: 4 }
-      },
-      {
-        path: 'tasks-templates',
-        name: 'tasks-templates',
-        component: TasksTemplatesPage,
-        meta: { activeTab: 5 }
-      },
-      {
-        path: 'tasks-templates/:id',
-        name: 'task-template',
-        component: TaskTemplate,
-        meta: { activeTab: 5 }
       },
       {
         path: '/:pathMatch(.*)*',

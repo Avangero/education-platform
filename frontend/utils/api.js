@@ -1,5 +1,5 @@
 import axios from 'axios';
-import store from '../store/index.js';
+import store from '@store/index.js';
 
 const api = axios.create({
     baseURL: 'http://gocpa.education:8082',

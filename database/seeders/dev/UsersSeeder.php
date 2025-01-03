@@ -12,7 +12,7 @@ class UsersSeeder extends Seeder
         $data = [
             [
                 'id' => 1,
-                'name' => 'Василий',
+                'name' => 'Иван',
                 'surname' => 'Иванов',
                 'email' => 'admin@test.ru',
                 'role' => 1,
@@ -20,16 +20,16 @@ class UsersSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'name' => 'Иван',
-                'surname' => 'Петров',
+                'name' => 'Игорь',
+                'surname' => 'Венцель',
                 'email' => 'mentor@test.ru',
                 'role' => 2,
                 'password' => bcrypt('mentor'),
             ],
             [
                 'id' => 3,
-                'name' => 'Иван',
-                'surname' => 'Иванов',
+                'name' => 'Александр',
+                'surname' => 'Филин',
                 'email' => 'student@test.ru',
                 'role' => 3,
                 'password' => bcrypt('student'),

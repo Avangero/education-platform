@@ -40,16 +40,19 @@ export default {
     mounted() {
         this.checkFileExists();
     },
+    updated() {
+        this.checkFileExists();
+    },
     methods: {
         checkFileExists() {
             const img = new Image();
+            img.src = this.getPath;
             img.onload = () => {
                 this.fileExists = true;
             };
             img.onerror = () => {
                 this.fileExists = false;
             };
-            img.src = this.getPath;
         }
     },
     computed: {

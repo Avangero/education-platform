@@ -7,12 +7,12 @@ trap exit SIGINT
 ./vendor/bin/sail composer install --no-interaction --prefer-dist --ignore-platform-reqs
 ./vendor/bin/sail up --detach
 ./vendor/bin/sail artisan down
-./vendor/bin/sail npm ci --no-audit --no-fund
-./vendor/bin/sail npm run build
+npm ci --no-audit --no-fund
+npm run build
 sleep 20
 ./vendor/bin/sail artisan migrate:fresh --force
 ./vendor/bin/sail artisan db:seed --force
 ./vendor/bin/sail artisan module:seed --force
 ./vendor/bin/sail artisan optimize
 ./vendor/bin/sail artisan up
-./vendor/bin/sail npm run dev
+npm run dev

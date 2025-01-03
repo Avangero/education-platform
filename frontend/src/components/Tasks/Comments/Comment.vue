@@ -1,18 +1,16 @@
 <template>
-    <li class="flex p-3 mb-3 border-1 surface-border border-round">
+    <li class="comment-item">
         <EPAvatar :id="commenterId" :name="commenterName" />
-        <div>
-            <span class="font-semibold text-900">{{ commenterName }}</span>
-            <p class="font-semibold text-600 m-0 text-sm">
-                {{ getDate(commentDate) }}
-            </p>
-            <p class="line-height-3 mb-0 my-3">{{ commentText }}</p>
+        <div class="comment-content">
+            <span class="comment-author">{{ commenterName }}</span>
+            <p class="comment-date">{{ getDate(commentDate) }}</p>
+            <p class="comment-text">{{ commentText }}</p>
         </div>
     </li>
 </template>
 
 <script>
-import EPAvatar from '../../EP/EPAvatar.vue';
+import EPAvatar from '@components/EP/EPAvatar.vue';
 
 export default {
     name: 'Comment',
@@ -58,3 +56,38 @@ export default {
     }
 };
 </script>
+
+<style scoped lang="scss">
+@import '@styles/variables';
+
+.comment-item {
+    display: flex;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--surface-border);
+    border-radius: 0.5rem;
+}
+
+.comment-content {
+    margin-left: 1rem;
+
+    .comment-author {
+        font-weight: 600;
+        color: $text-main;
+        display: block;
+    }
+
+    .comment-date {
+        font-weight: 600;
+        color: var(--text-600);
+        margin: 0;
+        font-size: 0.875rem;
+    }
+
+    .comment-text {
+        line-height: 1.5;
+        margin-top: 1rem;
+        margin-bottom: 0;
+    }
+}
+</style>
