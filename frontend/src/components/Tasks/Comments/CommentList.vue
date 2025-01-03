@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import Comment from './Comment.vue';
+import Comment from '@components/Tasks/Comments/Comment.vue';
 
 export default {
     name: 'CommentList',

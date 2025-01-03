@@ -6,9 +6,9 @@
 </template>
 
 <script>
-import EPBreadCrumb from './EPBreadCrumb.vue';
+import EPBreadCrumb from '@components/EP/EPBreadCrumb.vue';
 import { mapGetters } from 'vuex';
-import UserInfo from '../Tasks/Task/UserInfo.vue';
+import UserInfo from '@components/Tasks/Task/UserInfo.vue';
 
 export default {
     name: 'EPHeader',

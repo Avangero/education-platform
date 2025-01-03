@@ -1,4 +1,4 @@
-import { get, post, del } from '../../utils/index.js';
+import { get, post, del } from '@utils/index.js';
 
 export default {
     namespaced: true,

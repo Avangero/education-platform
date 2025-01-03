@@ -50,7 +50,7 @@
     </Sidebar>
 </template>
 <script>
-import EPLogo from './EPLogo.vue';
+import EPLogo from '@components/EP/EPLogo.vue';
 import Menu from 'primevue/menu';
 import Sidebar from 'primevue/sidebar';
 import { mapGetters } from 'vuex';
@@ -68,7 +68,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../styles/variables';
+@import '@styles/variables';
 
 .p-sidebar-left .p-sidebar {
     width: 15rem;

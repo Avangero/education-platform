@@ -1,4 +1,4 @@
-import store from '../store/index.js';
+import store from '@store/index.js';
 export const buttons = [
     {
         label: 'Не начато',

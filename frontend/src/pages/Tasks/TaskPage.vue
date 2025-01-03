@@ -16,9 +16,9 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import Toast from 'primevue/toast';
-import EPFileUpload from '../../components/EP/EPFileUpload.vue';
-import TaskInfo from '../../components/Tasks/Task/TaskInfo.vue';
-import CommentList from '../../components/Tasks/Comments/CommentList.vue';
+import EPFileUpload from '@components/EP/EPFileUpload.vue';
+import TaskInfo from '@components/Tasks/Task/TaskInfo.vue';
+import CommentList from '@components/Tasks/Comments/CommentList.vue';
 
 export default {
     name: 'TaskComponent',
@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../styles/variables';
+@import '@styles/variables';
 
 .task {
     display: flex;

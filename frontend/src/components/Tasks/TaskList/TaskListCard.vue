@@ -74,7 +74,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../../styles/variables';
+@import '@styles/variables';
 
 .task-link {
     width: calc(50% - 25px);

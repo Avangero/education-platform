@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import EPAvatar from '../../EP/EPAvatar.vue';
+import EPAvatar from '@components/EP/EPAvatar.vue';
 
 export default {
     name: 'Comment',

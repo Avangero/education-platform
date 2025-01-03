@@ -5,7 +5,7 @@
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import TasksTemplates from '../../components/Tasks/admin/TasksTemplates/TasksTemplates.vue';
+import TasksTemplates from '@components/Tasks/admin/TasksTemplates/TasksTemplates.vue';
 
 export default {
     name: 'TasksTemplatesPage',
